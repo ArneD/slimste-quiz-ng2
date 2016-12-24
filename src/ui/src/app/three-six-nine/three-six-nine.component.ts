@@ -6,9 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./three-six-nine.component.scss']
 })
 export class ThreeSixNineComponent implements OnInit {
-  x: number = 300;
   selectedNr: number = 1;
-  color: string = 'orange';
   constructor() { }
 
   ngOnInit() {
@@ -16,7 +14,7 @@ export class ThreeSixNineComponent implements OnInit {
   }
 
   private selectNextNumber() {
-    if(this.selectedNr < 12) {
+    if (this.selectedNr < 12) {
       this.selectedNr++;
     }
   }

@@ -21,7 +21,7 @@ export class CircleSelectorComponent implements OnInit, OnChanges {
     this.selectionChanged();
   }
 
-  public selectionChanged() {
+  private selectionChanged() {
     if (this.selectedValue === this.text) {
       this.showCircle = true;
       this.textColor = 'orange';
