@@ -6,17 +6,18 @@ import { HttpModule } from '@angular/http';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
-import { ThreeSixNineComponent } from './three-six-nine';
+import { routingComponents, AppRoutingModule } from './app.routes';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ThreeSixNineComponent
+    routingComponents
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    AppRoutingModule,
     SharedModule
   ],
   providers: [],
