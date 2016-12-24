@@ -3,20 +3,21 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { SharedModule } from './shared/shared.module';
+
 import { AppComponent } from './app.component';
 import { ThreeSixNineComponent } from './three-six-nine';
-import { CircleSelectorComponent } from './shared';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ThreeSixNineComponent,
-    CircleSelectorComponent
+    ThreeSixNineComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
