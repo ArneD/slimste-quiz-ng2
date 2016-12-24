@@ -4,10 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { ThreeSixNineComponent } from './three-six-nine';
+import { CircleSelectorComponent } from './shared';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ThreeSixNineComponent,
+    CircleSelectorComponent
   ],
   imports: [
     BrowserModule,
