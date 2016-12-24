@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { CircleSelectorComponent }   from './';
+import { CircleSelectorComponent, ScoreEllipseComponent }   from './';
 
 @NgModule({
   imports: [CommonModule],
-  exports: [CircleSelectorComponent],
-  declarations: [CircleSelectorComponent],
+  exports: [CircleSelectorComponent, ScoreEllipseComponent],
+  declarations: [CircleSelectorComponent, ScoreEllipseComponent],
   providers: [],
 })
 export class SharedModule { }
