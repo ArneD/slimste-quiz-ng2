@@ -13,8 +13,12 @@ export class ThreeSixNineComponent implements OnInit {
 
   }
 
+  nextQuestion() {
+    this.selectNextNumber();
+  }
+
   private selectNextNumber() {
-    if (this.selectedNr < 12) {
+    if (this.selectedNr < 15) {
       this.selectedNr++;
     }
   }
