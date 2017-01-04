@@ -7,6 +7,7 @@ import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 import { routingComponents, AppRoutingModule } from './app.routes';
+import { QuizService } from './core/quiz.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { routingComponents, AppRoutingModule } from './app.routes';
     AppRoutingModule,
     SharedModule
   ],
-  providers: [],
+  providers: [QuizService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
