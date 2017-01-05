@@ -10,15 +10,11 @@ export class QuizService {
 
   constructor(private http: Http) { }
 
-  public loadQuiz() {
-    this.http
+  public loadQuizzes() {
+    return this.http
       .get('quiz.json')
       .map(res => {
-        console.log(res);
-        return res.json();
-      })
-      .subscribe(data => {
-          console.log(data);
-        });
+        return res.json().data;
+      });
   }
 }

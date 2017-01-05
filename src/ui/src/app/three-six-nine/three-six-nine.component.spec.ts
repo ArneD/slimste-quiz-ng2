@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { ThreeSixNineComponent } from './three-six-nine.component';
-import { CircleSelectorComponent } from './../shared';
+import { CircleSelectorComponent, ScoreEllipseComponent } from './../shared';
 
 describe('ThreeSixNineComponent', () => {
   let component: ThreeSixNineComponent;
@@ -12,7 +12,7 @@ describe('ThreeSixNineComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ThreeSixNineComponent, CircleSelectorComponent ]
+      declarations: [ ThreeSixNineComponent, CircleSelectorComponent, ScoreEllipseComponent ]
     })
     .compileComponents();
   }));

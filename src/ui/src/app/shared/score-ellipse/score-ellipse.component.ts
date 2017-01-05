@@ -16,10 +16,9 @@ export class ScoreEllipseComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    if(this.isSelected) {
+    if (this.isSelected) {
       this.textColor = 'orange';
-    }
-    else {
+    } else {
       this.textColor = 'white';
     }
   }

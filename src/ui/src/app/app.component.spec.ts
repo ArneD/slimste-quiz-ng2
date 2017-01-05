@@ -3,14 +3,20 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { ThreeSixNineComponent } from './three-six-nine/three-six-nine.component';
-import { CircleSelectorComponent } from './shared';
+import { CircleSelectorComponent, ScoreEllipseComponent } from './shared';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent, CircleSelectorComponent, ThreeSixNineComponent
+        AppComponent, CircleSelectorComponent, ThreeSixNineComponent, ScoreEllipseComponent
       ],
+      imports: [
+      RouterTestingModule.withRoutes(
+          [{path: '', component: ThreeSixNineComponent}]
+        )
+      ]
     });
     TestBed.compileComponents();
   });

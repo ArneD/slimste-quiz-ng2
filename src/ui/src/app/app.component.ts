@@ -1,4 +1,3 @@
-import { QuizService } from './core/quiz.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -9,7 +8,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app works!';
 
-  constructor(private quizService: QuizService) {
-    quizService.loadQuiz();
+  constructor() {
   }
 }
