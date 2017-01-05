@@ -1,6 +1,6 @@
 import { IScoreState, IPlayerState } from './../../core/states';
 import { playerStateReducer } from './player-state.reducer';
-import { PlayerUpdateScoreTick, PlayerUpdateAddSeconds } from '../actions/player-state';
+import { PlayerUpdateScoreTick, PlayerUpdateAddSeconds, PlayerUpdateName } from '../actions/player-state';
 
 let deepfreeze = require('deep-freeze');
 
@@ -19,6 +19,20 @@ describe('reduce player state', () => {
         isSelected: false,
         hasPlayed: false
       };
+  });
+
+  describe('case PLAYER_UPDATE_NAME', () => {
+    it('returns a new instance with expected name', () => {
+      let expectedName = 'player 1';
+
+      deepfreeze(initialState);
+
+      let changedState: IPlayerState = playerStateReducer(initialState, new PlayerUpdateName(expectedName));
+
+      expect(changedState).not.toBe(initialState);
+      expect(changedState.name).toBe(expectedName);
+      expect(changedState.score).toBe(initialState.score);
+    });
   });
 
   describe('case PLAYER_SCORE_UPDATE_TICK', () => {
