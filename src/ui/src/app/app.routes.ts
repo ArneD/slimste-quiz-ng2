@@ -2,9 +2,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { ThreeSixNineComponent } from './three-six-nine';
+import { SetUpComponent } from './admin';
 
 const routes: Routes  = [
-  { path: '', component: ThreeSixNineComponent}
+  { path: '', component: SetUpComponent}
 ];
 
 @NgModule({
@@ -13,4 +14,4 @@ const routes: Routes  = [
 })
 export class AppRoutingModule { }
 
-export const routingComponents = [ThreeSixNineComponent];
+export const routingComponents = [SetUpComponent, ThreeSixNineComponent];

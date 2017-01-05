@@ -11,11 +11,13 @@ import { routingComponents, AppRoutingModule } from './app.routes';
 import { QuizService } from './core/quiz.service';
 
 import { rootReducer } from './state/root-reducer';
+import { SetUpComponent } from './admin/set-up/set-up.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents
+    routingComponents,
+    SetUpComponent
   ],
   imports: [
     BrowserModule,
