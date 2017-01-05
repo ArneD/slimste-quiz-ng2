@@ -4,14 +4,23 @@ import { UpdateScoreTick, UpdateAddSeconds } from '../actions/player-state';
 
 let deepfreeze = require('deep-freeze');
 
-describe('reduce scores', () => {
-  describe('case SCORES_UPDATE_TICK', () => {
-    it('returns a new instance with score minus 1', () => {
-      let initialState: IPlayerState = {
-          name: 'test',
-          score: 60
-      };
+describe('reduce player state', () => {
+  let initialState: IPlayerState = {
+    name: '',
+    score: 0,
+    isSelected: false
+  };
 
+  beforeEach(() => {
+    initialState = {
+        name: 'test',
+        score: 60,
+        isSelected: false
+      };
+  });
+
+  describe('case PLAYER_SCORE_UPDATE_TICK', () => {
+    it('returns a new instance with score minus 1', () => {
       deepfreeze(initialState);
 
       let changedState: IPlayerState = playerStateReducer(initialState, new UpdateScoreTick());
@@ -22,27 +31,21 @@ describe('reduce scores', () => {
     });
 
     it('returns a new instance with score 0', () => {
-      let initialState: IPlayerState = {
-          name: 'test',
-          score: 0
-      };
+      let state: IPlayerState = Object.assign({}, initialState);
+      state.score = 0;
 
-      deepfreeze(initialState);
+      deepfreeze(state);
 
-      let changedState: IPlayerState = playerStateReducer(initialState, new UpdateScoreTick());
+      let changedState: IPlayerState = playerStateReducer(state, new UpdateScoreTick());
 
-      expect(changedState).not.toBe(initialState);
-      expect(changedState.name).toBe(initialState.name);
+      expect(changedState).not.toBe(state);
+      expect(changedState.name).toBe(state.name);
       expect(changedState.score).toBe(0);
     });
   });
 
-   describe('case SCORES_UPDATE_ADD_SECONDS', () => {
+   describe('case PLAYER_SCORE_UPDATE_ADD_SECONDS', () => {
     it('returns a new instance with the added expected score', () => {
-      let initialState: IPlayerState = {
-          name: 'test',
-          score: 60
-      };
       let expectedScore = 80;
       deepfreeze(initialState);
 
@@ -54,10 +57,7 @@ describe('reduce scores', () => {
     });
 
     it('returns a new instance with the subtracted expected score', () => {
-      let initialState: IPlayerState = {
-          name: 'test',
-          score: 60
-      };
+
       let expectedScore = 40;
       deepfreeze(initialState);
 
@@ -69,17 +69,16 @@ describe('reduce scores', () => {
     });
 
     it('returns a new instance with the score 0', () => {
-      let initialState: IPlayerState = {
-          name: 'test',
-          score: 10
-      };
+      let state: IPlayerState = Object.assign({}, initialState);
+      state.score = 10;
+
       let expectedScore = 0;
-      deepfreeze(initialState);
+      deepfreeze(state);
 
-      let changedState: IPlayerState = playerStateReducer(initialState, new UpdateAddSeconds(-20));
+      let changedState: IPlayerState = playerStateReducer(state, new UpdateAddSeconds(-20));
 
-      expect(changedState).not.toBe(initialState);
-      expect(changedState.name).toBe(initialState.name);
+      expect(changedState).not.toBe(state);
+      expect(changedState.name).toBe(state.name);
       expect(changedState.score).toBe(expectedScore);
     });
   });

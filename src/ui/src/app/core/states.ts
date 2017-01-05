@@ -14,6 +14,7 @@ export interface IScoreState {
 export interface IPlayerState {
   name: string;
   score: number;
+  isSelected: boolean;
 }
 
 export interface IQuizState {
