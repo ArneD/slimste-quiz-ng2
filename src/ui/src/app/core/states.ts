@@ -15,6 +15,7 @@ export interface IPlayerState {
   name: string;
   score: number;
   isSelected: boolean;
+  hasPlayed: boolean;
 }
 
 export interface IQuizState {

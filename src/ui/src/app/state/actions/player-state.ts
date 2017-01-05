@@ -7,14 +7,14 @@ export const ActionTypes = {
   PLAYER_SCORE_UPDATE_ADD_SECONDS: type('PLAYER_SCORE_UPDATE_ADD_SECONDS')
 };
 
-export class UpdateScoreTick implements Action {
+export class PlayerUpdateScoreTick implements Action {
   type = ActionTypes.PLAYER_SCORE_UPDATE_TICK;
 
   public constructor() {
   }
 }
 
-export class UpdateAddSeconds implements Action {
+export class PlayerUpdateAddSeconds implements Action {
   type = ActionTypes.PLAYER_SCORE_UPDATE_ADD_SECONDS;
   payload: {secondsToAdd: number };
 
@@ -23,5 +23,5 @@ export class UpdateAddSeconds implements Action {
   }
 }
 
-export type Actions = UpdateScoreTick
-  | UpdateAddSeconds;
+export type Actions = PlayerUpdateScoreTick
+  | PlayerUpdateAddSeconds;
