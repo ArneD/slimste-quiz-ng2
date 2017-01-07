@@ -13,6 +13,11 @@ export function quizStateReducer(state: IQuizState = initialState, action: quiz.
         selectedQuiz: state.selectedQuiz,
         quizzes: action.payload.quizzes
       };
+    case quiz.ActionTypes.QUIZZES_UPDATE_SELECTED:
+      return {
+        selectedQuiz: action.payload.quiz,
+        quizzes: state.quizzes
+      };
     default:
       return state;
   }

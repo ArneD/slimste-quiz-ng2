@@ -1,4 +1,5 @@
-import { QuizzesUpdateAll } from './../../state/actions/quiz-state';
+import { IQuiz } from './../../core/models';
+import { QuizzesUpdateAll, QuizzesUpdateSelected } from './../../state/actions/quiz-state';
 import { QuizService } from './../../core/quiz.service';
 import { ScoreUpdatePlayers } from './../../state/actions/score-state';
 import { IState, IPlayerState } from './../../core/states';
@@ -16,7 +17,7 @@ export class SetUpComponent implements OnInit {
   player3Name: string = 'Player 3';
   numberOfSeconds: number = 60;
   selectableQuizzes$ = this.store.select(state => state.quizState.quizzes);
-  selectedQuizName: string;
+  selectedQuiz: IQuiz;
 
   constructor(private store: Store<IState>, private quizService: QuizService) { }
 
@@ -45,5 +46,7 @@ export class SetUpComponent implements OnInit {
         hasPlayed: false
       }
     ));
+
+    this.store.dispatch(new QuizzesUpdateSelected(this.selectedQuiz));
   }
 }

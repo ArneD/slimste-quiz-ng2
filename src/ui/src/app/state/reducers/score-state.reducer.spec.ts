@@ -4,7 +4,7 @@ import { ScoreUpdatePlayers } from '../actions/score-state';
 
 let deepfreeze = require('deep-freeze');
 
-describe('reduce player state', () => {
+describe('reduce score state', () => {
 let initialState: IScoreState = {
     player1: {
       name: 'Player 1',
