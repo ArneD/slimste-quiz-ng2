@@ -1,6 +1,8 @@
+import { HttpModule } from '@angular/http';
+import { QuizService } from './../../core/quiz.service';
 import { Store, StoreModule } from '@ngrx/store';
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +16,12 @@ describe('SetUpComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SetUpComponent ],
-      imports: [FormsModule, StoreModule],
+      imports: [
+        FormsModule,
+        HttpModule,
+        StoreModule.provideStore({})
+      ],
+      providers: [ QuizService ]
     })
     .compileComponents();
   }));
@@ -25,7 +32,7 @@ describe('SetUpComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', async(() => {
+  it('should create', () => {
     expect(component).toBeTruthy();
-  }));
+  });
 });

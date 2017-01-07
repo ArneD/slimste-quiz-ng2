@@ -1,5 +1,6 @@
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import * as Models from './models';
 
 import 'rxjs/add/operator/map';
@@ -10,11 +11,11 @@ export class QuizService {
 
   constructor(private http: Http) { }
 
-  public loadQuizzes() {
+  public loadQuizzes(): Observable<Array<Models.IQuiz>> {
     return this.http
       .get('quiz.json')
       .map(res => {
-        return res.json().data;
+        return res.json().quizzes;
       });
   }
 }
