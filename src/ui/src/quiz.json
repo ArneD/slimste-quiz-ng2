@@ -272,7 +272,7 @@
           "video": {
             "url": "",
             "startFrom": "",
-            "numberOfSecondsToPlay": ""
+            "numberOfSecondsToPlay": 0
           },
           "answer1": "",
           "answer2": "",
@@ -285,7 +285,7 @@
           "video": {
             "url": "",
             "startFrom": "",
-            "numberOfSecondsToPlay": ""
+            "numberOfSecondsToPlay": 0
           },
           "answer1": "",
           "answer2": "",
@@ -298,7 +298,7 @@
           "video": {
             "url": "",
             "startFrom": "",
-            "numberOfSecondsToPlay": ""
+            "numberOfSecondsToPlay": 0
           },
           "answer1": "",
           "answer2": "",
