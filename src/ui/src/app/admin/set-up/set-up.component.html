@@ -1,3 +1,29 @@
-<p>
-  set-up works!
-</p>
+<div class="row">
+  <form class="col-lg-12" (submit)="submitQuiz()">
+    <div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="player1Name">Name player 1</label>
+          <input type="text" id="player1Name" name="player1Name" class="form-control" [(ngModel)]="player1Name" required="required">
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="player2Name">Name player 2</label>
+          <input type="text" id="player2Name" name="player2Name" class="form-control" [(ngModel)]="player2Name" required="required">
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="player3Name">Name player 3</label>
+          <input type="text" id="player3Name" name="player3Name" class="form-control" [(ngModel)]="player3Name" required="required">
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="col-lg-12 text-center">
+        <button type="submit" class="btn btn-warning">Start</button>
+      </div>
+    </div>
+  </form>
+</div>
