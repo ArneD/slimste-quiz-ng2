@@ -1,8 +1,9 @@
 import {combineReducers} from '@ngrx/store';
-import { playerStateReducer, scoreStateReducer } from './reducers';
+import { quizStateReducer, scoreStateReducer } from './reducers';
 
 let stateReducers = combineReducers({
-  scoreState: scoreStateReducer
+  scoreState: scoreStateReducer,
+  quizState: quizStateReducer
 });
 
 export function rootReducer(state: any, action: any) {

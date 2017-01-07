@@ -8,6 +8,7 @@ import { DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { SetUpComponent } from './set-up.component';
+import { rootReducer } from '../../state/root-reducer';
 
 describe('SetUpComponent', () => {
   let component: SetUpComponent;
@@ -19,7 +20,7 @@ describe('SetUpComponent', () => {
       imports: [
         FormsModule,
         HttpModule,
-        StoreModule.provideStore({})
+        StoreModule.provideStore(rootReducer)
       ],
       providers: [ QuizService ]
     })

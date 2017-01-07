@@ -1,3 +1,4 @@
+import { QuizzesUpdateAll } from './../../state/actions/quiz-state';
 import { QuizService } from './../../core/quiz.service';
 import { ScoreUpdatePlayers } from './../../state/actions/score-state';
 import { IState, IPlayerState } from './../../core/states';
@@ -14,12 +15,14 @@ export class SetUpComponent implements OnInit {
   player2Name: string = 'Player 2';
   player3Name: string = 'Player 3';
   numberOfSeconds: number = 60;
+  selectableQuizzes$ = this.store.select(state => state.quizState.quizzes);
+  selectedQuizName: string;
 
   constructor(private store: Store<IState>, private quizService: QuizService) { }
 
   ngOnInit() {
     this.quizService.loadQuizzes().subscribe(quizzes => {
-      console.log(quizzes);
+      this.store.dispatch(new QuizzesUpdateAll(quizzes));
     });
   }
 
