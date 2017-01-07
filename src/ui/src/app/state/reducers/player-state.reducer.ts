@@ -1,5 +1,5 @@
 import { IPlayerState } from './../../core/states';
-import * as score from '../actions/player-state';
+import * as player from '../actions/player-state';
 
 let initialState: IPlayerState = {
     name: '',
@@ -8,16 +8,16 @@ let initialState: IPlayerState = {
     hasPlayed: false
 };
 
-export function playerStateReducer(state: IPlayerState = initialState, action: score.Actions): IPlayerState {
+export function playerStateReducer(state: IPlayerState = initialState, action: player.Actions): IPlayerState {
   switch (action.type) {
-    case score.ActionTypes.PLAYER_UPDATE_NAME:
+    case player.ActionTypes.PLAYER_UPDATE_NAME:
       return {
         name: action.payload.name,
         score: state.score,
         isSelected: state.isSelected,
         hasPlayed: state.hasPlayed
       };
-    case score.ActionTypes.PLAYER_SCORE_UPDATE_TICK:
+    case player.ActionTypes.PLAYER_SCORE_UPDATE_TICK:
       let newScoreAfterTick = state.score - 1;
       return {
         name: state.name,
@@ -25,7 +25,7 @@ export function playerStateReducer(state: IPlayerState = initialState, action: s
         isSelected: state.isSelected,
         hasPlayed: state.hasPlayed
       };
-    case score.ActionTypes.PLAYER_SCORE_UPDATE_ADD_SECONDS:
+    case player.ActionTypes.PLAYER_SCORE_UPDATE_ADD_SECONDS:
       let newScoreAfterAdd = state.score + action.payload.secondsToAdd;
       return {
         name: state.name,

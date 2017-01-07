@@ -13,7 +13,7 @@ export class SetUpComponent implements OnInit {
   player3Name: string = 'Player 3';
   numberOfSeconds: number = 60;
 
-  constructor(private store: Store<IState>) { }
+  constructor() { }
 
   ngOnInit() {
   }
