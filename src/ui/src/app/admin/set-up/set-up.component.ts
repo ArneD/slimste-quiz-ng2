@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { IQuiz } from './../../core/models';
 import { QuizzesUpdateAll, QuizzesUpdateSelected } from './../../state/actions/quiz-state';
 import { QuizService } from './../../core/quiz.service';
@@ -19,7 +20,8 @@ export class SetUpComponent implements OnInit {
   selectableQuizzes$ = this.store.select(state => state.quizState.quizzes);
   selectedQuiz: IQuiz;
 
-  constructor(private store: Store<IState>, private quizService: QuizService) { }
+  constructor(private store: Store<IState>, private quizService: QuizService,
+    private router: Router) { }
 
   ngOnInit() {
     this.quizService.loadQuizzes().subscribe(quizzes => {
@@ -48,5 +50,6 @@ export class SetUpComponent implements OnInit {
     ));
 
     this.store.dispatch(new QuizzesUpdateSelected(this.selectedQuiz));
+    this.router.navigate(['/admin/three-six-nine']);
   }
 }
