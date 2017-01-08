@@ -1,8 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
-import { ThreeSixNineComponent } from './three-six-nine';
-
 const routes: Routes  = [
   { path: '', pathMatch: 'full', redirectTo: 'admin/setup'}
 ];
@@ -13,4 +11,4 @@ const routes: Routes  = [
 })
 export class AppRoutingModule { }
 
-export const routingComponents = [ThreeSixNineComponent];
+export const routingComponents = [];
