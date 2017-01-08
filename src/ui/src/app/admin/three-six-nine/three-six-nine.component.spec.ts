@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { ThreeSixNineComponent } from './three-six-nine.component';
+import { AdminThreeSixNineComponent } from './three-six-nine.component';
 
-describe('ThreeSixNineComponent', () => {
-  let component: ThreeSixNineComponent;
-  let fixture: ComponentFixture<ThreeSixNineComponent>;
+describe('AdminThreeSixNineComponent', () => {
+  let component: AdminThreeSixNineComponent;
+  let fixture: ComponentFixture<AdminThreeSixNineComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ThreeSixNineComponent ]
+      declarations: [ AdminThreeSixNineComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ThreeSixNineComponent);
+    fixture = TestBed.createComponent(AdminThreeSixNineComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
