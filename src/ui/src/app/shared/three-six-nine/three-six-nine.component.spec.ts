@@ -1,3 +1,4 @@
+import { ScoreBoardComponent } from './../score-board/score-board.component';
 import { StoreModule } from '@ngrx/store';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
@@ -14,7 +15,7 @@ describe('ThreeSixNineComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ThreeSixNineComponent, CircleSelectorComponent, ScoreEllipseComponent ],
+      declarations: [ ThreeSixNineComponent, CircleSelectorComponent, ScoreEllipseComponent, ScoreBoardComponent ],
       imports: [
         StoreModule.provideStore(rootReducer)
       ]

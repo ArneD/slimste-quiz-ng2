@@ -2,87 +2,77 @@
   <div class="col-lg-2 col-lg-offset-1">
     <div class="row">
       <div class="col-xs-4 col-xs-offset-8">
-        <slq-circle-selector [text]="3" [selectedValue]="selectedNr"></slq-circle-selector>
+        <slq-circle-selector [text]="3" [selectedValue]="selectedNr | async"></slq-circle-selector>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-4">
-        <slq-circle-selector [text]="1" [selectedValue]="selectedNr"></slq-circle-selector>
+        <slq-circle-selector [text]="1" [selectedValue]="selectedNr | async"></slq-circle-selector>
       </div>
       <div class="col-xs-4">
-        <slq-circle-selector [text]="2" [selectedValue]="selectedNr"></slq-circle-selector>
+        <slq-circle-selector [text]="2" [selectedValue]="selectedNr | async"></slq-circle-selector>
       </div>
     </div>
   </div>
   <div class="col-lg-2">
     <div class="row">
       <div class="col-xs-4 col-xs-offset-8">
-        <slq-circle-selector [text]="6" [selectedValue]="selectedNr"></slq-circle-selector>
+        <slq-circle-selector [text]="6" [selectedValue]="selectedNr | async"></slq-circle-selector>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-4">
-        <slq-circle-selector [text]="4" [selectedValue]="selectedNr"></slq-circle-selector>
+        <slq-circle-selector [text]="4" [selectedValue]="selectedNr | async"></slq-circle-selector>
       </div>
       <div class="col-xs-4">
-        <slq-circle-selector [text]="5" [selectedValue]="selectedNr"></slq-circle-selector>
+        <slq-circle-selector [text]="5" [selectedValue]="selectedNr | async"></slq-circle-selector>
       </div>
     </div>
   </div>
   <div class="col-lg-2">
     <div class="row">
       <div class="col-xs-4 col-xs-offset-8">
-        <slq-circle-selector [text]="9" [selectedValue]="selectedNr"></slq-circle-selector>
+        <slq-circle-selector [text]="9" [selectedValue]="selectedNr | async"></slq-circle-selector>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-4">
-        <slq-circle-selector [text]="7" [selectedValue]="selectedNr"></slq-circle-selector>
+        <slq-circle-selector [text]="7" [selectedValue]="selectedNr | async"></slq-circle-selector>
       </div>
       <div class="col-xs-4">
-        <slq-circle-selector [text]="8" [selectedValue]="selectedNr"></slq-circle-selector>
+        <slq-circle-selector [text]="8" [selectedValue]="selectedNr | async"></slq-circle-selector>
       </div>
     </div>
   </div>
    <div class="col-lg-2">
     <div class="row">
       <div class="col-xs-4 col-xs-offset-8">
-        <slq-circle-selector [text]="12" [selectedValue]="selectedNr"></slq-circle-selector>
+        <slq-circle-selector [text]="12" [selectedValue]="selectedNr | async"></slq-circle-selector>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-4">
-        <slq-circle-selector [text]="10" [selectedValue]="selectedNr"></slq-circle-selector>
+        <slq-circle-selector [text]="10" [selectedValue]="selectedNr | async"></slq-circle-selector>
       </div>
       <div class="col-xs-4">
-        <slq-circle-selector [text]="11" [selectedValue]="selectedNr"></slq-circle-selector>
+        <slq-circle-selector [text]="11" [selectedValue]="selectedNr | async"></slq-circle-selector>
       </div>
     </div>
   </div>
    <div class="col-lg-2">
     <div class="row">
       <div class="col-xs-4 col-xs-offset-8">
-        <slq-circle-selector [text]="15" [selectedValue]="selectedNr"></slq-circle-selector>
+        <slq-circle-selector [text]="15" [selectedValue]="selectedNr | async"></slq-circle-selector>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-4">
-        <slq-circle-selector [text]="13" [selectedValue]="selectedNr"></slq-circle-selector>
+        <slq-circle-selector [text]="13" [selectedValue]="selectedNr | async"></slq-circle-selector>
       </div>
       <div class="col-xs-4">
-        <slq-circle-selector [text]="14" [selectedValue]="selectedNr"></slq-circle-selector>
+        <slq-circle-selector [text]="14" [selectedValue]="selectedNr | async"></slq-circle-selector>
       </div>
     </div>
   </div>
 </div>
-<div class="row">
-  <div class="col-md-4">
-    <slq-score-ellipse [isSelected]="true"></slq-score-ellipse>
-  </div>
-  <div class="col-md-4">
-    <slq-score-ellipse></slq-score-ellipse>
-  </div>
-  <div class="col-md-4">
-    <slq-score-ellipse></slq-score-ellipse>
-  </div>
-</div>
+<slq-score-board></slq-score-board>

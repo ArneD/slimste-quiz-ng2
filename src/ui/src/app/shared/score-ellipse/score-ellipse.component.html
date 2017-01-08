@@ -1,12 +1,19 @@
-<div class="text-center">
-  <svg height="140" width="250">
-    <g>
-      <svg:ellipse cx="120" cy="80" rx="100" ry="50"
-        style="fill:brown;stroke-width:5" [attr.stroke]="textColor" />
-      <svg:text text-anchor="middle" x="115" y="95"
-        [attr.fill]="textColor" style="font-size: 4em; font-style: italic">
-        {{ numberOfSeconds }}
-      </svg:text>
-    </g>
-  </svg>
+<div class="row text-center">
+  <h3>{{ player.name }}</h3>
+</div>
+<div class="row">
+  <div class="score-ellipse text-center">
+    <svg height="140" width="250">
+      <g>
+        <svg:ellipse cx="125" cy="80" rx="100" ry="50"
+          class="ellipse"
+          [ngClass]="{'selected': player.isSelected, 'default': !player.isSelected }" />
+        <svg:text text-anchor="middle" x="120" y="95"
+          class="text"
+          [ngClass]="{'selected': player.isSelected, 'default': !player.isSelected }">
+          {{ player.score }}
+        </svg:text>
+      </g>
+    </svg>
+  </div>
 </div>

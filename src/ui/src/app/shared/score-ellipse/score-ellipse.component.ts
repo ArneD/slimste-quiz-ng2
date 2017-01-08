@@ -1,25 +1,21 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { IPlayerState } from './../../core/states';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'slq-score-ellipse',
   templateUrl: './score-ellipse.component.html',
   styleUrls: ['./score-ellipse.component.scss']
 })
-export class ScoreEllipseComponent implements OnInit, OnChanges {
-  @Input() numberOfSeconds: number = 60;
-  @Input() isSelected: boolean = false;
-  textColor: string = 'white';
+export class ScoreEllipseComponent implements OnInit {
+  @Input() player: IPlayerState = {
+    name: '',
+    score: 0,
+    isSelected: false,
+    hasPlayed: false
+  };
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-  ngOnChanges() {
-    if (this.isSelected) {
-      this.textColor = 'orange';
-    } else {
-      this.textColor = 'white';
-    }
   }
 }

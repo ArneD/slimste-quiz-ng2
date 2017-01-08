@@ -1,23 +1,21 @@
-import { SharedModule } from './../../shared/shared.module';
-/* tslint:disable:no-unused-variable */
-
+import { ScoreEllipseComponent } from './../score-ellipse/score-ellipse.component';
 import { StoreModule } from '@ngrx/store';
+/* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
+import { ScoreBoardComponent } from './score-board.component';
 import { rootReducer } from '../../state/root-reducer';
-import { AdminThreeSixNineComponent } from './three-six-nine.component';
 
-describe('AdminThreeSixNineComponent', () => {
-  let component: AdminThreeSixNineComponent;
-  let fixture: ComponentFixture<AdminThreeSixNineComponent>;
+describe('ScoreBoardComponent', () => {
+  let component: ScoreBoardComponent;
+  let fixture: ComponentFixture<ScoreBoardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminThreeSixNineComponent ],
+      declarations: [ ScoreBoardComponent, ScoreEllipseComponent ],
       imports: [
-        SharedModule,
         StoreModule.provideStore(rootReducer)
       ]
     })
@@ -25,7 +23,7 @@ describe('AdminThreeSixNineComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AdminThreeSixNineComponent);
+    fixture = TestBed.createComponent(ScoreBoardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

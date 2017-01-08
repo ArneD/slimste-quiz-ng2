@@ -1,0 +1,25 @@
+.score-ellipse .ellipse {
+  fill: brown;
+  stroke-width: 5;
+}
+
+.score-ellipse .ellipse.default {
+  stroke: white;
+}
+
+.score-ellipse .ellipse.selected {
+  stroke: orange;
+}
+
+.score-ellipse .text {
+  font-size: 4em;
+  font-style: italic;
+}
+
+.score-ellipse .text.selected {
+  fill: orange;
+}
+
+.score-ellipse .text.default {
+  fill: white;
+}
