@@ -1,3 +1,4 @@
+import { AdminModule } from './admin/admin.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -7,17 +8,16 @@ import {StoreModule} from '@ngrx/store';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
-import { routingComponents, AppRoutingModule } from './app.routes';
+import { routingComponents, AppRoutingModule } from './app.routing';
 import { QuizService } from './core/quiz.service';
 
 import { rootReducer } from './state/root-reducer';
-import { SetUpComponent } from './admin/set-up/set-up.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents,
-    SetUpComponent
+    routingComponents
   ],
   imports: [
     BrowserModule,
@@ -25,7 +25,8 @@ import { SetUpComponent } from './admin/set-up/set-up.component';
     HttpModule,
     AppRoutingModule,
     SharedModule,
-    StoreModule.provideStore(rootReducer)
+    StoreModule.provideStore(rootReducer),
+    AdminModule
   ],
   providers: [QuizService],
   bootstrap: [AppComponent]
