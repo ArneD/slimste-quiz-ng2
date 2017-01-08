@@ -3,20 +3,44 @@ import { IQuizState } from './../../core/states';
 import * as quiz from '../actions/quiz-state';
 
 let initialState: IQuizState = {
-    quizzes: []
+    quizzes: [],
+    threeSixNine: {
+      numberOfQuestion: 0
+    }
 };
 
 export function quizStateReducer(state: IQuizState = initialState, action: quiz.Actions): IQuizState {
   switch (action.type) {
-    case quiz.ActionTypes.QUIZZES_UPDATE_ALL:
+    case quiz.ActionTypes.QUIZ_UPDATE_ALL:
       return {
         selectedQuiz: state.selectedQuiz,
-        quizzes: action.payload.quizzes
+        quizzes: action.payload.quizzes,
+        threeSixNine: state.threeSixNine
       };
-    case quiz.ActionTypes.QUIZZES_UPDATE_SELECTED:
+    case quiz.ActionTypes.QUIZ_UPDATE_SELECTED:
       return {
         selectedQuiz: action.payload.quiz,
-        quizzes: state.quizzes
+        quizzes: state.quizzes,
+        threeSixNine: state.threeSixNine
+      };
+    case quiz.ActionTypes.QUIZ_THREE_SIX_NINE_NEXT_QUESTION:
+      let nextNumber = state.threeSixNine.numberOfQuestion + 1;
+      if (!state.selectedQuiz || nextNumber > 15) {
+        return {
+          quizzes: state.quizzes,
+          selectedQuiz: state.selectedQuiz,
+          threeSixNine: {
+            numberOfQuestion: 0
+          }
+        };
+      }
+      return {
+        quizzes: state.quizzes,
+        selectedQuiz: state.selectedQuiz,
+        threeSixNine: {
+          numberOfQuestion: nextNumber,
+          question: state.selectedQuiz.threeSixNine[nextNumber]
+        }
       };
     default:
       return state;

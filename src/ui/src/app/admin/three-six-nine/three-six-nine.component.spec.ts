@@ -1,8 +1,11 @@
 /* tslint:disable:no-unused-variable */
+
+import { StoreModule } from '@ngrx/store';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
+import { rootReducer } from '../../state/root-reducer';
 import { AdminThreeSixNineComponent } from './three-six-nine.component';
 
 describe('AdminThreeSixNineComponent', () => {
@@ -11,7 +14,10 @@ describe('AdminThreeSixNineComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminThreeSixNineComponent ]
+      declarations: [ AdminThreeSixNineComponent ],
+      imports: [
+        StoreModule.provideStore(rootReducer)
+      ]
     })
     .compileComponents();
   }));

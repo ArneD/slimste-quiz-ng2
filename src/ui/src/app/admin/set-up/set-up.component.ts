@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { IQuiz } from './../../core/models';
-import { QuizzesUpdateAll, QuizzesUpdateSelected } from './../../state/actions/quiz-state';
+import { QuizUpdateAll, QuizUpdateSelected } from './../../state/actions/quiz-state';
 import { QuizService } from './../../core/quiz.service';
 import { ScoreUpdatePlayers } from './../../state/actions/score-state';
 import { IState, IPlayerState } from './../../core/states';
@@ -25,7 +25,7 @@ export class SetUpComponent implements OnInit {
 
   ngOnInit() {
     this.quizService.loadQuizzes().subscribe(quizzes => {
-      this.store.dispatch(new QuizzesUpdateAll(quizzes));
+      this.store.dispatch(new QuizUpdateAll(quizzes));
     });
   }
 
@@ -49,7 +49,7 @@ export class SetUpComponent implements OnInit {
       }
     ));
 
-    this.store.dispatch(new QuizzesUpdateSelected(this.selectedQuiz));
+    this.store.dispatch(new QuizUpdateSelected(this.selectedQuiz));
     this.router.navigate(['/admin/three-six-nine']);
   }
 }
