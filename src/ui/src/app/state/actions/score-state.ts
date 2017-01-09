@@ -3,7 +3,8 @@ import { Action } from '@ngrx/store';
 import { type } from '../util';
 
 export const ActionTypes = {
-  SCORE_UPDATE_PLAYERS: type('SCORE_UPDATE_PLAYERS')
+  SCORE_UPDATE_PLAYERS: type('SCORE_UPDATE_PLAYERS'),
+  SCORE_INCREASE_SELECTED_PLAYER: type('SCORE_INCREASE_SELECTED_PLAYER')
 };
 
 export class ScoreUpdatePlayers implements Action {
@@ -19,4 +20,16 @@ export class ScoreUpdatePlayers implements Action {
   }
 }
 
-export type Actions = ScoreUpdatePlayers;
+export class ScoreIncreaseSelectedPlayer implements Action {
+  type = ActionTypes.SCORE_INCREASE_SELECTED_PLAYER;
+  payload: { scoreToAdd: number };
+
+  public constructor(scoreToAdd: number) {
+    this.payload = {
+      scoreToAdd: scoreToAdd
+    };
+  }
+}
+
+export type Actions = ScoreUpdatePlayers
+  | ScoreIncreaseSelectedPlayer;

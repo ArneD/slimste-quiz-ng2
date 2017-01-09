@@ -25,7 +25,7 @@ export interface IQuizState {
 }
 
 export interface IThreeSixNineState {
-  question?: IThreeSixNineQuestion;
+  question: IThreeSixNineQuestion;
   numberOfQuestion: number;
 }
 

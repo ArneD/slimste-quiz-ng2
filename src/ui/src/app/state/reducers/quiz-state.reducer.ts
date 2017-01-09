@@ -5,7 +5,11 @@ import * as quiz from '../actions/quiz-state';
 let initialState: IQuizState = {
     quizzes: [],
     threeSixNine: {
-      numberOfQuestion: 0
+      numberOfQuestion: 0,
+      question: {
+        question: '',
+        answer: ''
+      }
     }
 };
 
@@ -30,7 +34,11 @@ export function quizStateReducer(state: IQuizState = initialState, action: quiz.
           quizzes: state.quizzes,
           selectedQuiz: state.selectedQuiz,
           threeSixNine: {
-            numberOfQuestion: 0
+            numberOfQuestion: 0,
+            question: {
+              question: null,
+              answer: null
+            }
           }
         };
       }

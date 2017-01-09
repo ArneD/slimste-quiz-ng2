@@ -13,7 +13,11 @@ describe('reduce quiz state', () => {
     let initialState: IQuizState = {
       quizzes: [],
       threeSixNine: {
-        numberOfQuestion: 0
+        numberOfQuestion: 0,
+        question: {
+          question: null,
+          answer: null
+        }
       }
     };
 
@@ -35,7 +39,11 @@ describe('reduce quiz state', () => {
       quizzes: [],
       selectedQuiz: null,
       threeSixNine: {
-        numberOfQuestion: 0
+        numberOfQuestion: 0,
+        question: {
+          question: null,
+          answer: null
+        }
       }
     };
 
@@ -61,7 +69,11 @@ describe('reduce quiz state', () => {
       quizzes: [],
       selectedQuiz: quiz,
       threeSixNine: {
-        numberOfQuestion: 0
+        numberOfQuestion: 0,
+        question: {
+          question: null,
+          answer: null
+        }
       }
     };
       deepfreeze(initialState);
@@ -90,7 +102,8 @@ describe('reduce quiz state', () => {
 
       expect(initialState).not.toBe(changedState);
       expect(changedState.threeSixNine.numberOfQuestion).toBe(0);
-      expect(changedState.threeSixNine.question).toBeUndefined();
+      expect(changedState.threeSixNine.question.question).toBeNull();
+      expect(changedState.threeSixNine.question.answer).toBeNull();
     });
 
     it('returns a new instance with no question and number 0 when no quiz is selected', () => {
@@ -98,7 +111,11 @@ describe('reduce quiz state', () => {
         quizzes: [],
         selectedQuiz: null,
         threeSixNine: {
-          numberOfQuestion: 0
+          numberOfQuestion: 0,
+          question: {
+            question: null,
+            answer: null
+          }
         }
       };
       deepfreeze(initialState);
@@ -108,7 +125,8 @@ describe('reduce quiz state', () => {
 
       expect(initialState).not.toBe(changedState);
       expect(changedState.threeSixNine.numberOfQuestion).toBe(0);
-      expect(changedState.threeSixNine.question).toBeUndefined();
+      expect(changedState.threeSixNine.question.question).toBeNull();
+      expect(changedState.threeSixNine.question.answer).toBeNull();
     });
   });
 });

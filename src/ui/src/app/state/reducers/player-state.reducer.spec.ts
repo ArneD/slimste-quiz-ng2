@@ -5,12 +5,7 @@ import { PlayerUpdateScoreTick, PlayerUpdateAddSeconds, PlayerUpdateName } from 
 let deepfreeze = require('deep-freeze');
 
 describe('reduce player state', () => {
-  let initialState: IPlayerState = {
-    name: '',
-    score: 0,
-    isSelected: false,
-    hasPlayed: false
-  };
+  let initialState: IPlayerState;
 
   beforeEach(() => {
     initialState = {
