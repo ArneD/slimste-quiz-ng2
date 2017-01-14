@@ -37,7 +37,7 @@ export function scoreStateReducer(state: IScoreState = initialState, action: sco
           player2: state.player2,
           player3: state.player3
         };
-      } else if(state.player2.isSelected) {
+      } else if (state.player2.isSelected) {
         return {
           player2: createPlayerWithAddedScore(state.player2, action.payload.scoreToAdd),
           player1: state.player1,
@@ -49,6 +49,50 @@ export function scoreStateReducer(state: IScoreState = initialState, action: sco
           player2: state.player2,
           player1: state.player1
         };
+    case score.ActionTypes.SCORE_RESET_HAS_PLAYED:
+      return {
+        player1: createPlayerWithHasPlayed(state.player1, false),
+        player2: createPlayerWithHasPlayed(state.player2, false),
+        player3: createPlayerWithHasPlayed(state.player3, false),
+      };
+    case score.ActionTypes.SCORE_PLAYER_PLAYED:
+      if (state.player1.name === action.payload.player.name) {
+        return {
+          player1: createPlayerWithHasPlayed(state.player1, true),
+          player2: state.player2,
+          player3: state.player3
+        };
+      } else if (state.player2.name === action.payload.player.name) {
+        return {
+          player1: state.player1,
+          player2: createPlayerWithHasPlayed(state.player2, true),
+          player3: state.player3
+        };
+      }
+      return {
+          player1: state.player1,
+          player2: state.player2,
+          player3: createPlayerWithHasPlayed(state.player3, true),
+      };
+    case score.ActionTypes.SCORE_SELECT_PLAYER:
+      if (state.player1.name === action.payload.player.name) {
+        return {
+          player1: createPlayerWithIsSelected(state.player1, true),
+          player2: createPlayerWithIsSelected(state.player2, false),
+          player3: createPlayerWithIsSelected(state.player3, false),
+        };
+      } else if (state.player2.name === action.payload.player.name) {
+        return {
+          player1: createPlayerWithIsSelected(state.player1, false),
+          player2: createPlayerWithIsSelected(state.player2, true),
+          player3: createPlayerWithIsSelected(state.player3, false),
+        };
+      }
+      return {
+          player1: createPlayerWithIsSelected(state.player1, false),
+          player2: createPlayerWithIsSelected(state.player2, false),
+          player3: createPlayerWithIsSelected(state.player3, true),
+      };
     default:
       return state;
   }
@@ -59,6 +103,24 @@ export function scoreStateReducer(state: IScoreState = initialState, action: sco
       hasPlayed: player.hasPlayed,
       isSelected: player.isSelected,
       score: player.score + scoreToAdd
-    }
+    };
+  }
+
+  function createPlayerWithHasPlayed(player: IPlayerState, hasPlayed: boolean): IPlayerState {
+    return {
+      name: player.name,
+      hasPlayed: hasPlayed,
+      isSelected: player.isSelected,
+      score: player.score
+    };
+  }
+
+  function createPlayerWithIsSelected(player: IPlayerState, isSelected: boolean): IPlayerState {
+    return {
+      name: player.name,
+      hasPlayed: player.hasPlayed,
+      isSelected: isSelected,
+      score: player.score
+    };
   }
 };

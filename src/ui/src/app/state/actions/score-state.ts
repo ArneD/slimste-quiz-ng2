@@ -4,7 +4,10 @@ import { type } from '../util';
 
 export const ActionTypes = {
   SCORE_UPDATE_PLAYERS: type('SCORE_UPDATE_PLAYERS'),
-  SCORE_INCREASE_SELECTED_PLAYER: type('SCORE_INCREASE_SELECTED_PLAYER')
+  SCORE_INCREASE_SELECTED_PLAYER: type('SCORE_INCREASE_SELECTED_PLAYER'),
+  SCORE_RESET_HAS_PLAYED: type('SCORE_RESET_HAS_PLAYED'),
+  SCORE_PLAYER_PLAYED: type('SCORE_PLAYER_PLAYED'),
+  SCORE_SELECT_PLAYER: type('SCORE_SELECT_PLAYER'),
 };
 
 export class ScoreUpdatePlayers implements Action {
@@ -31,5 +34,32 @@ export class ScoreIncreaseSelectedPlayer implements Action {
   }
 }
 
+export class ScoreResetHasPlayed implements Action {
+  type = ActionTypes.SCORE_RESET_HAS_PLAYED;
+
+  public constructor() { }
+}
+
+export class ScorePlayerPlayed implements Action {
+  type = ActionTypes.SCORE_PLAYER_PLAYED;
+  payload: { player: IPlayerState };
+
+  public constructor(player: IPlayerState) {
+    this.payload = { player: player };
+  }
+}
+
+export class ScoreSelectPlayer implements Action {
+  type = ActionTypes.SCORE_SELECT_PLAYER;
+  payload: { player: IPlayerState };
+
+  public constructor(player: IPlayerState) {
+    this.payload = { player: player };
+  }
+}
+
 export type Actions = ScoreUpdatePlayers
-  | ScoreIncreaseSelectedPlayer;
+  | ScoreIncreaseSelectedPlayer
+  | ScoreResetHasPlayed
+  | ScorePlayerPlayed
+  | ScoreSelectPlayer;
