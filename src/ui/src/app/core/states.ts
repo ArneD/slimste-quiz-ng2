@@ -1,4 +1,4 @@
-import { IQuiz, IThreeSixNineQuestion } from './models';
+import { IQuiz, IThreeSixNineQuestion, IPuzzle } from './models';
 
 export interface IState {
   scoreState: IScoreState;
@@ -22,6 +22,7 @@ export interface IQuizState {
   quizzes: Array<IQuiz>;
   selectedQuiz?: IQuiz;
   threeSixNine: IThreeSixNineState;
+  puzzle: IPuzzle;
 }
 
 export interface IThreeSixNineState {

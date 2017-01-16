@@ -1,3 +1,31 @@
-<p>
-  puzzles works!
-</p>
+<div class="row col-sm-12 ">
+  <div class="row">
+  </div>
+  <div class="row" *ngIf="puzzle$ | async">
+    <div class="col-md-12 text-center">
+      <button class="btn btn-default" [disabled]="isButton1Disabled"
+        (click)="selectAnswer($event.target.value); isButton1Disabled = true;"
+        [value]="(puzzle$ | async)['1'].answer">{{ (puzzle$ | async)['1'].answer }}</button>
+      <button class="btn btn-default" [disabled]="isButton2Disabled"
+        (click)="selectAnswer($event.target.value); isButton2Disabled = true;"
+        [value]="(puzzle$ | async)['2'].answer">{{ (puzzle$ | async)["2"].answer }}</button>
+      <button class="btn btn-default" [disabled]="isButton3Disabled"
+        (click)="selectAnswer($event.target.value); isButton3Disabled = true;"
+        [value]="(puzzle$ | async)['3'].answer">{{ (puzzle$ | async)["3"].answer }}</button>
+    </div>
+  </div>
+  <div class="row">
+    <form class="col-sm-6 col-sm-offset-3">
+      <div class="form-group" *ngIf="!endOfRound">
+          <button class="btn btn-default" (click)="selectNextPuzzle()">Next puzzle</button>
+      </div>
+      <div class="form-group" *ngIf="!endOfRound">
+        <button class="btn btn-default" (click)="startTimer()" [disabled]="timerRunning">Start timer</button>
+        <button class="btn btn-warning" (click)="stopTimer()" [disabled]="!timerRunning">Stop timer</button>
+      </div>
+      <div class="form-group" *ngIf="endOfRound">
+        <button class="btn btn-default" (click)="goToNextRound()">Next round</button>
+      </div>
+    </form>
+  </div>
+</div>

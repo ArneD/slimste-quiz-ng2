@@ -6,7 +6,8 @@ import { type } from '../util';
 export const ActionTypes = {
   QUIZ_UPDATE_ALL: type('QUIZ_UPDATE_ALL'),
   QUIZ_UPDATE_SELECTED: type('QUIZ_UPDATE_SELECTED'),
-  QUIZ_THREE_SIX_NINE_NEXT_QUESTION: type('QUIZ_THREE_SIX_NINE_NEXT_QUESTION')
+  QUIZ_THREE_SIX_NINE_NEXT_QUESTION: type('QUIZ_THREE_SIX_NINE_NEXT_QUESTION'),
+  QUIZ_PUZZLES_NEXT_PUZZLE: type('QUIZ_PUZZLES_NEXT_PUZZLE')
 };
 
 export class QuizUpdateAll implements Action {
@@ -39,6 +40,13 @@ export class QuizThreeSixNineNextQuestion implements Action {
   }
 }
 
+export class QuizPuzzlesNextPuzzle implements Action {
+  type = ActionTypes.QUIZ_PUZZLES_NEXT_PUZZLE;
+
+  public constructor() { }
+}
+
 export type Actions = QuizUpdateAll
   | QuizUpdateSelected
-  | QuizThreeSixNineNextQuestion;
+  | QuizThreeSixNineNextQuestion
+  | QuizPuzzlesNextPuzzle;
