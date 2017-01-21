@@ -1,3 +1,4 @@
+import { ClientModule } from './client/client.module';
 import { ScoreService } from './core/score.service';
 import { AdminModule } from './admin/admin.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,11 +15,10 @@ import { QuizService } from './core/quiz.service';
 
 import { rootReducer } from './state/root-reducer';
 
-
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents
+    routingComponents,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +27,8 @@ import { rootReducer } from './state/root-reducer';
     AppRoutingModule,
     SharedModule,
     StoreModule.provideStore(rootReducer),
-    AdminModule
+    AdminModule,
+    ClientModule
   ],
   providers: [QuizService, ScoreService],
   bootstrap: [AppComponent]

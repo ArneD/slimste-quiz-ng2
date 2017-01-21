@@ -32,8 +32,6 @@ export class ScoreService implements OnDestroy {
         this.player3 = score.player3;
     });
 
-    console.log('init');
-
     this.timerAudio.load();
     this.timerPauseAudio.load();
     this.scoreAudio.load();

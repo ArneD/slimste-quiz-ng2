@@ -12,8 +12,13 @@ export class AppComponent implements OnInit {
   preventReset$ = this.store.select(state => state);
 
   constructor(private store: Store<IState>) {
+
   }
 
   ngOnInit() {
+    if(window.opener) {
+      console.log(window.opener['slqStore']);
+    }
+    window['slqStore'] = this.store;
   }
 }
