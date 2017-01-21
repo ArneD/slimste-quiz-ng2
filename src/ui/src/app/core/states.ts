@@ -23,11 +23,18 @@ export interface IQuizState {
   quizzes: Array<IQuiz>;
   selectedQuiz?: IQuiz;
   threeSixNine: IThreeSixNineState;
-  puzzle: IPuzzle;
+  puzzle: IPuzzleState;
 }
 
 export interface IThreeSixNineState {
   question: IThreeSixNineQuestion;
   numberOfQuestion: number;
+}
+
+export interface IPuzzleState {
+  puzzle: IPuzzle;
+  answered1: boolean;
+  answered2: boolean;
+  answered3: boolean;
 }
 

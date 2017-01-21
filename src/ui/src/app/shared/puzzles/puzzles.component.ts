@@ -16,7 +16,7 @@ export class PuzzlesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.puzzleSubscription = this.store
-      .select(state => state.quizState.puzzle)
+      .select(state => state.quizState.puzzle.puzzle)
       .subscribe((puzzle) => {
         if (!puzzle) {
           return;

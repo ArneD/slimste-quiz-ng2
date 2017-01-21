@@ -1,6 +1,7 @@
-import { SharedModule } from './../../shared/shared.module';
 /* tslint:disable:no-unused-variable */
 
+import { ScoreService } from './../../core/score.service';
+import { SharedModule } from './../../shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -19,7 +20,8 @@ describe('AdminThreeSixNineComponent', () => {
       imports: [
         SharedModule,
         StoreModule.provideStore(rootReducer)
-      ]
+      ],
+      providers: [ ScoreService ]
     })
     .compileComponents();
   }));

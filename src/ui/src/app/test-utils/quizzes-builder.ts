@@ -72,21 +72,21 @@ export class QuizzesBuilder {
       puzzles: {
         firstPuzzle: {
           1: {
-            answer: 'Antwoord',
+            answer: 'Antwoord 1',
             clue1: 'Clue 1',
             clue2: 'Clue 2',
             clue3: 'Clue 3',
             clue4: 'Clue 4'
           },
           2: {
-            answer: 'Antwoord',
+            answer: 'Antwoord 2',
             clue1: 'Clue 1',
             clue2: 'Clue 2',
             clue3: 'Clue 3',
             clue4: 'Clue 4'
           },
           3: {
-            answer: 'Antwoord',
+            answer: 'Antwoord 3',
             clue1: 'Clue 1',
             clue2: 'Clue 2',
             clue3: 'Clue 3',

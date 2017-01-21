@@ -1,4 +1,4 @@
-import { IQuiz, IThreeSixNineRound } from './../../core/models';
+import { IQuiz, IThreeSixNineRound, IPuzzleQuestion } from './../../core/models';
 import { IQuizState } from './../../core/states';
 import { Action } from '@ngrx/store';
 import { type } from '../util';
@@ -7,7 +7,8 @@ export const ActionTypes = {
   QUIZ_UPDATE_ALL: type('QUIZ_UPDATE_ALL'),
   QUIZ_UPDATE_SELECTED: type('QUIZ_UPDATE_SELECTED'),
   QUIZ_THREE_SIX_NINE_NEXT_QUESTION: type('QUIZ_THREE_SIX_NINE_NEXT_QUESTION'),
-  QUIZ_PUZZLES_NEXT_PUZZLE: type('QUIZ_PUZZLES_NEXT_PUZZLE')
+  QUIZ_PUZZLES_NEXT_PUZZLE: type('QUIZ_PUZZLES_NEXT_PUZZLE'),
+  QUIZ_PUZZLES_ANSWERED_PUZZLE_QUESTION: type('QUIZ_PUZZLES_ANSWERED_PUZZLE_QUESTION')
 };
 
 export class QuizUpdateAll implements Action {
@@ -32,7 +33,6 @@ export class QuizUpdateSelected implements Action {
   }
 }
 
-
 export class QuizThreeSixNineNextQuestion implements Action {
   type = ActionTypes.QUIZ_THREE_SIX_NINE_NEXT_QUESTION;
 
@@ -46,7 +46,17 @@ export class QuizPuzzlesNextPuzzle implements Action {
   public constructor() { }
 }
 
+export class QuizPuzzlesAnsweredPuzzleQuestion implements Action {
+  type = ActionTypes.QUIZ_PUZZLES_ANSWERED_PUZZLE_QUESTION;
+  payload: { answer: string };
+
+  public constructor(answer: string) {
+    this.payload = { answer: answer };
+  }
+}
+
 export type Actions = QuizUpdateAll
   | QuizUpdateSelected
   | QuizThreeSixNineNextQuestion
-  | QuizPuzzlesNextPuzzle;
+  | QuizPuzzlesNextPuzzle
+  | QuizPuzzlesAnsweredPuzzleQuestion;

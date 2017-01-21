@@ -2,7 +2,7 @@
   <div class="row">
     <slq-puzzles></slq-puzzles>
   </div>
-  <div class="row" *ngIf="puzzle$ | async">
+  <div class="row" *ngIf="(puzzle$ | async) && !endOfRound">
     <div class="col-md-12 text-center">
       <button class="btn btn-default" [disabled]="isButton1Disabled"
         (click)="selectAnswer($event.target.value); isButton1Disabled = true;"
@@ -18,7 +18,8 @@
   <div class="row">
     <form class="col-sm-6 col-sm-offset-3">
       <div class="form-group" *ngIf="!endOfRound">
-          <button class="btn btn-default" (click)="selectNextPuzzle()">Next puzzle</button>
+          <button class="btn btn-default" *ngIf="!timerRunning && showNextPuzzle" (click)="selectNextPuzzle()">Next puzzle</button>
+          <button class="btn btn-default" *ngIf="!timerRunning && showNextPlayer" (click)="selectNextPlayer()">Next player</button>
       </div>
       <div class="form-group" *ngIf="!endOfRound">
         <button class="btn btn-default" (click)="startTimer()" [disabled]="timerRunning">Start timer</button>

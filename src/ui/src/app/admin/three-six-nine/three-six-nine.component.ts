@@ -1,4 +1,8 @@
-import { ScoreIncreaseSelectedPlayer, ScoreResetHasPlayedQuestion, ScorePlayerPlayedQuestion, ScoreSelectPlayer } from './../../state/actions/score-state';
+import { ScoreService } from './../../core/score.service';
+import { ScoreIncreaseSelectedPlayer,
+  ScoreResetHasPlayedQuestion,
+  ScorePlayerPlayedQuestion,
+  ScoreSelectPlayer } from './../../state/actions/score-state';
 import { QuizThreeSixNineNextQuestion } from './../../state/actions/quiz-state';
 import { Store } from '@ngrx/store';
 import { IState, IPlayerState } from './../../core/states';
@@ -21,7 +25,7 @@ export class AdminThreeSixNineComponent implements OnInit, OnDestroy {
   player3: IPlayerState;
   endOfRound: boolean = false;
 
-  constructor(private store: Store<IState>) { }
+  constructor(private store: Store<IState>, private scoreService: ScoreService) { }
 
   ngOnInit() {
     this.selectNextQuestion();
@@ -58,19 +62,13 @@ export class AdminThreeSixNineComponent implements OnInit, OnDestroy {
 
   correct() {
     if (this.numberOfQuestion % 3 === 0) {
-        this.store.dispatch(new ScoreIncreaseSelectedPlayer(this.pointsToAdd));
+        this.scoreService.addScoreForSelectedPlayer(this.pointsToAdd);
     }
     this.selectNextQuestion();
   }
 
   incorrect() {
-    if (this.player1.isSelected) {
-      this.store.dispatch(new ScorePlayerPlayedQuestion(this.player1));
-    } else if (this.player2.isSelected) {
-      this.store.dispatch(new ScorePlayerPlayedQuestion(this.player2));
-    } else {
-      this.store.dispatch(new ScorePlayerPlayedQuestion(this.player3));
-    }
+    this.scoreService.selectedPlayerPlayedQuestion();
 
     if ((this.player1.hasPlayedQuestion && !this.player2.hasPlayedQuestion)) {
       this.store.dispatch(new ScoreSelectPlayer(this.player2));

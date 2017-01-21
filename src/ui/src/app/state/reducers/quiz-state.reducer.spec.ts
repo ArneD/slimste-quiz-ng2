@@ -1,4 +1,4 @@
-import { QuizThreeSixNineNextQuestion, QuizPuzzlesNextPuzzle } from './../actions/quiz-state';
+import { QuizThreeSixNineNextQuestion, QuizPuzzlesNextPuzzle, QuizPuzzlesAnsweredPuzzleQuestion } from './../actions/quiz-state';
 import { QuizzesBuilder } from './../../test-utils/quizzes-builder';
 import { IQuiz } from './../../core/models';
 import { IQuizState } from './../../core/states';
@@ -136,8 +136,6 @@ describe('reduce quiz state', () => {
   });
 
   describe('case QUIZ_PUZZLES_NEXT_PUZZLE', () => {
-
-
     it('given no puzzles played returns a new instance with the first puzzle', () => {
       let quiz: IQuiz = quizzesBuilder.createQuizzes()[0];
       let initialState: IQuizState = {
@@ -153,7 +151,10 @@ describe('reduce quiz state', () => {
           new QuizPuzzlesNextPuzzle());
 
       expect(changedState).not.toBe(initialState);
-      expect(changedState.puzzle).toBe(quiz.puzzles.firstPuzzle);
+      expect(changedState.puzzle.puzzle).toBe(quiz.puzzles.firstPuzzle);
+      expect(changedState.puzzle.answered1).toBeFalsy();
+      expect(changedState.puzzle.answered2).toBeFalsy();
+      expect(changedState.puzzle.answered3).toBeFalsy();
     });
 
      it('given first puzzle is played returns a new instance with the second puzzle', () => {
@@ -172,7 +173,10 @@ describe('reduce quiz state', () => {
           new QuizPuzzlesNextPuzzle());
 
       expect(changedState).not.toBe(initialState);
-      expect(changedState.puzzle).toBe(quiz.puzzles.secondPuzzle);
+      expect(changedState.puzzle.puzzle).toBe(quiz.puzzles.secondPuzzle);
+      expect(changedState.puzzle.answered1).toBeFalsy();
+      expect(changedState.puzzle.answered2).toBeFalsy();
+      expect(changedState.puzzle.answered3).toBeFalsy();
     });
 
      it('given first and second puzzle played returns a new instance with the third puzzle', () => {
@@ -192,7 +196,10 @@ describe('reduce quiz state', () => {
           new QuizPuzzlesNextPuzzle());
 
       expect(changedState).not.toBe(initialState);
-      expect(changedState.puzzle).toBe(quiz.puzzles.thirdPuzzle);
+      expect(changedState.puzzle.puzzle).toBe(quiz.puzzles.thirdPuzzle);
+      expect(changedState.puzzle.answered1).toBeFalsy();
+      expect(changedState.puzzle.answered2).toBeFalsy();
+      expect(changedState.puzzle.answered3).toBeFalsy();
     });
 
     it('given all puzzles played returns a new instance with null puzzle', () => {
@@ -213,8 +220,111 @@ describe('reduce quiz state', () => {
           new QuizPuzzlesNextPuzzle());
 
       expect(changedState).not.toBe(initialState);
-      expect(changedState.puzzle).toBeNull();
+      expect(changedState.puzzle.puzzle).toBeNull();
+    });
+  });
+
+   describe('case QUIZ_PUZZLES_ANSWERED_PUZZLE_QUESTION', () => {
+    it('given answered first question returns a new instance with the answered1 truthy', () => {
+      let quiz: IQuiz = quizzesBuilder.createQuizzes()[0];
+      let initialState: IQuizState = {
+        quizzes: [],
+        selectedQuiz: quiz,
+        threeSixNine: null,
+        puzzle: {
+          puzzle: quiz.puzzles.firstPuzzle,
+          answered1: false,
+          answered2: false,
+          answered3: false,
+        },
+      };
+
+      deepfreeze(initialState);
+
+      let changedState: IQuizState = quizStateReducer(initialState,
+          new QuizPuzzlesAnsweredPuzzleQuestion(quiz.puzzles.firstPuzzle[1].answer));
+
+      expect(changedState).not.toBe(initialState);
+      expect(changedState.puzzle.answered1).toBeTruthy();
+      expect(changedState.puzzle.answered2).toBeFalsy();
+      expect(changedState.puzzle.answered3).toBeFalsy();
+    });
+
+    it('given answered second question returns a new instance with the answered2 truthy', () => {
+      let quiz: IQuiz = quizzesBuilder.createQuizzes()[0];
+      let initialState: IQuizState = {
+        quizzes: [],
+        selectedQuiz: quiz,
+        threeSixNine: null,
+        puzzle: {
+          puzzle: quiz.puzzles.firstPuzzle,
+          answered1: false,
+          answered2: false,
+          answered3: false,
+        },
+      };
+
+      deepfreeze(initialState);
+
+      let changedState: IQuizState = quizStateReducer(initialState,
+          new QuizPuzzlesAnsweredPuzzleQuestion(quiz.puzzles.firstPuzzle[2].answer));
+
+      expect(changedState).not.toBe(initialState);
+      expect(changedState.puzzle.answered2).toBeTruthy();
+      expect(changedState.puzzle.answered1).toBeFalsy();
+      expect(changedState.puzzle.answered3).toBeFalsy();
+    });
+
+    it('given answered third question returns a new instance with the answered3 truthy', () => {
+      let quiz: IQuiz = quizzesBuilder.createQuizzes()[0];
+      let initialState: IQuizState = {
+        quizzes: [],
+        selectedQuiz: quiz,
+        threeSixNine: null,
+        puzzle: {
+          puzzle: quiz.puzzles.firstPuzzle,
+          answered1: false,
+          answered2: false,
+          answered3: false,
+        },
+      };
+
+      deepfreeze(initialState);
+
+      let changedState: IQuizState = quizStateReducer(initialState,
+          new QuizPuzzlesAnsweredPuzzleQuestion(quiz.puzzles.firstPuzzle[3].answer));
+
+      expect(changedState).not.toBe(initialState);
+      expect(changedState.puzzle.answered3).toBeTruthy();
+      expect(changedState.puzzle.answered1).toBeFalsy();
+      expect(changedState.puzzle.answered2).toBeFalsy();
+    });
+
+     it('give wrong answer returns a new instance with the all answered falsy', () => {
+      let quiz: IQuiz = quizzesBuilder.createQuizzes()[0];
+      let initialState: IQuizState = {
+        quizzes: [],
+        selectedQuiz: quiz,
+        threeSixNine: null,
+        puzzle: {
+          puzzle: quiz.puzzles.firstPuzzle,
+          answered1: false,
+          answered2: false,
+          answered3: false,
+        },
+      };
+
+      deepfreeze(initialState);
+
+      let changedState: IQuizState = quizStateReducer(initialState,
+          new QuizPuzzlesAnsweredPuzzleQuestion('test'));
+
+      expect(changedState).not.toBe(initialState);
+      expect(changedState.puzzle.answered1).toBeFalsy();
+      expect(changedState.puzzle.answered2).toBeFalsy();
+      expect(changedState.puzzle.answered3).toBeFalsy();
     });
   });
 });
+
 
