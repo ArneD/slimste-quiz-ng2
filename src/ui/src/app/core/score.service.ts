@@ -31,6 +31,12 @@ export class ScoreService implements OnDestroy {
         this.player2 = score.player2;
         this.player3 = score.player3;
     });
+
+    console.log('init');
+
+    this.timerAudio.load();
+    this.timerPauseAudio.load();
+    this.scoreAudio.load();
   }
 
   public setUpNextRound() {
@@ -77,6 +83,7 @@ export class ScoreService implements OnDestroy {
   public stopTimer() {
     clearInterval(this.intervalId);
     this.timerAudio.pause();
+    this.timerAudio.load();
     this.timerPauseAudio.play();
   }
 
@@ -125,6 +132,7 @@ export class ScoreService implements OnDestroy {
 
   public addScoreForSelectedPlayer(scoreToAdd: number) {
     this.store.dispatch(new ScoreIncreaseSelectedPlayer(scoreToAdd));
+    this.scoreAudio.load();
     this.scoreAudio.play();
   }
 

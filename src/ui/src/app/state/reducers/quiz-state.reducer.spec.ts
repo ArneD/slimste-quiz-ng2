@@ -159,12 +159,16 @@ describe('reduce quiz state', () => {
 
      it('given first puzzle is played returns a new instance with the second puzzle', () => {
        let quiz: IQuiz = quizzesBuilder.createQuizzes()[0];
-       quiz.puzzles.firstPuzzle.played = true;
        let initialState: IQuizState = {
          quizzes: [],
          selectedQuiz: quiz,
          threeSixNine: null,
-         puzzle: null,
+         puzzle: {
+           puzzle: quiz.puzzles.firstPuzzle,
+           answered1: true,
+           answered2: true,
+           answered3: true
+         }
        };
 
       deepfreeze(initialState);
@@ -181,13 +185,16 @@ describe('reduce quiz state', () => {
 
      it('given first and second puzzle played returns a new instance with the third puzzle', () => {
        let quiz: IQuiz = quizzesBuilder.createQuizzes()[0];
-       quiz.puzzles.firstPuzzle.played = true;
-       quiz.puzzles.secondPuzzle.played = true;
        let initialState: IQuizState = {
          quizzes: [],
          selectedQuiz: quiz,
          threeSixNine: null,
-         puzzle: null,
+         puzzle: {
+           puzzle: quiz.puzzles.secondPuzzle,
+           answered1: true,
+           answered2: true,
+           answered3: true
+         }
        };
 
       deepfreeze(initialState);
@@ -202,16 +209,18 @@ describe('reduce quiz state', () => {
       expect(changedState.puzzle.answered3).toBeFalsy();
     });
 
-    it('given all puzzles played returns a new instance with null puzzle', () => {
+    it('given third puzzle played returns a new instance with null puzzle', () => {
       let quiz: IQuiz = quizzesBuilder.createQuizzes()[0];
-      quiz.puzzles.firstPuzzle.played = true;
-      quiz.puzzles.secondPuzzle.played = true;
-      quiz.puzzles.thirdPuzzle.played = true;
       let initialState: IQuizState = {
         quizzes: [],
         selectedQuiz: quiz,
         threeSixNine: null,
-        puzzle: null,
+        puzzle: {
+           puzzle: quiz.puzzles.thirdPuzzle,
+           answered1: true,
+           answered2: true,
+           answered3: true
+         }
       };
 
       deepfreeze(initialState);

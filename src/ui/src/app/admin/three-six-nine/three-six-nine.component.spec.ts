@@ -1,5 +1,12 @@
+import { AppRoutingModule } from './../../app.routing';
 /* tslint:disable:no-unused-variable */
 
+import { FormsModule } from '@angular/forms';
+import { AdminPuzzlesComponent } from './../puzzles/puzzles.component';
+import { SetUpComponent } from './../set-up/set-up.component';
+import { ThreeSixNineComponent } from './../../shared/three-six-nine/three-six-nine.component';
+import { AdminRoutingModule } from './../admin.routing';
+import { RouterModule } from '@angular/router';
 import { ScoreService } from './../../core/score.service';
 import { SharedModule } from './../../shared/shared.module';
 import { StoreModule } from '@ngrx/store';
@@ -16,10 +23,13 @@ describe('AdminThreeSixNineComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminThreeSixNineComponent ],
+      declarations: [ AdminThreeSixNineComponent, SetUpComponent, AdminPuzzlesComponent ],
       imports: [
         SharedModule,
-        StoreModule.provideStore(rootReducer)
+        StoreModule.provideStore(rootReducer),
+        AppRoutingModule,
+        AdminRoutingModule,
+        FormsModule
       ],
       providers: [ ScoreService ]
     })

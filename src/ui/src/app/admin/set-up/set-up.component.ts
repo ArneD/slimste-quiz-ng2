@@ -16,7 +16,7 @@ export class SetUpComponent implements OnInit {
   player1Name: string = 'Player 1';
   player2Name: string = 'Player 2';
   player3Name: string = 'Player 3';
-  numberOfSeconds: number = 60;
+  numberOfSeconds: number = 70;
   selectableQuizzes$ = this.store.select(state => state.quizState.quizzes);
   selectedQuiz: IQuiz;
 
@@ -53,6 +53,6 @@ export class SetUpComponent implements OnInit {
     ));
 
     this.store.dispatch(new QuizUpdateSelected(this.selectedQuiz));
-    this.router.navigate(['/admin/puzzles']);
+    this.router.navigate(['/admin/three-six-nine']);
   }
 }

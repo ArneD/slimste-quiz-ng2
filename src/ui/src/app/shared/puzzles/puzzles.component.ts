@@ -1,4 +1,4 @@
-import { IPuzzleQuestion } from './../../core/models';
+import { IPuzzleQuestion, IPuzzle } from './../../core/models';
 import { Store } from '@ngrx/store';
 import { IState } from './../../core/states';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -9,36 +9,49 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./puzzles.component.scss']
 })
 export class PuzzlesComponent implements OnInit, OnDestroy {
-  puzzleSubscription;
-  answers: Array<string> = [];
+  puzzleStateSubscription;
+  puzzle: IPuzzle;
+  answers: Array<any> = [];
 
   constructor(private store: Store<IState>) { }
 
   ngOnInit() {
-    this.puzzleSubscription = this.store
-      .select(state => state.quizState.puzzle.puzzle)
-      .subscribe((puzzle) => {
-        if (!puzzle) {
-          return;
-        }
+    this.puzzleStateSubscription = this.puzzleStateSubscription = this.store
+      .select(state => state.quizState.puzzle)
+      .subscribe((puzzleState) => {
 
-        this.pushPuzzleToAnswers(puzzle['1']);
-        this.pushPuzzleToAnswers(puzzle['2']);
-        this.pushPuzzleToAnswers(puzzle['3']);
-        this.answers = this.shuffle(this.answers);
+        if (puzzleState.puzzle && puzzleState.puzzle !== this.puzzle) {
+          this.puzzle = puzzleState.puzzle;
+
+          this.answers = [];
+          this.pushPuzzleToAnswers(this.puzzle['1'], 1);
+          this.pushPuzzleToAnswers(this.puzzle['2'], 2);
+          this.pushPuzzleToAnswers(this.puzzle['3'], 3);
+          this.answers = this.shuffle(this.answers);
+        };
+
+        this.answers.forEach(element => {
+            if (puzzleState.answered1 && element.puzzleNr === 1) {
+              element.css = 'answer1';
+            } else if (puzzleState.answered2 && element.puzzleNr === 2) {
+              element.css = 'answer2';
+            } else if (puzzleState.answered3 && element.puzzleNr === 3) {
+              element.css = 'answer3';
+            }
+          });
       });
   }
 
-  pushPuzzleToAnswers(puzzle: IPuzzleQuestion) {
-      this.answers.push(puzzle.clue1);
-      this.answers.push(puzzle.clue2);
-      this.answers.push(puzzle.clue3);
-      this.answers.push(puzzle.clue4);
+  pushPuzzleToAnswers(puzzle: IPuzzleQuestion, puzzleNr: number) {
+      this.answers.push({ clue: puzzle.clue1, puzzleNr: puzzleNr, css: '' });
+      this.answers.push({ clue: puzzle.clue2, puzzleNr: puzzleNr, css: '' });
+      this.answers.push({ clue: puzzle.clue3, puzzleNr: puzzleNr, css: '' });
+      this.answers.push({ clue: puzzle.clue4, puzzleNr: puzzleNr, css: '' });
   }
 
   ngOnDestroy() {
-    if(this.puzzleSubscription) {
-      this.puzzleSubscription.unsubscribe();
+    if (this.puzzleStateSubscription) {
+      this.puzzleStateSubscription.unsubscribe();
     }
   }
 

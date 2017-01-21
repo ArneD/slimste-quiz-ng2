@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ScoreService } from './../../core/score.service';
 import { ScoreIncreaseSelectedPlayer,
   ScoreResetHasPlayedQuestion,
@@ -25,7 +26,9 @@ export class AdminThreeSixNineComponent implements OnInit, OnDestroy {
   player3: IPlayerState;
   endOfRound: boolean = false;
 
-  constructor(private store: Store<IState>, private scoreService: ScoreService) { }
+  constructor(private store: Store<IState>,
+    private scoreService: ScoreService,
+    private router: Router) { }
 
   ngOnInit() {
     this.selectNextQuestion();
@@ -83,7 +86,7 @@ export class AdminThreeSixNineComponent implements OnInit, OnDestroy {
   }
 
   goToNextRound() {
-
+    this.router.navigate(['/admin/puzzles']);
   }
 
   ngOnDestroy() {

@@ -43,7 +43,6 @@ export interface IPuzzle {
   1: IPuzzleQuestion;
   2: IPuzzleQuestion;
   3: IPuzzleQuestion;
-  played?: boolean;
 }
 
 export interface IPuzzleRound {

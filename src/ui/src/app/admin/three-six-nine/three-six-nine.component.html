@@ -3,7 +3,7 @@
     <slq-three-six-nine></slq-three-six-nine>
   </div>
   <div class="row">
-    <form class="col-sm-6 col-sm-offset-3">
+    <div class="form col-sm-6 col-sm-offset-3">
       <div class="form-group" *ngIf="!endOfRound">
         <label class="control-label">Question<span *ngIf="numberOfQuestion % 3 === 0"> (+10)</span></label>
         <div>
@@ -23,7 +23,7 @@
       <div class="form-group" *ngIf="endOfRound">
         <button class="btn btn-default" (click)="goToNextRound()">Next round</button>
       </div>
-    </form>
+    </div>
   </div>
 </div>
 

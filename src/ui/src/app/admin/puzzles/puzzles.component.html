@@ -16,7 +16,7 @@
     </div>
   </div>
   <div class="row">
-    <form class="col-sm-6 col-sm-offset-3">
+    <div class="form col-sm-6 col-sm-offset-3">
       <div class="form-group" *ngIf="!endOfRound">
           <button class="btn btn-default" *ngIf="!timerRunning && showNextPuzzle" (click)="selectNextPuzzle()">Next puzzle</button>
           <button class="btn btn-default" *ngIf="!timerRunning && showNextPlayer" (click)="selectNextPlayer()">Next player</button>
@@ -28,6 +28,6 @@
       <div class="form-group" *ngIf="endOfRound">
         <button class="btn btn-default" (click)="goToNextRound()">Next round</button>
       </div>
-    </form>
+    </div>
   </div>
 </div>

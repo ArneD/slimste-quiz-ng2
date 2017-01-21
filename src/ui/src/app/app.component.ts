@@ -1,3 +1,5 @@
+import { Store } from '@ngrx/store';
+import { IState } from './core/states';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,8 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'app works!';
+  preventReset$ = this.store.select(state => state);
 
-  constructor() {
+  constructor(private store: Store<IState>) {
   }
 
   ngOnInit() {

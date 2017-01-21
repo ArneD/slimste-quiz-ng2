@@ -63,11 +63,11 @@ export function quizStateReducer(state: IQuizState = initialState, action: quiz.
       };
     case quiz.ActionTypes.QUIZ_PUZZLES_NEXT_PUZZLE:
       let puzzle: IPuzzle = null;
-      if (!state.selectedQuiz.puzzles.firstPuzzle.played) {
+      if (!state.puzzle || !state.puzzle.puzzle) {
         puzzle = state.selectedQuiz.puzzles.firstPuzzle;
-      } else if (!state.selectedQuiz.puzzles.secondPuzzle.played) {
+      } else if (state.puzzle.puzzle === state.selectedQuiz.puzzles.firstPuzzle) {
         puzzle = state.selectedQuiz.puzzles.secondPuzzle;
-      } else if (!state.selectedQuiz.puzzles.thirdPuzzle.played) {
+      } else if (state.puzzle.puzzle === state.selectedQuiz.puzzles.secondPuzzle) {
         puzzle = state.selectedQuiz.puzzles.thirdPuzzle;
       }
 

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ScoreService } from './../../core/score.service';
 import { ScoreResetHasPlayedQuestion } from './../../state/actions/score-state';
 import { QuizPuzzlesNextPuzzle, QuizPuzzlesAnsweredPuzzleQuestion } from './../../state/actions/quiz-state';
@@ -22,7 +23,7 @@ export class AdminPuzzlesComponent implements OnInit {
   isButton2Disabled = false;
   isButton3Disabled = false;
 
-  constructor(private store: Store<IState>, private scoreService: ScoreService) { }
+  constructor(private store: Store<IState>, private scoreService: ScoreService, private router: Router) { }
 
   ngOnInit() {
     this.scoreService.setUpNextRound();
@@ -74,6 +75,6 @@ export class AdminPuzzlesComponent implements OnInit {
   }
 
   goToNextRound() {
-
+    //this.router.navigate(['/admin/three-six-nine']);
   }
 }

@@ -1,23 +1,27 @@
 <div class="row puzzle">
   <div class="col-xs-12" *ngIf="answers.length === 12">
-    <div class="row">
-      <div class="col-xs-3 text-center">{{ answers[0] }}</div>
-      <div class="col-xs-3 text-center">{{ answers[1] }}</div>
-      <div class="col-xs-3 text-center">{{ answers[2] }}</div>
-      <div class="col-xs-3 text-center">{{ answers[3] }}</div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3 text-center">{{ answers[4] }}</div>
-      <div class="col-xs-3 text-center">{{ answers[5] }}</div>
-      <div class="col-xs-3 text-center">{{ answers[6] }}</div>
-      <div class="col-xs-3 text-center">{{ answers[7] }}</div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3 text-center">{{ answers[8] }}</div>
-      <div class="col-xs-3 text-center">{{ answers[9] }}</div>
-      <div class="col-xs-3 text-center">{{ answers[10] }}</div>
-      <div class="col-xs-3 text-center">{{ answers[11] }}</div>
-    </div>
+    <table class="table table-bordered clues-table">
+      <tbody>
+        <tr>
+          <td class="col-xs-3 text-center {{answers[0].css}}">{{ answers[0].clue }}</td>
+          <td class="col-xs-3 text-center {{answers[1].css}}">{{ answers[1].clue }}</td>
+          <td class="col-xs-3 text-center {{answers[2].css}}">{{ answers[2].clue }}</td>
+          <td class="col-xs-3 text-center {{answers[3].css}}">{{ answers[3].clue }}</td>
+        </tr>
+        <tr>
+          <td class="col-xs-3 text-center {{answers[4].css}}">{{ answers[4].clue }}</td>
+          <td class="col-xs-3 text-center {{answers[5].css}}">{{ answers[5].clue }}</td>
+          <td class="col-xs-3 text-center {{answers[6].css}}">{{ answers[6].clue }}</td>
+          <td class="col-xs-3 text-center {{answers[7].css}}">{{ answers[7].clue }}</td>
+        </tr>
+        <tr>
+          <td class="col-xs-3 text-center {{answers[8].css}}">{{ answers[8].clue }}</td>
+          <td class="col-xs-3 text-center {{answers[9].css}}">{{ answers[9].clue }}</td>
+          <td class="col-xs-3 text-center {{answers[10].css}}">{{ answers[10].clue }}</td>
+          <td class="col-xs-3 text-center {{answers[11].css}}">{{ answers[11].clue }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
