@@ -4,6 +4,7 @@ import { ScoreService } from './../../core/score.service';
 import { SharedModule } from './../../shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { rootReducer } from '../../state/root-reducer';
@@ -19,7 +20,8 @@ describe('AdminPuzzlesComponent', () => {
       declarations: [ AdminPuzzlesComponent ],
       imports: [
         SharedModule,
-        StoreModule.provideStore(rootReducer)
+        StoreModule.provideStore(rootReducer),
+        RouterTestingModule
       ],
       providers: [ScoreService]
     })

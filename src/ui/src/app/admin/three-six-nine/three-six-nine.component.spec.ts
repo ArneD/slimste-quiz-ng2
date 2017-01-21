@@ -1,16 +1,14 @@
-import { AppRoutingModule } from './../../app.routing';
 /* tslint:disable:no-unused-variable */
 
 import { FormsModule } from '@angular/forms';
 import { AdminPuzzlesComponent } from './../puzzles/puzzles.component';
 import { SetUpComponent } from './../set-up/set-up.component';
 import { ThreeSixNineComponent } from './../../shared/three-six-nine/three-six-nine.component';
-import { AdminRoutingModule } from './../admin.routing';
-import { RouterModule } from '@angular/router';
 import { ScoreService } from './../../core/score.service';
 import { SharedModule } from './../../shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
@@ -27,8 +25,7 @@ describe('AdminThreeSixNineComponent', () => {
       imports: [
         SharedModule,
         StoreModule.provideStore(rootReducer),
-        AppRoutingModule,
-        AdminRoutingModule,
+        RouterTestingModule,
         FormsModule
       ],
       providers: [ ScoreService ]

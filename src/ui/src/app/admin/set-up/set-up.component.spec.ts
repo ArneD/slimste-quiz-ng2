@@ -9,24 +9,26 @@ import { QuizService } from './../../core/quiz.service';
 import { Store, StoreModule } from '@ngrx/store';
 
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { SetUpComponent } from './set-up.component';
 import { rootReducer } from '../../state/root-reducer';
-/* TODO: fix with router...
+
 describe('SetUpComponent', () => {
   let component: SetUpComponent;
   let fixture: ComponentFixture<SetUpComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ routedComponents ],
+      declarations: [ SetUpComponent ],
       imports: [
         FormsModule,
         HttpModule,
-        StoreModule.provideStore(rootReducer)
+        StoreModule.provideStore(rootReducer),
+        RouterTestingModule
       ],
       providers: [ QuizService ]
     })
@@ -43,4 +45,4 @@ describe('SetUpComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-*/
+
