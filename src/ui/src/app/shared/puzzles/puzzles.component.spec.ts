@@ -3,17 +3,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { CircleSelectorComponent, ScoreEllipseComponent, ScoreBoardComponent, ThreeSixNineComponent } from '../';
-import { rootReducer } from '../../state/root-reducer';
 import { StoreModule } from '@ngrx/store';
+import { PuzzlesComponent, ScoreEllipseComponent, ScoreBoardComponent } from '../';
+import { rootReducer } from '../../state/root-reducer';
 
-describe('SharedThreeSixNineComponent', () => {
-  let component: ThreeSixNineComponent;
-  let fixture: ComponentFixture<ThreeSixNineComponent>;
+describe('SharedPuzzlesComponent', () => {
+  let component: PuzzlesComponent;
+  let fixture: ComponentFixture<PuzzlesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ThreeSixNineComponent, CircleSelectorComponent, ScoreEllipseComponent, ScoreBoardComponent ],
+      declarations: [ PuzzlesComponent, ScoreBoardComponent, ScoreEllipseComponent ],
       imports: [
         StoreModule.provideStore(rootReducer)
       ]
@@ -22,7 +22,7 @@ describe('SharedThreeSixNineComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ThreeSixNineComponent);
+    fixture = TestBed.createComponent(PuzzlesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

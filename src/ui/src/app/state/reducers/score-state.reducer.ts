@@ -6,19 +6,22 @@ let initialState: IScoreState = {
       name: 'Player 1',
       score: 60,
       isSelected: true,
-      hasPlayed: false
+      hasPlayedQuestion: false,
+      hasPlayedRound: false
     },
     player2: {
       name: 'Player 2',
       score: 60,
       isSelected: false,
-      hasPlayed: false
+      hasPlayedQuestion: false,
+      hasPlayedRound: false
     },
     player3: {
       name: 'Player 3',
       score: 60,
       isSelected: false,
-      hasPlayed: false
+      hasPlayedQuestion: false,
+      hasPlayedRound: false
     }
 };
 
@@ -49,30 +52,55 @@ export function scoreStateReducer(state: IScoreState = initialState, action: sco
           player2: state.player2,
           player1: state.player1
         };
-    case score.ActionTypes.SCORE_RESET_HAS_PLAYED:
+    case score.ActionTypes.SCORE_RESET_HAS_PLAYED_QUESTION:
       return {
-        player1: createPlayerWithHasPlayed(state.player1, false),
-        player2: createPlayerWithHasPlayed(state.player2, false),
-        player3: createPlayerWithHasPlayed(state.player3, false),
+        player1: createPlayerWithHasPlayedQuestion(state.player1, false),
+        player2: createPlayerWithHasPlayedQuestion(state.player2, false),
+        player3: createPlayerWithHasPlayedQuestion(state.player3, false),
       };
-    case score.ActionTypes.SCORE_PLAYER_PLAYED:
+     case score.ActionTypes.SCORE_RESET_HAS_PLAYED_ROUND:
+      return {
+        player1: createPlayerWithHasPlayedRound(state.player1, false),
+        player2: createPlayerWithHasPlayedRound(state.player2, false),
+        player3: createPlayerWithHasPlayedRound(state.player3, false),
+      };
+    case score.ActionTypes.SCORE_PLAYER_PLAYED_QUESTION:
       if (state.player1.name === action.payload.player.name) {
         return {
-          player1: createPlayerWithHasPlayed(state.player1, true),
+          player1: createPlayerWithHasPlayedQuestion(state.player1, true),
           player2: state.player2,
           player3: state.player3
         };
       } else if (state.player2.name === action.payload.player.name) {
         return {
           player1: state.player1,
-          player2: createPlayerWithHasPlayed(state.player2, true),
+          player2: createPlayerWithHasPlayedQuestion(state.player2, true),
           player3: state.player3
         };
       }
       return {
           player1: state.player1,
           player2: state.player2,
-          player3: createPlayerWithHasPlayed(state.player3, true),
+          player3: createPlayerWithHasPlayedQuestion(state.player3, true),
+      };
+    case score.ActionTypes.SCORE_PLAYER_PLAYED_ROUND:
+      if (state.player1.name === action.payload.player.name) {
+        return {
+          player1: createPlayerWithHasPlayedRound(state.player1, true),
+          player2: state.player2,
+          player3: state.player3
+        };
+      } else if (state.player2.name === action.payload.player.name) {
+        return {
+          player1: state.player1,
+          player2: createPlayerWithHasPlayedRound(state.player2, true),
+          player3: state.player3
+        };
+      }
+      return {
+          player1: state.player1,
+          player2: state.player2,
+          player3: createPlayerWithHasPlayedRound(state.player3, true),
       };
     case score.ActionTypes.SCORE_SELECT_PLAYER:
       if (state.player1.name === action.payload.player.name) {
@@ -100,27 +128,40 @@ export function scoreStateReducer(state: IScoreState = initialState, action: sco
   function createPlayerWithAddedScore(player: IPlayerState, scoreToAdd: number): IPlayerState {
     return {
       name: player.name,
-      hasPlayed: player.hasPlayed,
+      hasPlayedQuestion: player.hasPlayedQuestion,
       isSelected: player.isSelected,
-      score: player.score + scoreToAdd
+      score: player.score + scoreToAdd,
+      hasPlayedRound: player.hasPlayedRound
     };
   }
 
-  function createPlayerWithHasPlayed(player: IPlayerState, hasPlayed: boolean): IPlayerState {
+  function createPlayerWithHasPlayedQuestion(player: IPlayerState, hasPlayedQuestion: boolean): IPlayerState {
     return {
       name: player.name,
-      hasPlayed: hasPlayed,
+      hasPlayedQuestion: hasPlayedQuestion,
       isSelected: player.isSelected,
-      score: player.score
+      score: player.score,
+      hasPlayedRound: player.hasPlayedRound
+    };
+  }
+
+  function createPlayerWithHasPlayedRound(player: IPlayerState, hasPlayedRound: boolean): IPlayerState {
+    return {
+      name: player.name,
+      hasPlayedQuestion: player.hasPlayedQuestion,
+      isSelected: player.isSelected,
+      score: player.score,
+      hasPlayedRound: hasPlayedRound
     };
   }
 
   function createPlayerWithIsSelected(player: IPlayerState, isSelected: boolean): IPlayerState {
     return {
       name: player.name,
-      hasPlayed: player.hasPlayed,
+      hasPlayedQuestion: player.hasPlayedQuestion,
       isSelected: isSelected,
-      score: player.score
+      score: player.score,
+      hasPlayedRound: player.hasPlayedRound
     };
   }
 };

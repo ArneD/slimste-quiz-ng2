@@ -35,17 +35,20 @@ export class SetUpComponent implements OnInit {
         name: this.player1Name,
         score: this.numberOfSeconds,
         isSelected: true,
-        hasPlayed: false
+        hasPlayedQuestion: false,
+        hasPlayedRound: false
       }, {
         name: this.player2Name,
         score: this.numberOfSeconds,
         isSelected: false,
-        hasPlayed: false
+        hasPlayedQuestion: false,
+        hasPlayedRound: false
       }, {
         name: this.player3Name,
         score: this.numberOfSeconds,
         isSelected: false,
-        hasPlayed: false
+        hasPlayedQuestion: false,
+        hasPlayedRound: false
       }
     ));
 

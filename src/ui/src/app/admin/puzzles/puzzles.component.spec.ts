@@ -1,4 +1,6 @@
 /* tslint:disable:no-unused-variable */
+
+import { ScoreService } from './../../core/score.service';
 import { SharedModule } from './../../shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
@@ -8,7 +10,7 @@ import { rootReducer } from '../../state/root-reducer';
 
 import { AdminPuzzlesComponent } from './puzzles.component';
 
-describe('PuzzlesComponent', () => {
+describe('AdminPuzzlesComponent', () => {
   let component: AdminPuzzlesComponent;
   let fixture: ComponentFixture<AdminPuzzlesComponent>;
 
@@ -18,7 +20,8 @@ describe('PuzzlesComponent', () => {
       imports: [
         SharedModule,
         StoreModule.provideStore(rootReducer)
-      ]
+      ],
+      providers: [ScoreService]
     })
     .compileComponents();
   }));

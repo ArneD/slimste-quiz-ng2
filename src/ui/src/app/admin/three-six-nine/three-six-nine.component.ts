@@ -1,4 +1,4 @@
-import { ScoreIncreaseSelectedPlayer, ScoreResetHasPlayed, ScorePlayerPlayed, ScoreSelectPlayer } from './../../state/actions/score-state';
+import { ScoreIncreaseSelectedPlayer, ScoreResetHasPlayedQuestion, ScorePlayerPlayedQuestion, ScoreSelectPlayer } from './../../state/actions/score-state';
 import { QuizThreeSixNineNextQuestion } from './../../state/actions/quiz-state';
 import { Store } from '@ngrx/store';
 import { IState, IPlayerState } from './../../core/states';
@@ -33,11 +33,11 @@ export class AdminThreeSixNineComponent implements OnInit, OnDestroy {
         this.player2 = score.player2;
         this.player3 = score.player3;
 
-        if (score.player1.isSelected && !score.player2.hasPlayed && !score.player3.hasPlayed) {
+        if (score.player1.isSelected && !score.player2.hasPlayedQuestion && !score.player3.hasPlayedQuestion) {
           this.playerToPlay = score.player1;
-        } else if (score.player2.isSelected && !score.player1.hasPlayed && !score.player3.hasPlayed) {
+        } else if (score.player2.isSelected && !score.player1.hasPlayedQuestion && !score.player3.hasPlayedQuestion) {
           this.playerToPlay = score.player2;
-        } else if (score.player3.isSelected && !score.player1.hasPlayed && !score.player2.hasPlayed) {
+        } else if (score.player3.isSelected && !score.player1.hasPlayedQuestion && !score.player2.hasPlayedQuestion) {
           this.playerToPlay = score.player3;
         }
       });
@@ -50,7 +50,7 @@ export class AdminThreeSixNineComponent implements OnInit, OnDestroy {
   selectNextQuestion() {
     if (this.numberOfQuestion < 15) {
       this.store.dispatch(new QuizThreeSixNineNextQuestion());
-      this.store.dispatch(new ScoreResetHasPlayed());
+      this.store.dispatch(new ScoreResetHasPlayedQuestion());
     } else {
       this.endOfRound = true;
     }
@@ -65,20 +65,20 @@ export class AdminThreeSixNineComponent implements OnInit, OnDestroy {
 
   incorrect() {
     if (this.player1.isSelected) {
-      this.store.dispatch(new ScorePlayerPlayed(this.player1));
+      this.store.dispatch(new ScorePlayerPlayedQuestion(this.player1));
     } else if (this.player2.isSelected) {
-      this.store.dispatch(new ScorePlayerPlayed(this.player2));
+      this.store.dispatch(new ScorePlayerPlayedQuestion(this.player2));
     } else {
-      this.store.dispatch(new ScorePlayerPlayed(this.player3));
+      this.store.dispatch(new ScorePlayerPlayedQuestion(this.player3));
     }
 
-    if ((this.player1.hasPlayed && !this.player2.hasPlayed)) {
+    if ((this.player1.hasPlayedQuestion && !this.player2.hasPlayedQuestion)) {
       this.store.dispatch(new ScoreSelectPlayer(this.player2));
-    } else if (this.player2.hasPlayed && !this.player3.hasPlayed) {
+    } else if (this.player2.hasPlayedQuestion && !this.player3.hasPlayedQuestion) {
       this.store.dispatch(new ScoreSelectPlayer(this.player3));
-    } else if (!this.player1.hasPlayed) {
+    } else if (!this.player1.hasPlayedQuestion) {
       this.store.dispatch(new ScoreSelectPlayer(this.player1));
-    } else if (this.player1.hasPlayed && this.player2.hasPlayed && this.player3.hasPlayed) {
+    } else if (this.player1.hasPlayedQuestion && this.player2.hasPlayedQuestion && this.player3.hasPlayedQuestion) {
       this.store.dispatch(new ScoreSelectPlayer(this.playerToPlay));
       this.selectNextQuestion();
     }
@@ -89,6 +89,8 @@ export class AdminThreeSixNineComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.numberSubscription$.unsubscribe();
+    if (this.numberSubscription$) {
+      this.numberSubscription$.unsubscribe();
+    }
   }
 }

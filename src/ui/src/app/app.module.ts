@@ -1,3 +1,4 @@
+import { ScoreService } from './core/score.service';
 import { AdminModule } from './admin/admin.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -28,7 +29,7 @@ import { rootReducer } from './state/root-reducer';
     StoreModule.provideStore(rootReducer),
     AdminModule
   ],
-  providers: [QuizService],
+  providers: [QuizService, ScoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

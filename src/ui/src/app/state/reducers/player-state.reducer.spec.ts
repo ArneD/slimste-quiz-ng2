@@ -12,7 +12,8 @@ describe('reduce player state', () => {
         name: 'test',
         score: 60,
         isSelected: false,
-        hasPlayed: false
+        hasPlayedQuestion: false,
+        hasPlayedRound: false
       };
   });
 

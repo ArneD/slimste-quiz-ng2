@@ -11,7 +11,8 @@ export class ScoreEllipseComponent implements OnInit {
     name: '',
     score: 0,
     isSelected: false,
-    hasPlayed: false
+    hasPlayedQuestion: false,
+    hasPlayedRound: false
   };
 
   constructor() { }

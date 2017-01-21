@@ -1,7 +1,9 @@
 import {
   ScoreIncreaseSelectedPlayer,
-  ScoreResetHasPlayed,
-  ScorePlayerPlayed,
+  ScoreResetHasPlayedQuestion,
+  ScoreResetHasPlayedRound,
+  ScorePlayerPlayedQuestion,
+  ScorePlayerPlayedRound,
   ScoreSelectPlayer,
   ScoreUpdatePlayers
 } from './../actions/score-state';
@@ -23,19 +25,22 @@ describe('reduce score state', () => {
         name: 'Player 1',
         score: 60,
         isSelected: true,
-        hasPlayed: false
+        hasPlayedQuestion: false,
+        hasPlayedRound: false
       },
       player2: {
         name: 'Player 2',
         score: 60,
         isSelected: false,
-        hasPlayed: false
+        hasPlayedQuestion: false,
+        hasPlayedRound: false
       },
       player3: {
         name: 'Player 3',
         score: 60,
         isSelected: false,
-        hasPlayed: false
+        hasPlayedQuestion: false,
+        hasPlayedRound: false
       }
     };
   }
@@ -46,21 +51,24 @@ describe('reduce score state', () => {
         name: 'First player',
         score: 70,
         isSelected: true,
-        hasPlayed: true
+        hasPlayedQuestion: true,
+        hasPlayedRound: false,
       };
 
       let expectedPlayer2: IPlayerState = {
         name: 'Foo bar player',
         score: 90,
         isSelected: false,
-        hasPlayed: false
+        hasPlayedQuestion: false,
+        hasPlayedRound: false
       };
 
       let expectedPlayer3: IPlayerState = {
         name: 'Winner',
         score: 100,
         isSelected: false,
-        hasPlayed: true
+        hasPlayedQuestion: true,
+        hasPlayedRound: false,
       };
 
       deepfreeze(initialState);
@@ -81,7 +89,8 @@ describe('reduce score state', () => {
         name: initialState.player1.name,
         score: 70,
         isSelected: initialState.player1.isSelected,
-        hasPlayed: initialState.player1.hasPlayed
+        hasPlayedQuestion: initialState.player1.hasPlayedQuestion,
+        hasPlayedRound: initialState.player1.hasPlayedRound
       };
 
       deepfreeze(initialState);
@@ -104,7 +113,8 @@ describe('reduce score state', () => {
         name: initialState.player2.name,
         score: 70,
         isSelected: initialState.player2.isSelected,
-        hasPlayed: initialState.player2.hasPlayed
+        hasPlayedQuestion: initialState.player2.hasPlayedQuestion,
+        hasPlayedRound: initialState.player2.hasPlayedRound
       };
 
       deepfreeze(state);
@@ -127,7 +137,8 @@ describe('reduce score state', () => {
         name: initialState.player3.name,
         score: 70,
         isSelected: initialState.player3.isSelected,
-        hasPlayed: initialState.player3.hasPlayed
+        hasPlayedQuestion: initialState.player3.hasPlayedQuestion,
+        hasPlayedRound: initialState.player3.hasPlayedRound
       };
 
       deepfreeze(state);
@@ -142,63 +153,124 @@ describe('reduce score state', () => {
     });
   });
 
-  describe('case SCORE_RESET_HAS_PLAYED', () => {
-    it('returns a new instance with players has played is false', () => {
+  describe('case SCORE_RESET_HAS_PLAYED_ROUND', () => {
+    it('returns a new instance with players has played round is false', () => {
       let state: IScoreState = Object.assign({}, initialState);
-      state.player1.hasPlayed = true;
-      state.player2.hasPlayed = true;
-      state.player3.hasPlayed = true;
+      state.player1.hasPlayedRound = true;
+      state.player2.hasPlayedRound = true;
+      state.player3.hasPlayedRound = true;
 
       deepfreeze(state);
 
       let changedState: IScoreState = scoreStateReducer(state,
-          new ScoreResetHasPlayed());
+          new ScoreResetHasPlayedRound());
 
       expect(changedState).not.toBe(state);
-      expect(changedState.player1.hasPlayed).toBeFalsy();
-      expect(changedState.player2.hasPlayed).toBeFalsy();
-      expect(changedState.player3.hasPlayed).toBeFalsy();
+      expect(changedState.player1.hasPlayedRound).toBeFalsy();
+      expect(changedState.player2.hasPlayedRound).toBeFalsy();
+      expect(changedState.player3.hasPlayedRound).toBeFalsy();
     });
   });
 
-  describe('case SCORE_PLAYER_PLAYED', () => {
-    it('returns a new instance with expected player 1 has played is true', () => {
+   describe('case SCORE_RESET_HAS_PLAYED_QUESTION', () => {
+    it('returns a new instance with players has played question is false', () => {
       let state: IScoreState = Object.assign({}, initialState);
-      state.player1.hasPlayed = false;
+      state.player1.hasPlayedQuestion = true;
+      state.player2.hasPlayedQuestion = true;
+      state.player3.hasPlayedQuestion = true;
 
       deepfreeze(state);
 
       let changedState: IScoreState = scoreStateReducer(state,
-          new ScorePlayerPlayed(state.player1));
+          new ScoreResetHasPlayedQuestion());
 
       expect(changedState).not.toBe(state);
-      expect(changedState.player1.hasPlayed).toBeTruthy();
+      expect(changedState.player1.hasPlayedQuestion).toBeFalsy();
+      expect(changedState.player2.hasPlayedQuestion).toBeFalsy();
+      expect(changedState.player3.hasPlayedQuestion).toBeFalsy();
+    });
+  });
+
+
+  describe('case SCORE_PLAYER_PLAYED_QUESTION', () => {
+    it('returns a new instance with expected player 1 has played question is true', () => {
+      let state: IScoreState = Object.assign({}, initialState);
+      state.player1.hasPlayedQuestion = false;
+
+      deepfreeze(state);
+
+      let changedState: IScoreState = scoreStateReducer(state,
+          new ScorePlayerPlayedQuestion(state.player1));
+
+      expect(changedState).not.toBe(state);
+      expect(changedState.player1.hasPlayedQuestion).toBeTruthy();
     });
 
-    it('returns a new instance with expected player 2 has played is true', () => {
+    it('returns a new instance with expected player 2 has played question is true', () => {
       let state: IScoreState = Object.assign({}, initialState);
-      state.player2.hasPlayed = false;
+      state.player2.hasPlayedQuestion = false;
 
       deepfreeze(state);
 
       let changedState: IScoreState = scoreStateReducer(state,
-          new ScorePlayerPlayed(state.player2));
+          new ScorePlayerPlayedQuestion(state.player2));
 
       expect(changedState).not.toBe(state);
-      expect(changedState.player2.hasPlayed).toBeTruthy();
+      expect(changedState.player2.hasPlayedQuestion).toBeTruthy();
     });
 
-    it('returns a new instance with expected player 3 has played is true', () => {
+    it('returns a new instance with expected player 3 has played question is true', () => {
       let state: IScoreState = Object.assign({}, initialState);
-      state.player3.hasPlayed = false;
+      state.player3.hasPlayedQuestion = false;
 
       deepfreeze(state);
 
       let changedState: IScoreState = scoreStateReducer(state,
-          new ScorePlayerPlayed(state.player3));
+          new ScorePlayerPlayedQuestion(state.player3));
 
       expect(changedState).not.toBe(state);
-      expect(changedState.player3.hasPlayed).toBeTruthy();
+      expect(changedState.player3.hasPlayedQuestion).toBeTruthy();
+    });
+  });
+
+  describe('case SCORE_PLAYER_PLAYED_ROUND', () => {
+    it('returns a new instance with expected player 1 has played round is true', () => {
+      let state: IScoreState = Object.assign({}, initialState);
+      state.player1.hasPlayedRound = false;
+
+      deepfreeze(state);
+
+      let changedState: IScoreState = scoreStateReducer(state,
+          new ScorePlayerPlayedRound(state.player1));
+
+      expect(changedState).not.toBe(state);
+      expect(changedState.player1.hasPlayedRound).toBeTruthy();
+    });
+
+    it('returns a new instance with expected player 2 has played round is true', () => {
+      let state: IScoreState = Object.assign({}, initialState);
+      state.player2.hasPlayedRound = false;
+
+      deepfreeze(state);
+
+      let changedState: IScoreState = scoreStateReducer(state,
+          new ScorePlayerPlayedRound(state.player2));
+
+      expect(changedState).not.toBe(state);
+      expect(changedState.player2.hasPlayedRound).toBeTruthy();
+    });
+
+    it('returns a new instance with expected player 3 has played round is true', () => {
+      let state: IScoreState = Object.assign({}, initialState);
+      state.player3.hasPlayedRound = false;
+
+      deepfreeze(state);
+
+      let changedState: IScoreState = scoreStateReducer(state,
+          new ScorePlayerPlayedRound(state.player3));
+
+      expect(changedState).not.toBe(state);
+      expect(changedState.player3.hasPlayedRound).toBeTruthy();
     });
   });
 
@@ -253,6 +325,6 @@ describe('reduce score state', () => {
     expect(player.name).toBe(expectedPlayer.name);
     expect(player.score).toBe(expectedPlayer.score);
     expect(player.isSelected).toBe(expectedPlayer.isSelected);
-    expect(player.hasPlayed).toBe(expectedPlayer.hasPlayed);
+    expect(player.hasPlayedQuestion).toBe(expectedPlayer.hasPlayedQuestion);
   }
 });

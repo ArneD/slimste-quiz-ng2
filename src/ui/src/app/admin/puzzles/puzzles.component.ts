@@ -1,3 +1,5 @@
+import { ScoreService } from './../../core/score.service';
+import { ScoreResetHasPlayedQuestion, ScoreSelectPlayer } from './../../state/actions/score-state';
 import { QuizPuzzlesNextPuzzle } from './../../state/actions/quiz-state';
 import { Store } from '@ngrx/store';
 import { IState } from './../../core/states';
@@ -16,10 +18,10 @@ export class AdminPuzzlesComponent implements OnInit {
   isButton2Disabled = false;
   isButton3Disabled = false;
 
-  constructor(private store: Store<IState>) { }
+  constructor(private store: Store<IState>, private scoreService: ScoreService) { }
 
   ngOnInit() {
-    // set selected player on lowest score, when tied => by player nr.
+    this.scoreService.setUpNextRound();
   }
 
   selectNextPuzzle() {

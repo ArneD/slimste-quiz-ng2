@@ -5,8 +5,10 @@ import { type } from '../util';
 export const ActionTypes = {
   SCORE_UPDATE_PLAYERS: type('SCORE_UPDATE_PLAYERS'),
   SCORE_INCREASE_SELECTED_PLAYER: type('SCORE_INCREASE_SELECTED_PLAYER'),
-  SCORE_RESET_HAS_PLAYED: type('SCORE_RESET_HAS_PLAYED'),
-  SCORE_PLAYER_PLAYED: type('SCORE_PLAYER_PLAYED'),
+  SCORE_RESET_HAS_PLAYED_QUESTION: type('SCORE_RESET_HAS_PLAYED_QUESTION'),
+  SCORE_RESET_HAS_PLAYED_ROUND: type('SCORE_RESET_HAS_PLAYED_ROUND'),
+  SCORE_PLAYER_PLAYED_QUESTION: type('SCORE_PLAYER_PLAYED_QUESTION'),
+  SCORE_PLAYER_PLAYED_ROUND: type('SCORE_PLAYER_PLAYED_ROUND'),
   SCORE_SELECT_PLAYER: type('SCORE_SELECT_PLAYER'),
 };
 
@@ -34,14 +36,29 @@ export class ScoreIncreaseSelectedPlayer implements Action {
   }
 }
 
-export class ScoreResetHasPlayed implements Action {
-  type = ActionTypes.SCORE_RESET_HAS_PLAYED;
+export class ScoreResetHasPlayedQuestion implements Action {
+  type = ActionTypes.SCORE_RESET_HAS_PLAYED_QUESTION;
 
   public constructor() { }
 }
 
-export class ScorePlayerPlayed implements Action {
-  type = ActionTypes.SCORE_PLAYER_PLAYED;
+export class ScoreResetHasPlayedRound implements Action {
+  type = ActionTypes.SCORE_RESET_HAS_PLAYED_ROUND;
+
+  public constructor() { }
+}
+
+export class ScorePlayerPlayedQuestion implements Action {
+  type = ActionTypes.SCORE_PLAYER_PLAYED_QUESTION;
+  payload: { player: IPlayerState };
+
+  public constructor(player: IPlayerState) {
+    this.payload = { player: player };
+  }
+}
+
+export class ScorePlayerPlayedRound implements Action {
+  type = ActionTypes.SCORE_PLAYER_PLAYED_ROUND;
   payload: { player: IPlayerState };
 
   public constructor(player: IPlayerState) {
@@ -60,6 +77,8 @@ export class ScoreSelectPlayer implements Action {
 
 export type Actions = ScoreUpdatePlayers
   | ScoreIncreaseSelectedPlayer
-  | ScoreResetHasPlayed
-  | ScorePlayerPlayed
+  | ScoreResetHasPlayedQuestion
+  | ScoreResetHasPlayedRound
+  | ScorePlayerPlayedQuestion
+  | ScorePlayerPlayedRound
   | ScoreSelectPlayer;
