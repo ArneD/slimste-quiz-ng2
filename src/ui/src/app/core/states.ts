@@ -3,6 +3,7 @@ import { IQuiz, IThreeSixNineQuestion, IPuzzle } from './models';
 export interface IState {
   scoreState: IScoreState;
   quizState: IQuizState;
+  navigationState: INavigationState;
 }
 
 export interface IScoreState {
@@ -38,3 +39,15 @@ export interface IPuzzleState {
   answered3: boolean;
 }
 
+export interface INavigationState {
+  navigationType: NavigationType;
+}
+
+export enum NavigationType {
+  Unknown,
+  ThreeSixNine,
+  Puzzles,
+  Gallery,
+  Video,
+  Final
+}
