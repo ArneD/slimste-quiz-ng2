@@ -1,5 +1,4 @@
 import { ClientModule } from './client/client.module';
-import { ScoreService } from './core/score.service';
 import { AdminModule } from './admin/admin.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -12,6 +11,8 @@ import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { routingComponents, AppRoutingModule } from './app.routing';
 import { QuizService } from './core/quiz.service';
+import { StoreService } from './core/client.service';
+import { ScoreService } from './core/score.service';
 
 import { rootReducer } from './state/root-reducer';
 
@@ -30,7 +31,7 @@ import { rootReducer } from './state/root-reducer';
     ClientModule,
     SharedModule,
   ],
-  providers: [QuizService, ScoreService],
+  providers: [QuizService, ScoreService, StoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

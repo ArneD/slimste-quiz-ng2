@@ -1,6 +1,5 @@
+import { StoreService } from './../../core/client.service';
 import { IPuzzleQuestion, IPuzzle } from './../../core/models';
-import { Store } from '@ngrx/store';
-import { IState } from './../../core/states';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
@@ -13,10 +12,10 @@ export class PuzzlesComponent implements OnInit, OnDestroy {
   puzzle: IPuzzle;
   answers: Array<any> = [];
 
-  constructor(private store: Store<IState>) { }
+  constructor(private storeService: StoreService) { }
 
   ngOnInit() {
-    this.puzzleStateSubscription = this.puzzleStateSubscription = this.store
+    this.puzzleStateSubscription = this.puzzleStateSubscription = this.storeService.store
       .select(state => state.quizState.puzzle)
       .subscribe((puzzleState) => {
 

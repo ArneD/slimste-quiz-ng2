@@ -1,6 +1,5 @@
-import { Store } from '@ngrx/store';
-import { IState } from './../../core/states';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { StoreService } from './../../core/client.service';
 
 @Component({
   selector: 'slq-three-six-nine',
@@ -8,8 +7,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./three-six-nine.component.scss']
 })
 export class ThreeSixNineComponent implements OnInit, OnDestroy {
-  selectedNr = this.store.select(state => state.quizState.threeSixNine.numberOfQuestion);
-  constructor(private store: Store<IState>) { }
+  selectedNr = this.storeService.store.select(state => state.quizState.threeSixNine.numberOfQuestion);
+  constructor(private storeService: StoreService) { }
 
   ngOnInit() {
 
