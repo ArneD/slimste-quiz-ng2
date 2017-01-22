@@ -6,6 +6,7 @@ import { DebugElement } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { PuzzlesComponent, ScoreEllipseComponent, ScoreBoardComponent } from '../';
 import { rootReducer } from '../../state/root-reducer';
+import { StoreService } from './../../core/store.service';
 
 describe('SharedPuzzlesComponent', () => {
   let component: PuzzlesComponent;
@@ -16,7 +17,8 @@ describe('SharedPuzzlesComponent', () => {
       declarations: [ PuzzlesComponent, ScoreBoardComponent, ScoreEllipseComponent ],
       imports: [
         StoreModule.provideStore(rootReducer)
-      ]
+      ],
+      providers: [StoreService]
     })
     .compileComponents();
   }));

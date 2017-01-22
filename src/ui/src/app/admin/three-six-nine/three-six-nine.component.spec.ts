@@ -11,7 +11,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-
+import { StoreService } from './../../core/store.service';
 import { rootReducer } from '../../state/root-reducer';
 import { AdminThreeSixNineComponent } from './three-six-nine.component';
 
@@ -28,7 +28,7 @@ describe('AdminThreeSixNineComponent', () => {
         RouterTestingModule,
         FormsModule
       ],
-      providers: [ ScoreService ]
+      providers: [ ScoreService, StoreService ]
     })
     .compileComponents();
   }));

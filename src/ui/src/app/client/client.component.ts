@@ -1,5 +1,7 @@
-import { StoreService } from './../core/client.service';
+import { Router } from '@angular/router';
+import { StoreService } from './../core/store.service';
 import { Component, OnInit } from '@angular/core';
+import { NavigationType } from './../core/models';
 
 @Component({
   selector: 'slq-client',
@@ -8,14 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientComponent implements OnInit {
 
-  constructor(private storeService: StoreService) { }
+  constructor(private storeService: StoreService, private router: Router) { }
 
   ngOnInit() {
     if (this.storeService.store) {
       this.storeService.store
         .select(state => state.navigationState)
         .subscribe((navigation) => {
-          console.log(navigation);
+          switch (navigation.navigationType) {
+            case NavigationType.ThreeSixNine:
+              this.router.navigate(['/client/three-six-nine']);
+              break;
+            default:
+              this.router.navigate(['/client/setup']);
+              break;
+          }
         });
     }
   }

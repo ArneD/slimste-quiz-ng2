@@ -10,8 +10,11 @@ export class StoreService {
     if (window.opener) {
       console.log(window.opener['slqStore']);
       this.store = <Store<IState>> window.opener['slqStore'];
+
+      console.log('used store');
     } else {
       this.store = currentStore;
+      console.log('new store');
     }
   }
 }

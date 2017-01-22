@@ -1,6 +1,7 @@
 /* tslint:disable:no-unused-variable */
 
 import { ScoreService } from './../../core/score.service';
+import { StoreService } from './../../core/store.service';
 import { SharedModule } from './../../shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
@@ -23,7 +24,7 @@ describe('AdminPuzzlesComponent', () => {
         StoreModule.provideStore(rootReducer),
         RouterTestingModule
       ],
-      providers: [ScoreService]
+      providers: [ScoreService, StoreService]
     })
     .compileComponents();
   }));

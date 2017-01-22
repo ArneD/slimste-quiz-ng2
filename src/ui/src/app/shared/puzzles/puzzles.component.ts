@@ -1,4 +1,4 @@
-import { StoreService } from './../../core/client.service';
+import { StoreService } from './../../core/store.service';
 import { IPuzzleQuestion, IPuzzle } from './../../core/models';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
