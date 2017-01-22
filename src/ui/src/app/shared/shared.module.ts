@@ -1,7 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { CircleSelectorComponent, ScoreEllipseComponent, ThreeSixNineComponent, ScoreBoardComponent, PuzzlesComponent }   from './';
+import { CircleSelectorComponent,
+  ScoreEllipseComponent,
+  ThreeSixNineComponent,
+  ScoreBoardComponent,
+  PuzzlesComponent } from './';
 
 @NgModule({
   imports: [CommonModule],

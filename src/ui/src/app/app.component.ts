@@ -1,4 +1,4 @@
-import { Store } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import { IState } from './core/states';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,17 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'app works!';
-  preventReset$ = this.store.select(state => state);
 
   constructor(private store: Store<IState>) {
 
   }
 
   ngOnInit() {
-    if(window.opener) {
-      console.log(window.opener['slqStore']);
+    if (!window.opener) {
+      window['slqStore'] = this.store;
     }
-    window['slqStore'] = this.store;
   }
 }

@@ -1,9 +1,9 @@
-import { RouterTestingModule } from '@angular/router/testing';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-
+import { RouterTestingModule } from '@angular/router/testing';
+import { ClientStoreService } from './../core/client.service';
 import { ClientComponent } from './client.component';
 
 describe('ClientComponent', () => {
@@ -15,7 +15,8 @@ describe('ClientComponent', () => {
       declarations: [ ClientComponent ],
       imports: [
         RouterTestingModule
-      ]
+      ],
+      providers: [ClientStoreService]
     })
     .compileComponents();
   }));

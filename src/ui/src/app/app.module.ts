@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import {StoreModule} from '@ngrx/store';
+import {StoreModule, Store} from '@ngrx/store';
 
 import { SharedModule } from './shared/shared.module';
 
@@ -25,10 +25,10 @@ import { rootReducer } from './state/root-reducer';
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    SharedModule,
     StoreModule.provideStore(rootReducer),
     AdminModule,
-    ClientModule
+    ClientModule,
+    SharedModule,
   ],
   providers: [QuizService, ScoreService],
   bootstrap: [AppComponent]
