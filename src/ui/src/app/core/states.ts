@@ -1,4 +1,4 @@
-import { IQuiz, IThreeSixNineQuestion, IPuzzle } from './models';
+import { IQuiz, IThreeSixNineQuestion, IPuzzle, NavigationType } from './models';
 
 export interface IState {
   scoreState: IScoreState;
@@ -41,13 +41,4 @@ export interface IPuzzleState {
 
 export interface INavigationState {
   navigationType: NavigationType;
-}
-
-export enum NavigationType {
-  Unknown,
-  ThreeSixNine,
-  Puzzles,
-  Gallery,
-  Video,
-  Final
 }

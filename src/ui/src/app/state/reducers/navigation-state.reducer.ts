@@ -1,5 +1,5 @@
-import { IPuzzle } from './../../core/models';
-import { INavigationState, NavigationType } from './../../core/states';
+import { IPuzzle, NavigationType } from './../../core/models';
+import { INavigationState } from './../../core/states';
 import * as navigation from '../actions/navigation-state';
 
 let initialState: INavigationState = {

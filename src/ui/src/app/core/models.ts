@@ -106,3 +106,12 @@ export interface IVideo {
   startFrom: string;
   numberOfSecondsToPlay: number;
 }
+
+export enum NavigationType {
+  Unknown,
+  ThreeSixNine,
+  Puzzles,
+  Gallery,
+  Video,
+  Final
+}

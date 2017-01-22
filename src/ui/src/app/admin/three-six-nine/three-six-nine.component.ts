@@ -4,7 +4,8 @@ import { ScoreService } from './../../core/score.service';
 import { ScoreResetHasPlayedQuestion, ScoreSelectPlayer } from './../../state/actions/score-state';
 import { QuizThreeSixNineNextQuestion } from './../../state/actions/quiz-state';
 import { Store } from '@ngrx/store';
-import { IState, IPlayerState, NavigationType } from './../../core/states';
+import { IState, IPlayerState } from './../../core/states';
+import { NavigationType } from './../../core/models';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({

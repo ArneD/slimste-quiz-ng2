@@ -1,4 +1,5 @@
-import { INavigationState, NavigationType } from './../../core/states';
+import { INavigationState } from './../../core/states';
+import { NavigationType } from './../../core/models';
 import { navigationStateReducer } from './navigation-state.reducer';
 import { NavigateTo } from '../actions/navigation-state';
 

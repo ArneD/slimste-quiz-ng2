@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { type } from '../util';
-import { NavigationType } from '../../core/states';
+import { NavigationType } from '../../core/models';
 
 export const ActionTypes = {
   NAVIGATION_NAVIGATE_TO: type('NAVIGATION_NAVIGATE_TO'),
