@@ -1,4 +1,4 @@
-import { ClientSetUpComponent, ClientComponent } from './';
+import { ClientSetUpComponent, ClientComponent, ClientThreeSixNineComponent } from './';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
@@ -8,8 +8,8 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'setup', pathMatch: 'full' },
       { path: 'setup', component: ClientSetUpComponent },
-    // { path: 'client/three-six-nine', component: ClientThreeSixNineComponent },
-    // { path: 'client/puzzles', component: ClientPuzzlesComponent }
+      { path: 'three-six-nine', component: ClientThreeSixNineComponent },
+    // { path: 'puzzles', component: ClientPuzzlesComponent }
   ]}
 ];
 
@@ -24,4 +24,5 @@ export class ClientRoutingModule { }
 export const routedComponents = [
     ClientComponent,
     ClientSetUpComponent,
+    ClientThreeSixNineComponent
 ];

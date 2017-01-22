@@ -8,7 +8,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./three-six-nine.component.scss']
 })
 export class ThreeSixNineComponent implements OnInit, OnDestroy {
-  subscription;
   selectedNr = this.store.select(state => state.quizState.threeSixNine.numberOfQuestion);
   constructor(private store: Store<IState>) { }
 
