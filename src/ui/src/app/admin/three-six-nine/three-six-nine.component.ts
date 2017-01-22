@@ -1,12 +1,10 @@
+import { NavigateTo } from './../../state/actions/navigation-state';
 import { Router } from '@angular/router';
 import { ScoreService } from './../../core/score.service';
-import { ScoreIncreaseSelectedPlayer,
-  ScoreResetHasPlayedQuestion,
-  ScorePlayerPlayedQuestion,
-  ScoreSelectPlayer } from './../../state/actions/score-state';
+import { ScoreResetHasPlayedQuestion, ScoreSelectPlayer } from './../../state/actions/score-state';
 import { QuizThreeSixNineNextQuestion } from './../../state/actions/quiz-state';
 import { Store } from '@ngrx/store';
-import { IState, IPlayerState } from './../../core/states';
+import { IState, IPlayerState, NavigationType } from './../../core/states';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
@@ -52,6 +50,8 @@ export class AdminThreeSixNineComponent implements OnInit, OnDestroy {
     this.numberSubscription$ = this.store
       .select(state => state.quizState.threeSixNine.numberOfQuestion)
       .subscribe(number => this.numberOfQuestion = number);
+
+    this.store.dispatch(new NavigateTo(NavigationType.ThreeSixNine));
   }
 
   selectNextQuestion() {

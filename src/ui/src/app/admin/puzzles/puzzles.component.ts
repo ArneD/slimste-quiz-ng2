@@ -1,9 +1,10 @@
+import { NavigateTo } from './../../state/actions/navigation-state';
 import { Router } from '@angular/router';
 import { ScoreService } from './../../core/score.service';
 import { ScoreResetHasPlayedQuestion } from './../../state/actions/score-state';
 import { QuizPuzzlesNextPuzzle, QuizPuzzlesAnsweredPuzzleQuestion } from './../../state/actions/quiz-state';
 import { Store } from '@ngrx/store';
-import { IState } from './../../core/states';
+import { IState, NavigationType } from './../../core/states';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -27,6 +28,7 @@ export class AdminPuzzlesComponent implements OnInit {
 
   ngOnInit() {
     this.scoreService.setUpNextRound();
+    this.store.dispatch(new NavigateTo(NavigationType.Puzzles));
   }
 
   selectNextPuzzle() {
