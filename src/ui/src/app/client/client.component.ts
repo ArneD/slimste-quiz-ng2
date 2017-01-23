@@ -10,6 +10,7 @@ import { NavigationType } from './../core/models';
 })
 export class ClientComponent implements OnInit, OnDestroy {
   navigationSubscription;
+  interval: NodeJS.Timer;
   constructor(private storeService: StoreService, private router: Router) { }
 
   ngOnInit() {
@@ -30,11 +31,19 @@ export class ClientComponent implements OnInit, OnDestroy {
           }
         });
     }
+
+    this.interval = setInterval(() => {
+      // Needed to update window for some reason ...
+    }, 200);
   }
 
   ngOnDestroy() {
     if (this.navigationSubscription) {
       this.navigationSubscription.unsubscribe();
+    }
+
+    if (this.interval) {
+      clearInterval(this.interval);
     }
   }
 }
