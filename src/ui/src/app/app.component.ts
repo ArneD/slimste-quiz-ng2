@@ -9,13 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private store: Store<IState>) {
+  constructor() {
 
   }
 
   ngOnInit() {
-    if (!window.opener) {
-      window['slqStore'] = this.store;
-    }
+
   }
 }

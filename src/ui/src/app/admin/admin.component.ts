@@ -1,3 +1,6 @@
+import { StoreService } from './../core/store.service';
+import { Store } from '@ngrx/store';
+import { IState } from './../core/states';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,12 +11,13 @@ import { Component, OnInit } from '@angular/core';
 export class AdminComponent implements OnInit {
   clientWindow: Window = null;
 
-  constructor() { }
+  constructor(private store: Store<IState>, private storeService: StoreService) { }
 
   ngOnInit() {
   }
 
   openClient() {
     this.clientWindow = window.open('http://localhost:4200/client');
+    this.clientWindow['slqStore'] = this.store;
   }
 }
