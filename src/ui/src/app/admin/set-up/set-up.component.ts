@@ -58,8 +58,4 @@ export class SetUpComponent implements OnInit {
     this.store.dispatch(new QuizUpdateSelected(this.selectedQuiz));
     this.router.navigate(['/admin/three-six-nine']);
   }
-
-  openClient() {
-    let wdw = window.open('http://localhost:4200/client', '_blank');
-  }
 }
