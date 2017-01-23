@@ -21,6 +21,9 @@ export class ClientComponent implements OnInit {
             case NavigationType.ThreeSixNine:
               this.router.navigate(['/client/three-six-nine']);
               break;
+            case NavigationType.Puzzles:
+              this.router.navigate(['/client/puzzles']);
+              break;
             default:
               this.router.navigate(['/client/setup']);
               break;

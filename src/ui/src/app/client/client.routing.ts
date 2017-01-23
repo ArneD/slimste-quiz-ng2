@@ -1,7 +1,7 @@
 import { ClientSetUpComponent, ClientComponent } from './';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { ThreeSixNineComponent } from './../shared/three-six-nine/three-six-nine.component';
+import { ThreeSixNineComponent, PuzzlesComponent } from './../shared/';
 
 const routes: Routes = [
   { path: 'client',
@@ -10,7 +10,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'setup', pathMatch: 'full' },
       { path: 'setup', component: ClientSetUpComponent },
       { path: 'three-six-nine', component: ThreeSixNineComponent },
-    // { path: 'puzzles', component: ClientPuzzlesComponent }
+      { path: 'puzzles', component: PuzzlesComponent }
   ]}
 ];
 

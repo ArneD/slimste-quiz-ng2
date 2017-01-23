@@ -57,6 +57,6 @@ export class SetUpComponent implements OnInit {
   }
 
   openClient() {
-    let wdw = window.open('http://localhost:4200/client/setup', '_blank');
+    let wdw = window.open('http://localhost:4200/client', '_blank');
   }
 }
