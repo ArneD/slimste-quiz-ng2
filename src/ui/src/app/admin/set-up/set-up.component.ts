@@ -26,6 +26,9 @@ export class SetUpComponent implements OnInit {
   ngOnInit() {
     this.quizService.loadQuizzes().subscribe(quizzes => {
       this.store.dispatch(new QuizUpdateAll(quizzes));
+      if(quizzes.length > 0) {
+        this.selectedQuiz = quizzes[0];
+      }
     });
   }
 
