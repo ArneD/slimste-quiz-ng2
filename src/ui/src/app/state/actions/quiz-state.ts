@@ -8,7 +8,9 @@ export const ActionTypes = {
   QUIZ_UPDATE_SELECTED: type('QUIZ_UPDATE_SELECTED'),
   QUIZ_THREE_SIX_NINE_NEXT_QUESTION: type('QUIZ_THREE_SIX_NINE_NEXT_QUESTION'),
   QUIZ_PUZZLES_NEXT_PUZZLE: type('QUIZ_PUZZLES_NEXT_PUZZLE'),
-  QUIZ_PUZZLES_ANSWERED_PUZZLE_QUESTION: type('QUIZ_PUZZLES_ANSWERED_PUZZLE_QUESTION')
+  QUIZ_PUZZLES_ANSWERED_PUZZLE_QUESTION: type('QUIZ_PUZZLES_ANSWERED_PUZZLE_QUESTION'),
+  QUIZ_GALLERY_NEXT_GALLERY: type('QUIZ_GALLERY_NEXT_GALLERY'),
+  QUIZ_GALLERY_NEXT_GALLERY_QUESTION: type('QUIZ_GALLERY_NEXT_GALLERY_QUESTION'),
 };
 
 export class QuizUpdateAll implements Action {
@@ -55,8 +57,22 @@ export class QuizPuzzlesAnsweredPuzzleQuestion implements Action {
   }
 }
 
+export class QuizGalleryNextGallery implements Action {
+  type = ActionTypes.QUIZ_GALLERY_NEXT_GALLERY;
+
+  public constructor() { }
+}
+
+export class QuizGalleryNextGalleryQuestion implements Action {
+  type = ActionTypes.QUIZ_GALLERY_NEXT_GALLERY_QUESTION;
+
+  public constructor() { }
+}
+
 export type Actions = QuizUpdateAll
   | QuizUpdateSelected
   | QuizThreeSixNineNextQuestion
   | QuizPuzzlesNextPuzzle
-  | QuizPuzzlesAnsweredPuzzleQuestion;
+  | QuizPuzzlesAnsweredPuzzleQuestion
+  | QuizGalleryNextGallery
+  | QuizGalleryNextGalleryQuestion;

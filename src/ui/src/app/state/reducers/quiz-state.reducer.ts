@@ -1,9 +1,9 @@
-import { IPuzzle } from './../../core/models';
+import { IPuzzle, IGallery, IGalleryQuestion } from './../../core/models';
 import { ActionTypes } from './../actions/quiz-state';
 import { IQuizState } from './../../core/states';
 import * as quiz from '../actions/quiz-state';
 
-let initialState: IQuizState = {
+const initialState: IQuizState = {
     quizzes: [],
     threeSixNine: {
       numberOfQuestion: 0,
@@ -17,6 +17,10 @@ let initialState: IQuizState = {
       answered1: false,
       answered2: false,
       answered3: false
+    },
+    gallery: {
+      gallery: null,
+      galleryQuestionNumber: 0
     }
 };
 
@@ -27,14 +31,16 @@ export function quizStateReducer(state: IQuizState = initialState, action: quiz.
         selectedQuiz: state.selectedQuiz,
         quizzes: action.payload.quizzes,
         threeSixNine: state.threeSixNine,
-        puzzle: state.puzzle
+        puzzle: state.puzzle,
+        gallery: state.gallery
       };
     case quiz.ActionTypes.QUIZ_UPDATE_SELECTED:
       return {
         selectedQuiz: action.payload.quiz,
         quizzes: state.quizzes,
         threeSixNine: state.threeSixNine,
-        puzzle: state.puzzle
+        puzzle: state.puzzle,
+        gallery: state.gallery
       };
     case quiz.ActionTypes.QUIZ_THREE_SIX_NINE_NEXT_QUESTION:
       let nextNumber = state.threeSixNine.numberOfQuestion + 1;
@@ -49,7 +55,8 @@ export function quizStateReducer(state: IQuizState = initialState, action: quiz.
               answer: null
             }
           },
-          puzzle: state.puzzle
+          puzzle: state.puzzle,
+          gallery: state.gallery
         };
       }
       return {
@@ -59,7 +66,8 @@ export function quizStateReducer(state: IQuizState = initialState, action: quiz.
           numberOfQuestion: nextNumber,
           question: state.selectedQuiz.threeSixNine[nextNumber]
         },
-        puzzle: state.puzzle
+        puzzle: state.puzzle,
+        gallery: state.gallery
       };
     case quiz.ActionTypes.QUIZ_PUZZLES_NEXT_PUZZLE:
       let puzzle: IPuzzle = null;
@@ -80,7 +88,8 @@ export function quizStateReducer(state: IQuizState = initialState, action: quiz.
           answered1: false,
           answered2: false,
           answered3: false
-        }
+        },
+        gallery: state.gallery
       };
     case quiz.ActionTypes.QUIZ_PUZZLES_ANSWERED_PUZZLE_QUESTION:
       let answered1 = state.puzzle.answered1;
@@ -103,6 +112,45 @@ export function quizStateReducer(state: IQuizState = initialState, action: quiz.
           answered1: answered1,
           answered2: answered2,
           answered3: answered3,
+        },
+        gallery: state.gallery
+      };
+    case quiz.ActionTypes.QUIZ_GALLERY_NEXT_GALLERY:
+      let gallery: IGallery = null;
+      if (!state.gallery || !state.gallery.gallery) {
+        gallery = state.selectedQuiz.gallery.firstGallery;
+      } else if (state.gallery.gallery === state.selectedQuiz.gallery.firstGallery) {
+        gallery = state.selectedQuiz.gallery.secondGallery;
+      } else if (state.gallery.gallery === state.selectedQuiz.gallery.secondGallery) {
+        gallery = state.selectedQuiz.gallery.thirdGallery;
+      }
+
+      return {
+        quizzes: state.quizzes,
+        selectedQuiz: state.selectedQuiz,
+        threeSixNine: state.threeSixNine,
+        puzzle: state.puzzle,
+        gallery: {
+          gallery: gallery,
+          galleryQuestionNumber: 0
+        }
+      };
+    case quiz.ActionTypes.QUIZ_GALLERY_NEXT_GALLERY_QUESTION:
+      let number = state.gallery.galleryQuestionNumber;
+      if (number < 10) {
+        number = number + 1;
+      } else {
+        number = 0;
+      }
+
+      return {
+        quizzes: state.quizzes,
+        selectedQuiz: state.selectedQuiz,
+        threeSixNine: state.threeSixNine,
+        puzzle: state.puzzle,
+        gallery: {
+          gallery: state.gallery.gallery,
+          galleryQuestionNumber: number
         }
       };
     default:

@@ -1,4 +1,9 @@
-import { QuizThreeSixNineNextQuestion, QuizPuzzlesNextPuzzle, QuizPuzzlesAnsweredPuzzleQuestion } from './../actions/quiz-state';
+import { QuizThreeSixNineNextQuestion,
+  QuizPuzzlesNextPuzzle,
+  QuizPuzzlesAnsweredPuzzleQuestion,
+  QuizGalleryNextGallery,
+  QuizGalleryNextGalleryQuestion
+} from './../actions/quiz-state';
 import { QuizzesBuilder } from './../../test-utils/quizzes-builder';
 import { IQuiz } from './../../core/models';
 import { IQuizState } from './../../core/states';
@@ -20,6 +25,7 @@ describe('reduce quiz state', () => {
         }
       },
       puzzle: null,
+      gallery: null,
     };
 
     it('returns a new instance with expected quizzes', () => {
@@ -47,6 +53,7 @@ describe('reduce quiz state', () => {
         }
       },
       puzzle: null,
+      gallery: null,
     };
 
     it('returns a new instance with expected selected quiz', () => {
@@ -78,6 +85,7 @@ describe('reduce quiz state', () => {
         }
       },
       puzzle: null,
+      gallery: null,
     };
       deepfreeze(initialState);
 
@@ -98,6 +106,7 @@ describe('reduce quiz state', () => {
           question: quiz.threeSixNine[15]
         },
         puzzle: null,
+        gallery: null,
       };
       deepfreeze(initialState);
 
@@ -122,6 +131,7 @@ describe('reduce quiz state', () => {
           }
         },
         puzzle: null,
+        gallery: null,
       };
       deepfreeze(initialState);
 
@@ -143,6 +153,7 @@ describe('reduce quiz state', () => {
         selectedQuiz: quiz,
         threeSixNine: null,
         puzzle: null,
+        gallery: null,
       };
 
       deepfreeze(initialState);
@@ -168,7 +179,8 @@ describe('reduce quiz state', () => {
            answered1: true,
            answered2: true,
            answered3: true
-         }
+         },
+         gallery: null,
        };
 
       deepfreeze(initialState);
@@ -194,7 +206,8 @@ describe('reduce quiz state', () => {
            answered1: true,
            answered2: true,
            answered3: true
-         }
+         },
+         gallery: null,
        };
 
       deepfreeze(initialState);
@@ -220,7 +233,8 @@ describe('reduce quiz state', () => {
            answered1: true,
            answered2: true,
            answered3: true
-         }
+         },
+         gallery: null,
       };
 
       deepfreeze(initialState);
@@ -246,6 +260,7 @@ describe('reduce quiz state', () => {
           answered2: false,
           answered3: false,
         },
+        gallery: null,
       };
 
       deepfreeze(initialState);
@@ -271,6 +286,7 @@ describe('reduce quiz state', () => {
           answered2: false,
           answered3: false,
         },
+        gallery: null,
       };
 
       deepfreeze(initialState);
@@ -296,6 +312,7 @@ describe('reduce quiz state', () => {
           answered2: false,
           answered3: false,
         },
+        gallery: null,
       };
 
       deepfreeze(initialState);
@@ -321,6 +338,7 @@ describe('reduce quiz state', () => {
           answered2: false,
           answered3: false,
         },
+        gallery: null,
       };
 
       deepfreeze(initialState);
@@ -333,6 +351,176 @@ describe('reduce quiz state', () => {
       expect(changedState.puzzle.answered2).toBeFalsy();
       expect(changedState.puzzle.answered3).toBeFalsy();
     });
+  });
+
+  describe('case QUIZ_GALLERY_NEXT_GALLERY', () => {
+    it('given no gallery set first gallery and questionNr is 0', () => {
+      const quiz: IQuiz = quizzesBuilder.createQuizzes()[0];
+      let initialState: IQuizState = {
+        quizzes: [],
+        selectedQuiz: quiz,
+        threeSixNine: null,
+        puzzle: null,
+        gallery: null,
+      };
+
+      deepfreeze(initialState);
+
+      const changedState: IQuizState = quizStateReducer(initialState,
+        new QuizGalleryNextGallery());
+
+      expect(changedState).not.toBe(initialState);
+      expect(changedState.gallery).not.toBeNull();
+      expect(changedState.gallery.gallery).toBe(quiz.gallery.firstGallery);
+      expect(changedState.gallery.galleryQuestionNumber).toBe(0);
+    });
+
+    it('given first gallery set second gallery and questionNr is 0', () => {
+      const quiz: IQuiz = quizzesBuilder.createQuizzes()[0];
+      let initialState: IQuizState = {
+        quizzes: [],
+        selectedQuiz: quiz,
+        threeSixNine: null,
+        puzzle: null,
+        gallery: {
+          gallery: quiz.gallery.firstGallery,
+          galleryQuestionNumber: 10
+        },
+      };
+
+      deepfreeze(initialState);
+
+      const changedState: IQuizState = quizStateReducer(initialState,
+        new QuizGalleryNextGallery());
+
+      expect(changedState).not.toBe(initialState);
+      expect(changedState.gallery).not.toBeNull();
+      expect(changedState.gallery.gallery).toBe(quiz.gallery.secondGallery);
+      expect(changedState.gallery.galleryQuestionNumber).toBe(0);
+    });
+
+    it('given second gallery set third gallery and questionNr is 0', () => {
+      const quiz: IQuiz = quizzesBuilder.createQuizzes()[0];
+      let initialState: IQuizState = {
+        quizzes: [],
+        selectedQuiz: quiz,
+        threeSixNine: null,
+        puzzle: null,
+        gallery: {
+          gallery: quiz.gallery.secondGallery,
+          galleryQuestionNumber: 8
+        },
+      };
+
+      deepfreeze(initialState);
+
+      const changedState: IQuizState = quizStateReducer(initialState,
+        new QuizGalleryNextGallery());
+
+      expect(changedState).not.toBe(initialState);
+      expect(changedState.gallery).not.toBeNull();
+      expect(changedState.gallery.gallery).toBe(quiz.gallery.thirdGallery);
+      expect(changedState.gallery.galleryQuestionNumber).toBe(0);
+    });
+
+    it('given third gallery set gallery to null and questionNr is 0', () => {
+      const quiz: IQuiz = quizzesBuilder.createQuizzes()[0];
+      let initialState: IQuizState = {
+        quizzes: [],
+        selectedQuiz: quiz,
+        threeSixNine: null,
+        puzzle: null,
+        gallery: {
+          gallery: quiz.gallery.thirdGallery,
+          galleryQuestionNumber: 0
+        },
+      };
+
+      deepfreeze(initialState);
+
+      const changedState: IQuizState = quizStateReducer(initialState,
+        new QuizGalleryNextGallery());
+
+      expect(changedState).not.toBe(initialState);
+      expect(changedState.gallery).not.toBeNull();
+      expect(changedState.gallery.gallery).toBeNull();
+      expect(changedState.gallery.galleryQuestionNumber).toBe(0);
+    });
+  });
+
+  describe('case QUIZ_GALLERY_NEXT_GALLERY_QUESTION', () => {
+    it('given no question set question to 1', () => {
+      const quiz: IQuiz = quizzesBuilder.createQuizzes()[0];
+      let initialState: IQuizState = {
+        quizzes: [],
+        selectedQuiz: quiz,
+        threeSixNine: null,
+        puzzle: null,
+        gallery: {
+          gallery: quiz.gallery.firstGallery,
+          galleryQuestionNumber: 0
+        },
+      };
+
+      deepfreeze(initialState);
+
+      const changedState: IQuizState = quizStateReducer(initialState,
+        new QuizGalleryNextGalleryQuestion());
+
+      expect(changedState).not.toBe(initialState);
+      expect(changedState.gallery).not.toBeNull();
+      expect(changedState.gallery.galleryQuestionNumber).toBe(1);
+    });
+
+    it('given question set next questionNr', () => {
+      const quiz: IQuiz = quizzesBuilder.createQuizzes()[0];
+
+      for (let i = 2; i <= 10; i++) {
+         let initialState: IQuizState = {
+          quizzes: [],
+          selectedQuiz: quiz,
+          threeSixNine: null,
+          puzzle: null,
+          gallery: {
+            gallery: quiz.gallery.firstGallery,
+            galleryQuestionNumber: i - 1
+          },
+        };
+
+        deepfreeze(initialState);
+
+        const changedState: IQuizState = quizStateReducer(initialState,
+          new QuizGalleryNextGalleryQuestion());
+
+        expect(changedState).not.toBe(initialState);
+        expect(changedState.gallery).not.toBeNull();
+        expect(changedState.gallery.galleryQuestionNumber).toBe(i);
+      }
+    });
+
+     it('given last question set questionNr to 0', () => {
+      const quiz: IQuiz = quizzesBuilder.createQuizzes()[0];
+      let initialState: IQuizState = {
+        quizzes: [],
+        selectedQuiz: quiz,
+        threeSixNine: null,
+        puzzle: null,
+        gallery: {
+          gallery: quiz.gallery.firstGallery,
+          galleryQuestionNumber: 10
+        },
+      };
+
+      deepfreeze(initialState);
+
+      const changedState: IQuizState = quizStateReducer(initialState,
+        new QuizGalleryNextGalleryQuestion());
+
+      expect(changedState).not.toBe(initialState);
+      expect(changedState.gallery).not.toBeNull();
+      expect(changedState.gallery.galleryQuestionNumber).toBe(0);
+    });
+
   });
 });
 

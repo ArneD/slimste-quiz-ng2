@@ -1,4 +1,9 @@
-import { SetUpComponent, AdminThreeSixNineComponent, AdminPuzzlesComponent, AdminComponent } from './';
+import {  } from './gallery/gallery.component';
+import { SetUpComponent,
+   AdminThreeSixNineComponent,
+   AdminPuzzlesComponent,
+   AdminGalleryComponent,
+   AdminComponent } from './';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
@@ -9,7 +14,8 @@ const routes: Routes = [
       { path: '', redirectTo: 'setup', pathMatch: 'full'},
       { path: 'setup', component: SetUpComponent },
       { path: 'three-six-nine', component: AdminThreeSixNineComponent },
-      { path: 'puzzles', component: AdminPuzzlesComponent }
+      { path: 'puzzles', component: AdminPuzzlesComponent },
+      { path: 'gallery', component: AdminGalleryComponent }
     ]
   }
 ];
@@ -26,5 +32,6 @@ export const routedComponents = [
     AdminComponent,
     SetUpComponent,
     AdminThreeSixNineComponent,
+    AdminGalleryComponent,
     AdminPuzzlesComponent
 ];
