@@ -1,7 +1,7 @@
 import { ClientSetUpComponent, ClientComponent } from './';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { ThreeSixNineComponent, PuzzlesComponent } from './../shared/';
+import { ThreeSixNineComponent, PuzzlesComponent, GalleryComponent } from './../shared/';
 
 const routes: Routes = [
   { path: 'client',
@@ -10,7 +10,8 @@ const routes: Routes = [
       { path: '', redirectTo: 'setup', pathMatch: 'full' },
       { path: 'setup', component: ClientSetUpComponent },
       { path: 'three-six-nine', component: ThreeSixNineComponent },
-      { path: 'puzzles', component: PuzzlesComponent }
+      { path: 'puzzles', component: PuzzlesComponent },
+      { path: 'gallery', component: GalleryComponent },
   ]}
 ];
 

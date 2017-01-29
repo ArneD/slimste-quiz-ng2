@@ -25,6 +25,9 @@ export class ClientComponent implements OnInit, OnDestroy {
             case NavigationType.Puzzles:
               this.router.navigate(['/client/puzzles']);
               break;
+            case NavigationType.Gallery:
+              this.router.navigate(['/client/gallery']);
+              break;
             default:
               this.router.navigate(['/client/setup']);
               break;
