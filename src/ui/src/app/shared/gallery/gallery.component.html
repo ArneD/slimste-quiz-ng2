@@ -1,0 +1,7 @@
+<div class="row gallery text-center">
+  <div class="col-xs-12" *ngIf="(gallery$ | async) && (photoNumber$ | async) > 0">
+
+    <img [src]="(gallery$ | async)[photoNumber$|async].photoUrl" />
+  </div>
+</div>
+<slq-score-board></slq-score-board>

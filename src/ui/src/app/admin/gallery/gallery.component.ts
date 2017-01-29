@@ -1,20 +1,30 @@
+import { ScoreResetHasPlayedQuestion } from './../../state/actions/score-state';
 import { Router } from '@angular/router';
-import { ScoreIncreaseSelectedPlayer } from './../../state/actions/score-state';
-import { IGalleryQuestion, NavigationType } from './../../core/models';
+import { IGalleryQuestion, NavigationType, IGallery } from './../../core/models';
 import { NavigateTo } from './../../state/actions/navigation-state';
 import { ScoreService } from './../../core/score.service';
 import { StoreService } from './../../core/store.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { QuizGalleryNextGalleryQuestion, QuizGalleryNextGallery } from './../../state/actions/quiz-state';
 
 @Component({
   selector: 'slq-admin-gallery',
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.scss']
 })
-export class AdminGalleryComponent implements OnInit {
+export class AdminGalleryComponent implements OnInit, OnDestroy {
   numberOfQuestionsCorrect = 0;
   answersNotGiven: Array<string> = [];
   pointsToAdd = 15;
+  endOfRound = false;
+  questionNr: number;
+  timerRunning = false;
+  showNextGallery = true;
+  showNextPlayer = false;
+  gallery: IGallery = null;
+  answer: string;
+  questionNrSubscription;
+  gallerySubscription;
 
   constructor(private storeService: StoreService,
               private scoreService: ScoreService,
@@ -23,41 +33,114 @@ export class AdminGalleryComponent implements OnInit {
   ngOnInit() {
     this.scoreService.setUpNextRound();
     this.storeService.store.dispatch(new NavigateTo(NavigationType.Gallery));
+
+    this.questionNrSubscription = this.storeService
+      .store
+      .select(state => state.quizState.gallery.galleryQuestionNumber)
+      .subscribe((questionNr) => {
+        this.questionNr = questionNr;
+        if (this.questionNr > 0) {
+          this.answer = this.gallery[questionNr].answer;
+        }
+      });
+
+    this.gallerySubscription = this.storeService
+      .store
+      .select(state => state.quizState.gallery.gallery)
+      .subscribe((gallery) => {
+        this.gallery = gallery;
+      });
   }
 
-  correct() {
-    this.storeService.store.dispatch(new ScoreIncreaseSelectedPlayer(this.pointsToAdd));
+  correct(answer: string) {
+    this.scoreService.addScoreForSelectedPlayer(this.pointsToAdd);
+
     this.numberOfQuestionsCorrect += 1;
-    if (this.numberOfQuestionsCorrect === 10 ||
-        this.numberOfQuestionsCorrect + this.answersNotGiven.length === 10) {
+    if (this.numberOfQuestionsCorrect === 10) {
       this.stopTimer();
+      this.showNextGallery = true;
+      this.showNextPlayer = false;
+      return;
+    }
+
+    if (!answer) {
+      if (this.numberOfQuestionsCorrect + this.answersNotGiven.length === 10) {
+        this.stopTimer();
+        this.showNextPlayer = true;
+      } else {
+        this.storeService.store.dispatch(new QuizGalleryNextGalleryQuestion());
+      }
+    } else {
+      let index = this.answersNotGiven.indexOf(answer);
+      this.answersNotGiven.splice(index, 1);
     }
   }
 
   incorrect() {
-    if (this.numberOfQuestionsCorrect === 10 ||
-        this.numberOfQuestionsCorrect + this.answersNotGiven.length === 10) {
-      this.stopTimer();
+    if (this.questionNr > 0) {
+      this.answersNotGiven.push(this.answer);
+      if (this.numberOfQuestionsCorrect + this.answersNotGiven.length === 10) {
+        this.stopTimer();
+        this.showNextPlayer = true;
+      } else {
+        this.storeService.store.dispatch(new QuizGalleryNextGalleryQuestion());
+      }
+    } else {
+      this.storeService.store.dispatch(new QuizGalleryNextGalleryQuestion());
     }
   }
 
   startTimer() {
-
+    this.scoreService.startTimerForSelectedPlayer();
+    this.timerRunning = true;
   }
 
   stopTimer() {
+    this.scoreService.stopTimer();
+    this.scoreService.selectedPlayerPlayedQuestion();
+    this.timerRunning = false;
 
+    if (this.numberOfQuestionsCorrect !== 10 && !this.scoreService.haveAllPlayersPlayedQuestion()) {
+      this.showNextPlayer = true;
+    } else if (!this.scoreService.haveAllPlayersPlayedRound()) {
+      this.showNextGallery = true;
+      this.scoreService.selectNextPlayerForRound();
+    } else {
+      this.endOfRound = true;
+    }
   }
 
   nextGallery() {
-
+    this.storeService.store.dispatch(new QuizGalleryNextGallery());
+    this.numberOfQuestionsCorrect = 0;
+    this.answersNotGiven = [];
+    this.showNextGallery = false;
+    this.storeService.store.dispatch(new ScoreResetHasPlayedQuestion());
+    this.scoreService.selectedPlayerPlayedRound();
   }
 
   nextPlayer() {
+    this.scoreService.selectNextPlayerForQuestion();
+    this.showNextPlayer = false;
+  }
 
+  showFirstPlayerButtons(): boolean {
+    return !this.showNextPlayer &&
+      !this.showNextGallery &&
+      (this.answersNotGiven.length + this.numberOfQuestionsCorrect !== 10);
   }
 
   goToNextRound() {
 
+  }
+
+  ngOnDestroy() {
+    if (this.questionNrSubscription) {
+      this.questionNrSubscription.unsubscribe();
+    }
+
+    if (this.gallerySubscription) {
+      this.gallerySubscription.unsubscribe();
+    }
   }
 }

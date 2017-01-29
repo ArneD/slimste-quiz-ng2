@@ -78,6 +78,6 @@ export class AdminPuzzlesComponent implements OnInit {
   }
 
   goToNextRound() {
-    //this.router.navigate(['/admin/three-six-nine']);
+    this.router.navigate(['/admin/gallery']);
   }
 }

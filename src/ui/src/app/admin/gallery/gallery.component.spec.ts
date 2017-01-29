@@ -5,13 +5,14 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { RouterTestingModule } from '@angular/router/testing';
+import { SharedModule } from './../../shared/shared.module';
 import { StoreService } from './../../core/store.service';
 import { ScoreService } from './../../core/score.service';
 import { rootReducer } from '../../state/root-reducer';
 
 import { AdminGalleryComponent } from './gallery.component';
 
-describe('GalleryComponent', () => {
+describe('AdminGalleryComponent', () => {
   let component: AdminGalleryComponent;
   let fixture: ComponentFixture<AdminGalleryComponent>;
 
@@ -20,7 +21,8 @@ describe('GalleryComponent', () => {
       declarations: [ AdminGalleryComponent ],
       imports: [
         RouterTestingModule,
-        StoreModule.provideStore(rootReducer)
+        StoreModule.provideStore(rootReducer),
+        SharedModule
       ],
       providers: [ScoreService, StoreService]
     })

@@ -1,3 +1,43 @@
-<p>
-  gallery works!
-</p>
+<div class="row col-sm-12 ">
+  <div class="row">
+    <slq-gallery></slq-gallery>
+  </div>
+  <div class="row" *ngIf="gallery && !endOfRound">
+    <div class="form col-sm-6 col-sm-offset-3">
+      <div class="form-group">
+        Theme: {{ gallery.name }}
+      </div>
+      <div class="form-group" *ngIf="questionNr > 0">
+        {{ answer }}
+      </div>
+      <div class="form-group" *ngIf="showFirstPlayerButtons()">
+        <button class="btn btn-success" type="button" (click)="correct()" [disabled]="questionNr === 0">Correct</button>
+        <button class="btn btn-warning" type="button" (click)="incorrect()">Next photo</button>
+      </div>
+      <div class="form-group" *ngIf="!showFirstPlayerButtons()">
+        <ul class="list-unstyled">
+          <li *ngFor="let answer of answersNotGiven" style="padding: 5px">
+            <button type="button" class="btn btn-default" (click)="correct(answer)">{{ answer }}</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="form col-sm-6 col-sm-offset-3">
+      <div class="form-group" *ngIf="!endOfRound">
+          <button class="btn btn-default" *ngIf="!timerRunning && showNextGallery" (click)="nextGallery()">Next Gallery</button>
+          <button class="btn btn-default" *ngIf="!timerRunning && showNextPlayer" (click)="nextPlayer()">Next player</button>
+      </div>
+      <div class="form-group" *ngIf="!endOfRound">
+        <button class="btn btn-default" (click)="startTimer()" [disabled]="timerRunning">Start timer</button>
+        <button class="btn btn-warning" (click)="stopTimer()" [disabled]="!timerRunning">Stop timer</button>
+      </div>
+      <div class="form-group" *ngIf="endOfRound">
+        <button class="btn btn-default" (click)="goToNextRound()">Next round</button>
+      </div>
+    </div>
+  </div>
+</div>
+
