@@ -18,13 +18,13 @@
   <div class="row">
     <div class="form col-sm-6 col-sm-offset-3">
       <div class="form-group" *ngIf="!endOfRound">
-          <button class="btn btn-default" *ngIf="!timerRunning && showNextPuzzle" (click)="selectNextPuzzle()">Next puzzle</button>
-          <button class="btn btn-default" *ngIf="!timerRunning && showNextPlayer" (click)="selectNextPlayer()">Next player</button>
+          <button class="btn btn-default" *ngIf="showNextPuzzle" (click)="selectNextPuzzle()">Next puzzle</button>
+          <button class="btn btn-default" *ngIf="showNextPlayer" (click)="selectNextPlayer()">Next player</button>
       </div>
-      <div class="form-group" *ngIf="!endOfRound">
-        <button class="btn btn-default" (click)="startTimer()" [disabled]="timerRunning">Start timer</button>
-        <button class="btn btn-warning" (click)="stopTimer()" [disabled]="!timerRunning">Stop timer</button>
-      </div>
+      <slq-timer class="form-group" *ngIf="!endOfRound"
+          (timerStarted)="startTimer()"
+          (timerStopped)="stopTimer()">
+      </slq-timer>
       <div class="form-group" *ngIf="endOfRound">
         <button class="btn btn-default" (click)="goToNextRound()">Next round</button>
       </div>

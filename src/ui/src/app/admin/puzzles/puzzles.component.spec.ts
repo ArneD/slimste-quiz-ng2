@@ -11,6 +11,7 @@ import { DebugElement } from '@angular/core';
 import { rootReducer } from '../../state/root-reducer';
 
 import { AdminPuzzlesComponent } from './puzzles.component';
+import { TimerComponent } from './../timer/timer.component';
 
 describe('AdminPuzzlesComponent', () => {
   let component: AdminPuzzlesComponent;
@@ -18,7 +19,7 @@ describe('AdminPuzzlesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminPuzzlesComponent ],
+      declarations: [ AdminPuzzlesComponent, TimerComponent ],
       imports: [
         SharedModule,
         StoreModule.provideStore(rootReducer),

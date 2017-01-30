@@ -11,6 +11,7 @@ import { ScoreService } from './../../core/score.service';
 import { rootReducer } from '../../state/root-reducer';
 
 import { AdminGalleryComponent } from './gallery.component';
+import { TimerComponent } from './../timer/timer.component';
 
 describe('AdminGalleryComponent', () => {
   let component: AdminGalleryComponent;
@@ -18,7 +19,7 @@ describe('AdminGalleryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminGalleryComponent ],
+      declarations: [ AdminGalleryComponent, TimerComponent ],
       imports: [
         RouterTestingModule,
         StoreModule.provideStore(rootReducer),

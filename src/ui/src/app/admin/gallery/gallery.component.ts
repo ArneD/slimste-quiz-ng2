@@ -1,10 +1,11 @@
+import { TimerComponent } from './../timer/timer.component';
 import { ScoreResetHasPlayedQuestion } from './../../state/actions/score-state';
 import { Router } from '@angular/router';
 import { IGalleryQuestion, NavigationType, IGallery } from './../../core/models';
 import { NavigateTo } from './../../state/actions/navigation-state';
 import { ScoreService } from './../../core/score.service';
 import { StoreService } from './../../core/store.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { QuizGalleryNextGalleryQuestion, QuizGalleryNextGallery } from './../../state/actions/quiz-state';
 
 @Component({
@@ -13,12 +14,14 @@ import { QuizGalleryNextGalleryQuestion, QuizGalleryNextGallery } from './../../
   styleUrls: ['./gallery.component.scss']
 })
 export class AdminGalleryComponent implements OnInit, OnDestroy {
+  @ViewChild(TimerComponent)
+  private timerComponent: TimerComponent;
+
   numberOfQuestionsCorrect = 0;
   answersNotGiven: Array<string> = [];
   pointsToAdd = 15;
   endOfRound = false;
   questionNr: number;
-  timerRunning = false;
   showNextGallery = true;
   showNextPlayer = false;
   gallery: IGallery = null;
@@ -55,9 +58,14 @@ export class AdminGalleryComponent implements OnInit, OnDestroy {
   correct(answer: string) {
     this.scoreService.addScoreForSelectedPlayer(this.pointsToAdd);
 
+    if (answer) {
+      const index = this.answersNotGiven.indexOf(answer);
+      this.answersNotGiven.splice(index, 1);
+    }
+
     this.numberOfQuestionsCorrect += 1;
     if (this.numberOfQuestionsCorrect === 10) {
-      this.stopTimer();
+      this.timerComponent.stopTimer();
       this.showNextGallery = true;
       this.showNextPlayer = false;
       return;
@@ -65,14 +73,11 @@ export class AdminGalleryComponent implements OnInit, OnDestroy {
 
     if (!answer) {
       if (this.numberOfQuestionsCorrect + this.answersNotGiven.length === 10) {
-        this.stopTimer();
+        this.timerComponent.stopTimer();
         this.showNextPlayer = true;
       } else {
         this.storeService.store.dispatch(new QuizGalleryNextGalleryQuestion());
       }
-    } else {
-      let index = this.answersNotGiven.indexOf(answer);
-      this.answersNotGiven.splice(index, 1);
     }
   }
 
@@ -80,7 +85,7 @@ export class AdminGalleryComponent implements OnInit, OnDestroy {
     if (this.questionNr > 0) {
       this.answersNotGiven.push(this.answer);
       if (this.numberOfQuestionsCorrect + this.answersNotGiven.length === 10) {
-        this.stopTimer();
+        this.timerComponent.stopTimer();
         this.showNextPlayer = true;
       } else {
         this.storeService.store.dispatch(new QuizGalleryNextGalleryQuestion());
@@ -92,13 +97,11 @@ export class AdminGalleryComponent implements OnInit, OnDestroy {
 
   startTimer() {
     this.scoreService.startTimerForSelectedPlayer();
-    this.timerRunning = true;
   }
 
   stopTimer() {
     this.scoreService.stopTimer();
     this.scoreService.selectedPlayerPlayedQuestion();
-    this.timerRunning = false;
 
     if (this.numberOfQuestionsCorrect !== 10 && !this.scoreService.haveAllPlayersPlayedQuestion()) {
       this.showNextPlayer = true;
