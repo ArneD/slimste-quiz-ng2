@@ -11,7 +11,7 @@ import { DebugElement } from '@angular/core';
 import { rootReducer } from '../../state/root-reducer';
 
 import { AdminPuzzlesComponent } from './puzzles.component';
-import { TimerComponent } from './../timer/timer.component';
+import { TimerComponent } from './../components';
 
 describe('AdminPuzzlesComponent', () => {
   let component: AdminPuzzlesComponent;

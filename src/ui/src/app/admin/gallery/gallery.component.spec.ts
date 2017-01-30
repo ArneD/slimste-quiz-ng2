@@ -11,7 +11,7 @@ import { ScoreService } from './../../core/score.service';
 import { rootReducer } from '../../state/root-reducer';
 
 import { AdminGalleryComponent } from './gallery.component';
-import { TimerComponent } from './../timer/timer.component';
+import { TimerComponent } from './../components';
 
 describe('AdminGalleryComponent', () => {
   let component: AdminGalleryComponent;

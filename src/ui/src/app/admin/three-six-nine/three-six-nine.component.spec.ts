@@ -14,6 +14,7 @@ import { DebugElement } from '@angular/core';
 import { StoreService } from './../../core/store.service';
 import { rootReducer } from '../../state/root-reducer';
 import { AdminThreeSixNineComponent } from './three-six-nine.component';
+import { TimerComponent } from './../components';
 
 describe('AdminThreeSixNineComponent', () => {
   let component: AdminThreeSixNineComponent;
@@ -21,7 +22,7 @@ describe('AdminThreeSixNineComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminThreeSixNineComponent, SetUpComponent, AdminPuzzlesComponent ],
+      declarations: [ AdminThreeSixNineComponent, SetUpComponent, AdminPuzzlesComponent, TimerComponent ],
       imports: [
         SharedModule,
         StoreModule.provideStore(rootReducer),

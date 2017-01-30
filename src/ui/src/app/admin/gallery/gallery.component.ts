@@ -1,4 +1,4 @@
-import { TimerComponent } from './../timer/timer.component';
+import { TimerComponent } from './../components';
 import { ScoreResetHasPlayedQuestion } from './../../state/actions/score-state';
 import { Router } from '@angular/router';
 import { IGalleryQuestion, NavigationType, IGallery } from './../../core/models';

@@ -1,4 +1,3 @@
-import { ScoreService } from './../../core/score.service';
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 
 @Component({
@@ -11,7 +10,7 @@ export class TimerComponent implements OnInit {
   @Output() timerStarted = new EventEmitter();
   @Output() timerStopped = new EventEmitter();
 
-  constructor(private scoreService: ScoreService) { }
+  constructor() { }
 
   ngOnInit() {
   }

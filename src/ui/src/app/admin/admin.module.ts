@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { TimerComponent } from './timer/timer.component';
+import { TimerComponent } from './components';
 
 @NgModule({
   imports: [AdminRoutingModule, CommonModule, HttpModule, FormsModule, SharedModule],

@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { IState } from './../../core/states';
 import { NavigationType } from './../../core/models';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { TimerComponent } from './../timer/timer.component';
+import { TimerComponent } from './../components';
 
 @Component({
   selector: 'slq-admin-puzzles',
