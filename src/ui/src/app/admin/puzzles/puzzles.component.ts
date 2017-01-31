@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { IState } from './../../core/states';
 import { NavigationType } from './../../core/models';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { TimerComponent } from './../components';
+import { TimerComponent, NextComponent } from './../components';
 
 @Component({
   selector: 'slq-admin-puzzles',
@@ -18,11 +18,12 @@ export class AdminPuzzlesComponent implements OnInit {
   @ViewChild(TimerComponent)
   private timerComponent: TimerComponent;
 
+  @ViewChild(NextComponent)
+  private nextComponent: NextComponent;
+
   pointsToAdd = 30;
   puzzle$ = this.store.select(state => state.quizState.puzzle.puzzle);
   endOfRound = false;
-  showNextPuzzle = true;
-  showNextPlayer = false;
   answersGiven = 0;
   isButton1Disabled = false;
   isButton2Disabled = false;
@@ -41,7 +42,7 @@ export class AdminPuzzlesComponent implements OnInit {
     this.isButton1Disabled = false;
     this.isButton2Disabled = false;
     this.isButton3Disabled = false;
-    this.showNextPuzzle = false;
+
     this.store.dispatch(new ScoreResetHasPlayedQuestion());
     this.scoreService.selectedPlayerPlayedRound();
   }
@@ -57,7 +58,6 @@ export class AdminPuzzlesComponent implements OnInit {
 
   selectNextPlayer() {
     this.scoreService.selectNextPlayerForQuestion();
-    this.showNextPlayer = false;
   }
 
   startTimer() {
@@ -69,9 +69,9 @@ export class AdminPuzzlesComponent implements OnInit {
     this.scoreService.selectedPlayerPlayedQuestion();
 
     if (this.answersGiven !== 3 && !this.scoreService.haveAllPlayersPlayedQuestion()) {
-      this.showNextPlayer = true;
+      this.nextComponent.showNextPlayerButton(true);
     } else if (!this.scoreService.haveAllPlayersPlayedRound()) {
-      this.showNextPuzzle = true;
+      this.nextComponent.showNextQuestionButton(true);
       this.scoreService.selectNextPlayerForRound();
     } else {
       this.endOfRound = true;

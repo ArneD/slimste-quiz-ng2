@@ -1,4 +1,4 @@
-import { TimerComponent } from './../components';
+import { TimerComponent, NextComponent } from './../components';
 import { ScoreResetHasPlayedQuestion } from './../../state/actions/score-state';
 import { Router } from '@angular/router';
 import { IGalleryQuestion, NavigationType, IGallery } from './../../core/models';
@@ -17,13 +17,14 @@ export class AdminGalleryComponent implements OnInit, OnDestroy {
   @ViewChild(TimerComponent)
   private timerComponent: TimerComponent;
 
+  @ViewChild(NextComponent)
+  private nextComponent: NextComponent;
+
   numberOfQuestionsCorrect = 0;
   answersNotGiven: Array<string> = [];
   pointsToAdd = 15;
   endOfRound = false;
   questionNr: number;
-  showNextGallery = true;
-  showNextPlayer = false;
   gallery: IGallery = null;
   answer: string;
   questionNrSubscription;
@@ -66,15 +67,14 @@ export class AdminGalleryComponent implements OnInit, OnDestroy {
     this.numberOfQuestionsCorrect += 1;
     if (this.numberOfQuestionsCorrect === 10) {
       this.timerComponent.stopTimer();
-      this.showNextGallery = true;
-      this.showNextPlayer = false;
+      this.nextComponent.showNextQuestionButton(true);
       return;
     }
 
     if (!answer) {
       if (this.numberOfQuestionsCorrect + this.answersNotGiven.length === 10) {
         this.timerComponent.stopTimer();
-        this.showNextPlayer = true;
+        this.nextComponent.showNextPlayerButton(true);
       } else {
         this.storeService.store.dispatch(new QuizGalleryNextGalleryQuestion());
       }
@@ -86,7 +86,7 @@ export class AdminGalleryComponent implements OnInit, OnDestroy {
       this.answersNotGiven.push(this.answer);
       if (this.numberOfQuestionsCorrect + this.answersNotGiven.length === 10) {
         this.timerComponent.stopTimer();
-        this.showNextPlayer = true;
+        this.nextComponent.showNextPlayerButton(true);
       } else {
         this.storeService.store.dispatch(new QuizGalleryNextGalleryQuestion());
       }
@@ -104,33 +104,29 @@ export class AdminGalleryComponent implements OnInit, OnDestroy {
     this.scoreService.selectedPlayerPlayedQuestion();
 
     if (this.numberOfQuestionsCorrect !== 10 && !this.scoreService.haveAllPlayersPlayedQuestion()) {
-      this.showNextPlayer = true;
+      this.nextComponent.showNextPlayerButton(true);
     } else if (!this.scoreService.haveAllPlayersPlayedRound()) {
-      this.showNextGallery = true;
+      this.nextComponent.showNextQuestionButton(true);
       this.scoreService.selectNextPlayerForRound();
     } else {
       this.endOfRound = true;
     }
   }
 
-  nextGallery() {
+  selectNextGallery() {
     this.storeService.store.dispatch(new QuizGalleryNextGallery());
     this.numberOfQuestionsCorrect = 0;
     this.answersNotGiven = [];
-    this.showNextGallery = false;
     this.storeService.store.dispatch(new ScoreResetHasPlayedQuestion());
     this.scoreService.selectedPlayerPlayedRound();
   }
 
-  nextPlayer() {
+  selectNextPlayer() {
     this.scoreService.selectNextPlayerForQuestion();
-    this.showNextPlayer = false;
   }
 
   showFirstPlayerButtons(): boolean {
-    return !this.showNextPlayer &&
-      !this.showNextGallery &&
-      (this.answersNotGiven.length + this.numberOfQuestionsCorrect !== 10);
+    return (this.answersNotGiven.length + this.numberOfQuestionsCorrect !== 10);
   }
 
   goToNextRound() {
