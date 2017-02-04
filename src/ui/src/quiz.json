@@ -270,9 +270,9 @@
         "firstVideo": {
           "question": "Wat is?",
           "video": {
-            "url": "",
+            "url": "https://www.youtube.com/watch?v=ybnzMnFEWJY",
             "startFrom": "",
-            "numberOfSecondsToPlay": 0
+            "numberOfSecondsToPlay": 60
           },
           "answer1": "",
           "answer2": "",
