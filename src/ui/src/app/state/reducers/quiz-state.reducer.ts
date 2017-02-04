@@ -1,4 +1,4 @@
-import { IPuzzle, IGallery, IGalleryQuestion } from './../../core/models';
+import { IPuzzle, IGallery, IGalleryQuestion, IVideo, ICollectiveMemoryQuestion } from './../../core/models';
 import { ActionTypes } from './../actions/quiz-state';
 import { IQuizState } from './../../core/states';
 import * as quiz from '../actions/quiz-state';
@@ -21,6 +21,15 @@ const initialState: IQuizState = {
     gallery: {
       gallery: null,
       galleryQuestionNumber: 0
+    },
+    video: {
+      video: null,
+      answered1: null,
+      answered2: null,
+      answered3: null,
+      answered4: null,
+      answered5: null,
+      startVideo: false
     }
 };
 
@@ -32,7 +41,8 @@ export function quizStateReducer(state: IQuizState = initialState, action: quiz.
         quizzes: action.payload.quizzes,
         threeSixNine: state.threeSixNine,
         puzzle: state.puzzle,
-        gallery: state.gallery
+        gallery: state.gallery,
+        video: state.video,
       };
     case quiz.ActionTypes.QUIZ_UPDATE_SELECTED:
       return {
@@ -40,7 +50,8 @@ export function quizStateReducer(state: IQuizState = initialState, action: quiz.
         quizzes: state.quizzes,
         threeSixNine: state.threeSixNine,
         puzzle: state.puzzle,
-        gallery: state.gallery
+        gallery: state.gallery,
+        video: state.video,
       };
     case quiz.ActionTypes.QUIZ_THREE_SIX_NINE_NEXT_QUESTION:
       let nextNumber = state.threeSixNine.numberOfQuestion + 1;
@@ -56,7 +67,8 @@ export function quizStateReducer(state: IQuizState = initialState, action: quiz.
             }
           },
           puzzle: state.puzzle,
-          gallery: state.gallery
+          gallery: state.gallery,
+          video: state.video,
         };
       }
       return {
@@ -67,7 +79,8 @@ export function quizStateReducer(state: IQuizState = initialState, action: quiz.
           question: state.selectedQuiz.threeSixNine[nextNumber]
         },
         puzzle: state.puzzle,
-        gallery: state.gallery
+        gallery: state.gallery,
+        video: state.video,
       };
     case quiz.ActionTypes.QUIZ_PUZZLES_NEXT_PUZZLE:
       let puzzle: IPuzzle = null;
@@ -89,7 +102,8 @@ export function quizStateReducer(state: IQuizState = initialState, action: quiz.
           answered2: false,
           answered3: false
         },
-        gallery: state.gallery
+        gallery: state.gallery,
+        video: state.video,
       };
     case quiz.ActionTypes.QUIZ_PUZZLES_ANSWERED_PUZZLE_QUESTION:
       let answered1 = state.puzzle.answered1;
@@ -113,7 +127,8 @@ export function quizStateReducer(state: IQuizState = initialState, action: quiz.
           answered2: answered2,
           answered3: answered3,
         },
-        gallery: state.gallery
+        gallery: state.gallery,
+        video: state.video,
       };
     case quiz.ActionTypes.QUIZ_GALLERY_NEXT_GALLERY:
       let gallery: IGallery = null;
@@ -133,7 +148,8 @@ export function quizStateReducer(state: IQuizState = initialState, action: quiz.
         gallery: {
           gallery: gallery,
           galleryQuestionNumber: 0
-        }
+        },
+        video: state.video,
       };
     case quiz.ActionTypes.QUIZ_GALLERY_NEXT_GALLERY_QUESTION:
       let number = state.gallery.galleryQuestionNumber;
@@ -151,7 +167,51 @@ export function quizStateReducer(state: IQuizState = initialState, action: quiz.
         gallery: {
           gallery: state.gallery.gallery,
           galleryQuestionNumber: number
-        }
+        },
+        video: state.video,
+      };
+    case quiz.ActionTypes.QUIZ_VIDEO_NEXT_VIDEO:
+      let video: ICollectiveMemoryQuestion = null;
+      if (!state.video || !state.video.video) {
+        video = state.selectedQuiz.collectiveMemory.firstVideo;
+      } else if (state.video.video === state.selectedQuiz.collectiveMemory.firstVideo) {
+        video = state.selectedQuiz.collectiveMemory.secondVideo;
+      } else if (state.video.video === state.selectedQuiz.collectiveMemory.secondVideo) {
+        video = state.selectedQuiz.collectiveMemory.thirdVideo;
+      }
+
+      return {
+        quizzes: state.quizzes,
+        selectedQuiz: state.selectedQuiz,
+        threeSixNine: state.threeSixNine,
+        puzzle: state.puzzle,
+        gallery: state.gallery,
+        video: {
+          video: video,
+          answered1: null,
+          answered2: null,
+          answered3: null,
+          answered4: null,
+          answered5: null,
+          startVideo: false
+        },
+      };
+    case quiz.ActionTypes.QUIZ_VIDEO_PLAY_VIDEO:
+      return {
+        quizzes: state.quizzes,
+        selectedQuiz: state.selectedQuiz,
+        threeSixNine: state.threeSixNine,
+        puzzle: state.puzzle,
+        gallery: state.gallery,
+        video: {
+          video: state.video.video,
+          answered1: state.video.answered1,
+          answered2: state.video.answered2,
+          answered3: state.video.answered3,
+          answered4: state.video.answered4,
+          answered5: state.video.answered5,
+          startVideo: true
+        },
       };
     default:
       return state;

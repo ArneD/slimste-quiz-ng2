@@ -2,7 +2,10 @@ import { QuizThreeSixNineNextQuestion,
   QuizPuzzlesNextPuzzle,
   QuizPuzzlesAnsweredPuzzleQuestion,
   QuizGalleryNextGallery,
-  QuizGalleryNextGalleryQuestion
+  QuizGalleryNextGalleryQuestion,
+  QuizVideoNextVideo,
+  QuizVideoPlayVideo,
+  QuizVideoAnsweredQuestion,
 } from './../actions/quiz-state';
 import { QuizzesBuilder } from './../../test-utils/quizzes-builder';
 import { IQuiz } from './../../core/models';
@@ -26,6 +29,7 @@ describe('reduce quiz state', () => {
       },
       puzzle: null,
       gallery: null,
+      video: null,
     };
 
     it('returns a new instance with expected quizzes', () => {
@@ -54,6 +58,7 @@ describe('reduce quiz state', () => {
       },
       puzzle: null,
       gallery: null,
+      video: null,
     };
 
     it('returns a new instance with expected selected quiz', () => {
@@ -86,6 +91,7 @@ describe('reduce quiz state', () => {
       },
       puzzle: null,
       gallery: null,
+      video: null,
     };
       deepfreeze(initialState);
 
@@ -107,6 +113,7 @@ describe('reduce quiz state', () => {
         },
         puzzle: null,
         gallery: null,
+        video: null,
       };
       deepfreeze(initialState);
 
@@ -132,6 +139,7 @@ describe('reduce quiz state', () => {
         },
         puzzle: null,
         gallery: null,
+        video: null,
       };
       deepfreeze(initialState);
 
@@ -154,6 +162,7 @@ describe('reduce quiz state', () => {
         threeSixNine: null,
         puzzle: null,
         gallery: null,
+        video: null,
       };
 
       deepfreeze(initialState);
@@ -181,6 +190,7 @@ describe('reduce quiz state', () => {
            answered3: true
          },
          gallery: null,
+         video: null,
        };
 
       deepfreeze(initialState);
@@ -208,6 +218,7 @@ describe('reduce quiz state', () => {
            answered3: true
          },
          gallery: null,
+         video: null,
        };
 
       deepfreeze(initialState);
@@ -235,6 +246,7 @@ describe('reduce quiz state', () => {
            answered3: true
          },
          gallery: null,
+         video: null,
       };
 
       deepfreeze(initialState);
@@ -261,6 +273,7 @@ describe('reduce quiz state', () => {
           answered3: false,
         },
         gallery: null,
+        video: null,
       };
 
       deepfreeze(initialState);
@@ -287,6 +300,7 @@ describe('reduce quiz state', () => {
           answered3: false,
         },
         gallery: null,
+        video: null,
       };
 
       deepfreeze(initialState);
@@ -313,6 +327,7 @@ describe('reduce quiz state', () => {
           answered3: false,
         },
         gallery: null,
+        video: null,
       };
 
       deepfreeze(initialState);
@@ -339,6 +354,7 @@ describe('reduce quiz state', () => {
           answered3: false,
         },
         gallery: null,
+        video: null,
       };
 
       deepfreeze(initialState);
@@ -362,6 +378,7 @@ describe('reduce quiz state', () => {
         threeSixNine: null,
         puzzle: null,
         gallery: null,
+        video: null,
       };
 
       deepfreeze(initialState);
@@ -386,6 +403,7 @@ describe('reduce quiz state', () => {
           gallery: quiz.gallery.firstGallery,
           galleryQuestionNumber: 10
         },
+        video: null,
       };
 
       deepfreeze(initialState);
@@ -410,6 +428,7 @@ describe('reduce quiz state', () => {
           gallery: quiz.gallery.secondGallery,
           galleryQuestionNumber: 8
         },
+        video: null,
       };
 
       deepfreeze(initialState);
@@ -434,6 +453,7 @@ describe('reduce quiz state', () => {
           gallery: quiz.gallery.thirdGallery,
           galleryQuestionNumber: 0
         },
+        video: null,
       };
 
       deepfreeze(initialState);
@@ -460,6 +480,7 @@ describe('reduce quiz state', () => {
           gallery: quiz.gallery.firstGallery,
           galleryQuestionNumber: 0
         },
+        video: null,
       };
 
       deepfreeze(initialState);
@@ -485,6 +506,7 @@ describe('reduce quiz state', () => {
             gallery: quiz.gallery.firstGallery,
             galleryQuestionNumber: i - 1
           },
+          video: null,
         };
 
         deepfreeze(initialState);
@@ -509,6 +531,7 @@ describe('reduce quiz state', () => {
           gallery: quiz.gallery.firstGallery,
           galleryQuestionNumber: 10
         },
+        video: null,
       };
 
       deepfreeze(initialState);
@@ -520,7 +543,160 @@ describe('reduce quiz state', () => {
       expect(changedState.gallery).not.toBeNull();
       expect(changedState.gallery.galleryQuestionNumber).toBe(0);
     });
+  });
 
+  describe('case QUIZ_VIDEO_NEXT_VIDEO', () => {
+    it('given no video set first video and expect default state', () => {
+      const quiz: IQuiz = quizzesBuilder.createQuizzes()[0];
+      const initialState: IQuizState = {
+        quizzes: [],
+        selectedQuiz: quiz,
+        threeSixNine: null,
+        puzzle: null,
+        gallery: null,
+        video: null,
+      };
+
+      deepfreeze(initialState);
+
+      const changedState: IQuizState = quizStateReducer(initialState,
+        new QuizVideoNextVideo());
+
+      expect(changedState).not.toBe(initialState);
+      expect(changedState.video).not.toBeNull();
+      expect(changedState.video.video).toBe(quiz.collectiveMemory.firstVideo);
+      expectDefaultVideoState(changedState);
+    });
+
+    it('given first video set second video and expect default state', () => {
+      const quiz: IQuiz = quizzesBuilder.createQuizzes()[0];
+      const initialState: IQuizState = {
+        quizzes: [],
+        selectedQuiz: quiz,
+        threeSixNine: null,
+        puzzle: null,
+        gallery: null,
+        video: {
+          video: quiz.collectiveMemory.firstVideo,
+          answered1: { isAnswered: true, points: 20 },
+          answered2: null,
+          answered3: null,
+          answered4: null,
+          answered5: null,
+          startVideo: true,
+        },
+      };
+
+      deepfreeze(initialState);
+
+      const changedState: IQuizState = quizStateReducer(initialState,
+        new QuizVideoNextVideo());
+
+      expect(changedState).not.toBe(initialState);
+      expect(changedState.video).not.toBeNull();
+      expect(changedState.video.video).toBe(quiz.collectiveMemory.secondVideo);
+      expectDefaultVideoState(changedState);
+    });
+
+    it('given second video set third video and expect default state', () => {
+      const quiz: IQuiz = quizzesBuilder.createQuizzes()[0];
+      const initialState: IQuizState = {
+        quizzes: [],
+        selectedQuiz: quiz,
+        threeSixNine: null,
+        puzzle: null,
+        gallery: null,
+        video: {
+          video: quiz.collectiveMemory.secondVideo,
+          answered1: { isAnswered: true, points: 20 },
+          answered2: null,
+          answered3: null,
+          answered4: null,
+          answered5: null,
+          startVideo: true,
+        },
+      };
+
+      deepfreeze(initialState);
+
+      const changedState: IQuizState = quizStateReducer(initialState,
+        new QuizVideoNextVideo());
+
+      expect(changedState).not.toBe(initialState);
+      expect(changedState.video).not.toBeNull();
+      expect(changedState.video.video).toBe(quiz.collectiveMemory.thirdVideo);
+      expectDefaultVideoState(changedState);
+    });
+
+    it('given third video set null and expect default state', () => {
+      const quiz: IQuiz = quizzesBuilder.createQuizzes()[0];
+      const initialState: IQuizState = {
+        quizzes: [],
+        selectedQuiz: quiz,
+        threeSixNine: null,
+        puzzle: null,
+        gallery: null,
+        video: {
+          video: quiz.collectiveMemory.thirdVideo,
+          answered1: { isAnswered: true, points: 20 },
+          answered2: null,
+          answered3: null,
+          answered4: null,
+          answered5: null,
+          startVideo: true,
+        },
+      };
+
+      deepfreeze(initialState);
+
+      const changedState: IQuizState = quizStateReducer(initialState,
+        new QuizVideoNextVideo());
+
+      expect(changedState).not.toBe(initialState);
+      expect(changedState.video).not.toBeNull();
+      expect(changedState.video.video).toBeNull();
+      expectDefaultVideoState(changedState);
+    });
+
+    function expectDefaultVideoState(state: IQuizState) {
+      expect(state.video.answered1).toBeNull();
+      expect(state.video.answered2).toBeNull();
+      expect(state.video.answered3).toBeNull();
+      expect(state.video.answered4).toBeNull();
+      expect(state.video.answered5).toBeNull();
+      expect(state.video.startVideo).toBeFalsy();
+    }
+  });
+
+  describe('case QUIZ_VIDEO_PLAY_VIDEO', () => {
+    it('return video with startVideo truthy', () => {
+      const quiz: IQuiz = quizzesBuilder.createQuizzes()[0];
+      const initialState: IQuizState = {
+        quizzes: [],
+        selectedQuiz: quiz,
+        threeSixNine: null,
+        puzzle: null,
+        gallery: null,
+        video: {
+          video: quiz.collectiveMemory.firstVideo,
+          answered1: null,
+          answered2: null,
+          answered3: null,
+          answered4: null,
+          answered5: null,
+          startVideo: false,
+        },
+      };
+
+      deepfreeze(initialState);
+
+      const changedState: IQuizState = quizStateReducer(initialState,
+        new QuizVideoPlayVideo());
+
+      expect(changedState).not.toBe(initialState);
+      expect(changedState.video).not.toBeNull();
+      expect(changedState.video.startVideo).toBeTruthy();
+    });
   });
 });
 

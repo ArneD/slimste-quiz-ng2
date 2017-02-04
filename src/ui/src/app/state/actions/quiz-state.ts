@@ -1,5 +1,5 @@
 import { IQuiz, IThreeSixNineRound, IPuzzleQuestion } from './../../core/models';
-import { IQuizState } from './../../core/states';
+import { IQuizState, IVideoAnswer } from './../../core/states';
 import { Action } from '@ngrx/store';
 import { type } from '../util';
 
@@ -11,6 +11,9 @@ export const ActionTypes = {
   QUIZ_PUZZLES_ANSWERED_PUZZLE_QUESTION: type('QUIZ_PUZZLES_ANSWERED_PUZZLE_QUESTION'),
   QUIZ_GALLERY_NEXT_GALLERY: type('QUIZ_GALLERY_NEXT_GALLERY'),
   QUIZ_GALLERY_NEXT_GALLERY_QUESTION: type('QUIZ_GALLERY_NEXT_GALLERY_QUESTION'),
+  QUIZ_VIDEO_NEXT_VIDEO: type('QUIZ_VIDEO_NEXT_VIDEO'),
+  QUIZ_VIDEO_PLAY_VIDEO: type('QUIZ_VIDEO_PLAY_VIDEO'),
+  QUIZ_VIDEO_ANSWERED_VIDEO_QUESTION: type('QUIZ_VIDEO_ANSWERED_VIDEO_QUESTION'),
 };
 
 export class QuizUpdateAll implements Action {
@@ -69,10 +72,34 @@ export class QuizGalleryNextGalleryQuestion implements Action {
   public constructor() { }
 }
 
+export class QuizVideoNextVideo implements Action {
+  type = ActionTypes.QUIZ_VIDEO_NEXT_VIDEO;
+
+  public constructor() { }
+}
+
+export class QuizVideoPlayVideo implements Action {
+  type = ActionTypes.QUIZ_VIDEO_PLAY_VIDEO;
+
+  public constructor() { }
+}
+
+export class QuizVideoAnsweredQuestion implements Action {
+  type = ActionTypes.QUIZ_VIDEO_ANSWERED_VIDEO_QUESTION;
+  payload: { answer: IVideoAnswer };
+
+  public constructor(answer: IVideoAnswer) {
+    this.payload = { answer: answer };
+  }
+}
+
 export type Actions = QuizUpdateAll
   | QuizUpdateSelected
   | QuizThreeSixNineNextQuestion
   | QuizPuzzlesNextPuzzle
   | QuizPuzzlesAnsweredPuzzleQuestion
   | QuizGalleryNextGallery
-  | QuizGalleryNextGalleryQuestion;
+  | QuizGalleryNextGalleryQuestion
+  | QuizVideoNextVideo
+  | QuizVideoPlayVideo
+  | QuizVideoAnsweredQuestion;

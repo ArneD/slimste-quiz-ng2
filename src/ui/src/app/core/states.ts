@@ -1,4 +1,4 @@
-import { IQuiz, IThreeSixNineQuestion, IPuzzle, NavigationType, IGallery, IGalleryQuestion } from './models';
+import { IQuiz, IThreeSixNineQuestion, IPuzzle, NavigationType, IGallery, IGalleryQuestion, IVideo, ICollectiveMemoryQuestion } from './models';
 
 export interface IState {
   scoreState: IScoreState;
@@ -26,6 +26,7 @@ export interface IQuizState {
   threeSixNine: IThreeSixNineState;
   puzzle: IPuzzleState;
   gallery: IGalleryState;
+  video: IVideoState;
 }
 
 export interface IThreeSixNineState {
@@ -43,6 +44,21 @@ export interface IPuzzleState {
 export interface IGalleryState {
   gallery: IGallery;
   galleryQuestionNumber: number;
+}
+
+export interface IVideoState {
+  video: ICollectiveMemoryQuestion;
+  answered1: IVideoAnswer;
+  answered2: IVideoAnswer;
+  answered3: IVideoAnswer;
+  answered4: IVideoAnswer;
+  answered5: IVideoAnswer;
+  startVideo: boolean;
+}
+
+export interface IVideoAnswer {
+  isAnswered: boolean;
+  points?: number;
 }
 
 export interface INavigationState {
