@@ -3,35 +3,30 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-
 import { StoreService } from './../../core/store.service';
-import { ScoreService } from './../../core/score.service';
-import { SharedModule } from './../../shared/shared.module';
 import { StoreModule } from '@ngrx/store';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AdminVideoComponent } from './video.component';
 import { rootReducer } from '../../state/root-reducer';
-import { TimerComponent, NextComponent } from './../components';
+import { VideoComponent, ScoreEllipseComponent, ScoreBoardComponent } from '../';
+import { YoutubePlayerModule } from 'ng2-youtube-player';
 
-describe('AdminVideoComponent', () => {
-  let component: AdminVideoComponent;
-  let fixture: ComponentFixture<AdminVideoComponent>;
+describe('VideoComponent', () => {
+  let component: VideoComponent;
+  let fixture: ComponentFixture<VideoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminVideoComponent, TimerComponent, NextComponent ],
+      declarations: [ VideoComponent, ScoreEllipseComponent, ScoreBoardComponent ],
       imports: [
-        RouterTestingModule,
         StoreModule.provideStore(rootReducer),
-        SharedModule
+        YoutubePlayerModule
       ],
-      providers: [ScoreService, StoreService]
+      providers: [StoreService]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AdminVideoComponent);
+    fixture = TestBed.createComponent(VideoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

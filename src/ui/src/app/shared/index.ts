@@ -1,3 +1,4 @@
+export { VideoComponent } from './video/video.component';
 export { GalleryComponent } from './gallery/gallery.component';
 export { PuzzlesComponent } from './puzzles/puzzles.component';
 export { ScoreBoardComponent } from './score-board/score-board.component';

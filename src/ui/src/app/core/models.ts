@@ -102,8 +102,8 @@ export interface IFinaleQuestion {
 }
 
 export interface IVideo {
-  url: string;
-  startFrom: string;
+  youtubeId: string;
+  startFromSeconds: number;
   numberOfSecondsToPlay: number;
 }
 

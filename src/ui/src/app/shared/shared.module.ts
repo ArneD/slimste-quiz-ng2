@@ -1,3 +1,4 @@
+import { YoutubePlayerModule } from 'ng2-youtube-player';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
@@ -6,21 +7,24 @@ import { CircleSelectorComponent,
   ThreeSixNineComponent,
   ScoreBoardComponent,
   PuzzlesComponent,
-  GalleryComponent } from './';
+  GalleryComponent,
+  VideoComponent } from './';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, YoutubePlayerModule],
   exports: [CircleSelectorComponent,
             ScoreEllipseComponent,
             ThreeSixNineComponent,
             PuzzlesComponent,
-            GalleryComponent],
+            GalleryComponent,
+            VideoComponent],
   declarations: [CircleSelectorComponent,
                 ScoreEllipseComponent,
                 ThreeSixNineComponent,
                 ScoreBoardComponent,
                 PuzzlesComponent,
-                GalleryComponent],
+                GalleryComponent,
+                VideoComponent],
   providers: [],
 })
 export class SharedModule { }

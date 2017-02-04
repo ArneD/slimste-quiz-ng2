@@ -1,3 +1,65 @@
-<p>
-  video works!
-</p>
+<div class="row col-sm-12 ">
+  <div class="row">
+    <div class="col-sm-12 text-center" >
+      <slq-video [showPlayer]="true"></slq-video>
+      <button *ngIf="showPlayVideo" (click)="playVideo()" class="btn btn-success">Play Video</button>
+    </div>
+  </div>
+  <div class="row" *ngIf="(videoQuestion$ | async) && !endOfRound && !showPlayVideo">
+    <div class="col-sm-12 text-center answer-button">
+      <button class="btn btn-default"
+        (click)="answer($event.target.value); isButton1Disabled = true"
+        [disabled]="isButton1Disabled"
+        [value]="(videoQuestion$ | async).answer1">
+        {{ (videoQuestion$ | async).answer1 }}
+      </button>
+    </div>
+    <div class="col-sm-12 text-center answer-button">
+      <button class="btn btn-default"
+        (click)="answer($event.target.value); isButton2Disabled = true"
+        [disabled]="isButton2Disabled"
+        [value]="(videoQuestion$ | async).answer2">
+        {{ (videoQuestion$ | async).answer2 }}
+      </button>
+    </div>
+    <div class="col-sm-12 text-center answer-button">
+      <button class="btn btn-default"
+        (click)="answer($event.target.value); isButton3Disabled = true"
+        [disabled]="isButton3Disabled"
+        [value]="(videoQuestion$ | async).answer3">
+        {{ (videoQuestion$ | async).answer3 }}
+      </button>
+    </div>
+    <div class="col-sm-12 text-center answer-button">
+      <button class="btn btn-default"
+        (click)="answer($event.target.value); isButton4Disabled = true"
+        [disabled]="isButton4Disabled"
+        [value]="(videoQuestion$ | async).answer4">
+        {{ (videoQuestion$ | async).answer4 }}
+      </button>
+    </div>
+    <div class="col-sm-12 text-center answer-button">
+      <button class="btn btn-default"
+        (click)="answer($event.target.value); isButton5Disabled = true"
+        [disabled]="isButton5Disabled"
+        [value]="(videoQuestion$ | async).answer5">
+        {{ (videoQuestion$ | async).answer5 }}
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form col-sm-6 col-sm-offset-3">
+      <slq-next
+        (nextPlayerClicked)="selectNextPlayer()"
+        (nextQuestionClicked)="selectNextVideo()"
+        (nextRoundClicked)="goToNextRound()"
+        [endOfRound]="endOfRound"
+      ></slq-next>
+      <slq-timer class="form-group" *ngIf="!endOfRound"
+          (timerStarted)="startTimer()"
+          (timerStopped)="stopTimer()">
+      </slq-timer>
+    </div>
+  </div>
+</div>

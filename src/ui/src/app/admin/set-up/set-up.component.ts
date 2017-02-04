@@ -56,6 +56,6 @@ export class SetUpComponent implements OnInit {
     ));
 
     this.store.dispatch(new QuizUpdateSelected(this.selectedQuiz));
-    this.router.navigate(['/admin/three-six-nine']);
+    this.router.navigate(['/admin/video']);
   }
 }

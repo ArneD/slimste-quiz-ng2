@@ -1,0 +1,12 @@
+<div *ngIf="question">
+  <div *ngIf="showPlayer">
+    <youtube-player [hidden]="!showVideo"
+        [videoId]="videoId"
+        (ready)="savePlayer($event)"
+        (change)="onStateChange($event)"></youtube-player>
+  </div>
+  <div *ngIf="showAnswers">
+
+  </div>
+</div>
+<slq-score-board></slq-score-board>

@@ -86,10 +86,10 @@ export class QuizVideoPlayVideo implements Action {
 
 export class QuizVideoAnsweredQuestion implements Action {
   type = ActionTypes.QUIZ_VIDEO_ANSWERED_VIDEO_QUESTION;
-  payload: { answer: IVideoAnswer };
+  payload: { answer: string, points: number };
 
-  public constructor(answer: IVideoAnswer) {
-    this.payload = { answer: answer };
+  public constructor(answer: string, points: number) {
+    this.payload = { answer: answer, points: points };
   }
 }
 

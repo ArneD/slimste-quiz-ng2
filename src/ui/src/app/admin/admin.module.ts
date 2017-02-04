@@ -6,12 +6,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { TimerComponent } from './components';
 import { NextComponent } from './components/next/next.component';
-import { VideoComponent } from './video/video.component';
 
 @NgModule({
   imports: [AdminRoutingModule, CommonModule, HttpModule, FormsModule, SharedModule],
   exports: [],
-  declarations: [routedComponents, TimerComponent, NextComponent, VideoComponent],
+  declarations: [routedComponents, TimerComponent, NextComponent],
   providers: [],
 })
 export class AdminModule { }

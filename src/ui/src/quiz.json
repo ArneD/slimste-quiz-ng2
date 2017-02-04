@@ -270,41 +270,41 @@
         "firstVideo": {
           "question": "Wat is?",
           "video": {
-            "url": "https://www.youtube.com/watch?v=ybnzMnFEWJY",
-            "startFrom": "",
-            "numberOfSecondsToPlay": 60
+            "youtubeId": "ybnzMnFEWJY",
+            "startFromSeconds": 10,
+            "numberOfSecondsToPlay": 30
           },
-          "answer1": "",
-          "answer2": "",
-          "answer3": "",
-          "answer4": "",
-          "answer5": ""
+          "answer1": "A",
+          "answer2": "B",
+          "answer3": "C",
+          "answer4": "D",
+          "answer5": "E"
         },
         "secondVideo": {
           "question": "Wat is?",
           "video": {
-            "url": "",
-            "startFrom": "",
-            "numberOfSecondsToPlay": 0
+            "youtubeId": "PSmj2cdo0sA",
+            "startFromSeconds": 30,
+            "numberOfSecondsToPlay": 10
           },
-          "answer1": "",
-          "answer2": "",
-          "answer3": "",
-          "answer4": "",
-          "answer5": ""
+          "answer1": "A",
+          "answer2": "B",
+          "answer3": "C",
+          "answer4": "D",
+          "answer5": "E"
         },
         "thirdVideo": {
           "question": "Wat is?",
           "video": {
-            "url": "",
-            "startFrom": "",
-            "numberOfSecondsToPlay": 0
+            "youtubeId": "ybnzMnFEWJY",
+            "startFromSeconds": 10,
+            "numberOfSecondsToPlay": 30
           },
-          "answer1": "",
-          "answer2": "",
-          "answer3": "",
-          "answer4": "",
-          "answer5": ""
+          "answer1": "A",
+          "answer2": "B",
+          "answer3": "C",
+          "answer4": "D",
+          "answer5": "E"
         }
       },
       "finals": [

@@ -57,8 +57,7 @@ export interface IVideoState {
 }
 
 export interface IVideoAnswer {
-  isAnswered: boolean;
-  points?: number;
+  points: number;
 }
 
 export interface INavigationState {
