@@ -47,7 +47,7 @@ export interface IGalleryState {
 }
 
 export interface IVideoState {
-  video: ICollectiveMemoryQuestion;
+  question: ICollectiveMemoryQuestion;
   answered1: IVideoAnswer;
   answered2: IVideoAnswer;
   answered3: IVideoAnswer;

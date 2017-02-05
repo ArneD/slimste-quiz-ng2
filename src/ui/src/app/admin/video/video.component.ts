@@ -13,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./video.component.scss']
 })
 export class AdminVideoComponent extends BaseRound implements OnInit {
-  videoQuestion$ = this.storeService.store.select(state => state.quizState.video.video);
+  videoQuestion$ = this.storeService.store.select(state => state.quizState.video.question);
   showPlayVideo = false;
 
   isButton1Disabled = false;

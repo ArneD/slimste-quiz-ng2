@@ -23,7 +23,7 @@ const initialState: IQuizState = {
       galleryQuestionNumber: 0
     },
     video: {
-      video: null,
+      question: null,
       answered1: null,
       answered2: null,
       answered3: null,
@@ -172,11 +172,11 @@ export function quizStateReducer(state: IQuizState = initialState, action: quiz.
       };
     case quiz.ActionTypes.QUIZ_VIDEO_NEXT_VIDEO:
       let video: ICollectiveMemoryQuestion = null;
-      if (!state.video || !state.video.video) {
+      if (!state.video || !state.video.question) {
         video = state.selectedQuiz.collectiveMemory.firstVideo;
-      } else if (state.video.video === state.selectedQuiz.collectiveMemory.firstVideo) {
+      } else if (state.video.question === state.selectedQuiz.collectiveMemory.firstVideo) {
         video = state.selectedQuiz.collectiveMemory.secondVideo;
-      } else if (state.video.video === state.selectedQuiz.collectiveMemory.secondVideo) {
+      } else if (state.video.question === state.selectedQuiz.collectiveMemory.secondVideo) {
         video = state.selectedQuiz.collectiveMemory.thirdVideo;
       }
 
@@ -187,7 +187,7 @@ export function quizStateReducer(state: IQuizState = initialState, action: quiz.
         puzzle: state.puzzle,
         gallery: state.gallery,
         video: {
-          video: video,
+          question: video,
           answered1: null,
           answered2: null,
           answered3: null,
@@ -204,7 +204,7 @@ export function quizStateReducer(state: IQuizState = initialState, action: quiz.
         puzzle: state.puzzle,
         gallery: state.gallery,
         video: {
-          video: state.video.video,
+          question: state.video.question,
           answered1: state.video.answered1,
           answered2: state.video.answered2,
           answered3: state.video.answered3,

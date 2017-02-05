@@ -37,16 +37,22 @@ export class VideoComponent implements OnInit, OnDestroy {
       this.videoSubscription =
         this.storeService
           .store
-          .select(state => state.quizState.video.video)
-          .subscribe(question => {
-              this.question = question;
-              if (question) {
-                this.videoId = question.video.youtubeId;
-                if (this.player) {
-                  this.loadVideo();
-                }
+          .select(state => state.quizState.video)
+          .subscribe(video => {
+              if (this.question !== video.question) {
+                this.loadNewQuestion(video.question);
               }
           });
+  }
+
+  loadNewQuestion(question: ICollectiveMemoryQuestion) {
+    this.question = question;
+    if (question) {
+      this.videoId = question.video.youtubeId;
+      if (this.player) {
+        this.loadVideo();
+      }
+    }
   }
 
   savePlayer(player) {
@@ -65,6 +71,7 @@ export class VideoComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.player.stopVideo();
         this.showVideo = false;
+        this.showAnswers = true;
       }, this.question.video.numberOfSecondsToPlay * 1000);
     }
   }

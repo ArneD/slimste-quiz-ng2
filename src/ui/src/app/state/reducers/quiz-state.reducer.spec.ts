@@ -564,7 +564,7 @@ describe('reduce quiz state', () => {
 
       expect(changedState).not.toBe(initialState);
       expect(changedState.video).not.toBeNull();
-      expect(changedState.video.video).toBe(quiz.collectiveMemory.firstVideo);
+      expect(changedState.video.question).toBe(quiz.collectiveMemory.firstVideo);
       expectDefaultVideoState(changedState);
     });
 
@@ -577,7 +577,7 @@ describe('reduce quiz state', () => {
         puzzle: null,
         gallery: null,
         video: {
-          video: quiz.collectiveMemory.firstVideo,
+          question: quiz.collectiveMemory.firstVideo,
           answered1: { isAnswered: true, points: 20 },
           answered2: null,
           answered3: null,
@@ -594,7 +594,7 @@ describe('reduce quiz state', () => {
 
       expect(changedState).not.toBe(initialState);
       expect(changedState.video).not.toBeNull();
-      expect(changedState.video.video).toBe(quiz.collectiveMemory.secondVideo);
+      expect(changedState.video.question).toBe(quiz.collectiveMemory.secondVideo);
       expectDefaultVideoState(changedState);
     });
 
@@ -607,7 +607,7 @@ describe('reduce quiz state', () => {
         puzzle: null,
         gallery: null,
         video: {
-          video: quiz.collectiveMemory.secondVideo,
+          question: quiz.collectiveMemory.secondVideo,
           answered1: { isAnswered: true, points: 20 },
           answered2: null,
           answered3: null,
@@ -624,7 +624,7 @@ describe('reduce quiz state', () => {
 
       expect(changedState).not.toBe(initialState);
       expect(changedState.video).not.toBeNull();
-      expect(changedState.video.video).toBe(quiz.collectiveMemory.thirdVideo);
+      expect(changedState.video.question).toBe(quiz.collectiveMemory.thirdVideo);
       expectDefaultVideoState(changedState);
     });
 
@@ -637,7 +637,7 @@ describe('reduce quiz state', () => {
         puzzle: null,
         gallery: null,
         video: {
-          video: quiz.collectiveMemory.thirdVideo,
+          question: quiz.collectiveMemory.thirdVideo,
           answered1: { isAnswered: true, points: 20 },
           answered2: null,
           answered3: null,
@@ -654,7 +654,7 @@ describe('reduce quiz state', () => {
 
       expect(changedState).not.toBe(initialState);
       expect(changedState.video).not.toBeNull();
-      expect(changedState.video.video).toBeNull();
+      expect(changedState.video.question).toBeNull();
       expectDefaultVideoState(changedState);
     });
 
@@ -678,7 +678,7 @@ describe('reduce quiz state', () => {
         puzzle: null,
         gallery: null,
         video: {
-          video: quiz.collectiveMemory.firstVideo,
+          question: quiz.collectiveMemory.firstVideo,
           answered1: null,
           answered2: null,
           answered3: null,
