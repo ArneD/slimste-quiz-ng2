@@ -42,12 +42,20 @@ export class VideoComponent implements OnInit, OnDestroy {
               this.question = question;
               if (question) {
                 this.videoId = question.video.youtubeId;
+                if (this.player) {
+                  this.loadVideo();
+                }
               }
           });
   }
 
   savePlayer(player) {
     this.player = player;
+    this.loadVideo();
+  }
+
+  loadVideo() {
+    this.player.loadVideoById(this.videoId);
     this.player.seekTo(this.question.video.startFromSeconds, true);
     this.player.pauseVideo();
   }
