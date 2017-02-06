@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { StoreModule } from '@ngrx/store';
-import { PuzzlesComponent, ScoreEllipseComponent, ScoreBoardComponent } from '../';
+import { PuzzlesComponent, ScoreBoardEllipseComponent, ScoreBoardComponent } from '../';
 import { rootReducer } from '../../state/root-reducer';
 import { StoreService } from './../../core/store.service';
 
@@ -14,7 +14,7 @@ describe('SharedPuzzlesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PuzzlesComponent, ScoreBoardComponent, ScoreEllipseComponent ],
+      declarations: [ PuzzlesComponent, ScoreBoardComponent, ScoreBoardEllipseComponent ],
       imports: [
         StoreModule.provideStore(rootReducer)
       ],

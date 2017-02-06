@@ -5,7 +5,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { rootReducer } from '../../state/root-reducer';
-import { GalleryComponent, ScoreEllipseComponent, ScoreBoardComponent } from '../';
+import { GalleryComponent, ScoreBoardEllipseComponent, ScoreBoardComponent } from '../';
 
 describe('GalleryComponent', () => {
   let component: GalleryComponent;
@@ -13,7 +13,7 @@ describe('GalleryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GalleryComponent, ScoreEllipseComponent, ScoreBoardComponent ],
+      declarations: [ GalleryComponent, ScoreBoardEllipseComponent, ScoreBoardComponent ],
       imports: [
         StoreModule.provideStore(rootReducer)
       ],

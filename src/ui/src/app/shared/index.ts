@@ -1,3 +1,4 @@
+export { ScoreBoardEllipseComponent } from './score-board-ellipse/score-board-ellipse.component';
 export { VideoComponent } from './video/video.component';
 export { GalleryComponent } from './gallery/gallery.component';
 export { PuzzlesComponent } from './puzzles/puzzles.component';

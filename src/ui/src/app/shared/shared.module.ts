@@ -8,7 +8,8 @@ import { CircleSelectorComponent,
   ScoreBoardComponent,
   PuzzlesComponent,
   GalleryComponent,
-  VideoComponent } from './';
+  VideoComponent,
+  ScoreBoardEllipseComponent } from './';
 
 @NgModule({
   imports: [CommonModule, YoutubePlayerModule],
@@ -24,7 +25,8 @@ import { CircleSelectorComponent,
                 ScoreBoardComponent,
                 PuzzlesComponent,
                 GalleryComponent,
-                VideoComponent],
+                VideoComponent,
+                ScoreBoardEllipseComponent],
   providers: [],
 })
 export class SharedModule { }

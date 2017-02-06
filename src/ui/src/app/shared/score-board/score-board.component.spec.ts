@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { ScoreEllipseComponent } from './../score-ellipse/score-ellipse.component';
+import { ScoreBoardEllipseComponent } from './../score-board-ellipse/score-board-ellipse.component';
 import { StoreModule } from '@ngrx/store';
 
 import { StoreService } from './../../core/store.service';
@@ -16,7 +16,7 @@ describe('ScoreBoardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ScoreBoardComponent, ScoreEllipseComponent ],
+      declarations: [ ScoreBoardComponent, ScoreBoardEllipseComponent ],
       imports: [
         StoreModule.provideStore(rootReducer)
       ],

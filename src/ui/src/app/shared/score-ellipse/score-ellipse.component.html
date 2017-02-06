@@ -1,17 +1,14 @@
-<div class="row text-center">
-  <h3>{{ player.name }}</h3>
-</div>
 <div class="row">
   <div class="score-ellipse text-center">
     <svg height="140" width="250">
       <g>
         <svg:ellipse cx="125" cy="80" rx="100" ry="50"
           class="ellipse"
-          [ngClass]="{'selected': player.isSelected, 'default': !player.isSelected }" />
+          [ngClass]="{'selected': isSelected, 'default': !isSelected }" />
         <svg:text text-anchor="middle" x="120" y="95"
           class="text"
-          [ngClass]="{'selected': player.isSelected, 'default': !player.isSelected }">
-          {{ player.score }}
+          [ngClass]="{'selected': isSelected, 'default': !isSelected }">
+          {{ score }}
         </svg:text>
       </g>
     </svg>

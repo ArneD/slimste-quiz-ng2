@@ -6,7 +6,7 @@ import { DebugElement } from '@angular/core';
 import { StoreService } from './../../core/store.service';
 import { StoreModule } from '@ngrx/store';
 import { rootReducer } from '../../state/root-reducer';
-import { VideoComponent, ScoreEllipseComponent, ScoreBoardComponent } from '../';
+import { VideoComponent, ScoreBoardEllipseComponent, ScoreBoardComponent } from '../';
 import { YoutubePlayerModule } from 'ng2-youtube-player';
 
 describe('VideoComponent', () => {
@@ -15,7 +15,7 @@ describe('VideoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VideoComponent, ScoreEllipseComponent, ScoreBoardComponent ],
+      declarations: [ VideoComponent, ScoreBoardEllipseComponent, ScoreBoardComponent ],
       imports: [
         StoreModule.provideStore(rootReducer),
         YoutubePlayerModule

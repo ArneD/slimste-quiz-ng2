@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { CircleSelectorComponent, ScoreEllipseComponent, ScoreBoardComponent, ThreeSixNineComponent } from '../';
+import { CircleSelectorComponent, ScoreBoardEllipseComponent, ScoreBoardComponent, ThreeSixNineComponent } from '../';
 import { rootReducer } from '../../state/root-reducer';
 import { StoreModule } from '@ngrx/store';
 import { StoreService } from './../../core/store.service';
@@ -14,7 +14,7 @@ describe('SharedThreeSixNineComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ThreeSixNineComponent, CircleSelectorComponent, ScoreEllipseComponent, ScoreBoardComponent ],
+      declarations: [ ThreeSixNineComponent, CircleSelectorComponent, ScoreBoardEllipseComponent, ScoreBoardComponent ],
       imports: [
         StoreModule.provideStore(rootReducer)
       ],

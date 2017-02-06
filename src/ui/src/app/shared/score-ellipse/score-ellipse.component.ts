@@ -7,13 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./score-ellipse.component.scss']
 })
 export class ScoreEllipseComponent implements OnInit {
-  @Input() player: IPlayerState = {
-    name: '',
-    score: 0,
-    isSelected: false,
-    hasPlayedQuestion: false,
-    hasPlayedRound: false
-  };
+  @Input() score: number = 0;
+  @Input() isSelected: boolean = false;
 
   constructor() { }
 
